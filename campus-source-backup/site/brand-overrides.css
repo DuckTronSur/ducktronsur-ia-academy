@@ -1,0 +1,6 @@
+.hero-image{background-image:url('assets/hero-web.png')!important}
+.brand-logo{display:block;width:188px;height:auto}
+.experience-art{width:100%;max-width:420px;border-radius:4px;box-shadow:18px 18px 0 #f7c948}
+.experience-grid{align-items:center}
+@media(max-width:800px){.brand-logo{width:165px}.experience-art{max-width:360px}}
+
