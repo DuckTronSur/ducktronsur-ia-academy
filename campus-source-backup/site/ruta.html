@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ruta · DuckTronSur IA Academy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="brand-overrides.css">
+  <link rel="stylesheet" href="visual-v2.css">
+  <style>
+    .route-page{max-width:980px;margin:0 auto;padding:48px 24px 80px}.route-page header{display:flex;justify-content:space-between;align-items:center;margin-bottom:70px}.route-page a{color:inherit}.route-hero{display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:center}.route-hero img{width:100%;max-height:280px;object-fit:contain}.route-tag{font-family:monospace;letter-spacing:.12em;color:#008dbe;font-size:.78rem}.route-page h1{font-size:clamp(2.7rem,6vw,5rem);line-height:1;letter-spacing:-.06em;margin:16px 0}.route-summary{font-size:1.1rem;line-height:1.7;color:#4d6075}.lesson-list{display:grid;gap:12px;margin-top:52px}.lesson{display:flex;gap:18px;align-items:center;padding:20px;border:1px solid rgba(8,25,51,.16);background:#fff}.lesson strong{font-family:monospace;color:#008dbe}.route-back{display:inline-block;margin-top:44px;font-weight:700;text-decoration:none}@media(max-width:700px){.route-hero{grid-template-columns:1fr}.route-page header{margin-bottom:40px}}
+  </style>
+</head>
+<body>
+  <main class="route-page" id="app"></main>
+  <script>
+    const routes={
+      start:{label:'START · INICIACIÓN',title:'Empieza con buen criterio',summary:'Entiende lo esencial de la inteligencia artificial y aprende a utilizarla con seguridad.',image:'assets/ruta-start-v1.png',lessons:['Qué es la IA y qué puede hacer','Cómo escribir una buena instrucción','Cómo comprobar una respuesta','Tu primer flujo de trabajo']},
+      intermedio:{label:'INTERMEDIO',title:'Mejora tus resultados',summary:'Trabaja con mejores instrucciones, contexto y procesos reutilizables.',image:'assets/ruta-intermedio-v1.png',lessons:['Contexto y objetivos','Plantillas de prompts','Revisión y mejora','Trabajar con documentos','Proceso reutilizable']},
+      pro:{label:'PRO · AVANZADO',title:'Construye sistemas',summary:'Conecta herramientas y automatiza tareas repetitivas con criterio.',image:'assets/ruta-pro-v1.png',lessons:['Diseñar un proceso','Automatizaciones básicas','Conectar herramientas','Agentes y supervisión','Seguridad y control']},
+      lab:{label:'LAB · PROFESIONAL',title:'Convierte ideas en proyectos',summary:'Lleva la IA a casos de uso reales y crea soluciones que puedas mantener.',image:'assets/ruta-lab-v1.png',lessons:['Definir un caso de uso','Prototipo funcional','Pruebas y evaluación','Documentación y entrega']}
+    };
+    const key=new URLSearchParams(location.search).get('ruta')||'start';
+    const route=routes[key]||routes.start;
+    document.title=route.label+' · DuckTronSur IA Academy';
+    document.querySelector('#app').innerHTML=`<header><a href="./">← Volver al campus</a><span>DuckTronSur IA Academy</span></header><section class="route-hero"><div><p class="route-tag">${route.label}</p><h1>${route.title}</h1><p class="route-summary">${route.summary}</p></div><img src="${route.image}" alt="${route.label}"></section><section class="lesson-list" aria-label="Lecciones"><h2>Lecciones de esta ruta</h2>${route.lessons.map((lesson,i)=>`<article class="lesson"><strong>${String(i+1).padStart(2,'0')}</strong><span>${lesson}</span></article>`).join('')}</section><a class="route-back" href="./#rutas">Ver las cuatro rutas</a>`;
+  </script>
+</body>
+</html>
+
