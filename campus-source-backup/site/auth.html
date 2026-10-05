@@ -24,9 +24,14 @@
       <p class="auth-note">Usaremos tu correo para gestionar el acceso y tu nombre para mostrar tu perfil. No guardamos contraseñas en el Campus.</p>
     </section>
   </main>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
   <script src="supabase-config.js"></script>
   <script>
+    if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_PUBLISHABLE_KEY) {
+      document.querySelector('#auth-message').textContent = 'El servicio de acceso no está disponible ahora. Inténtalo de nuevo en unos minutos.';
+      document.querySelector('#auth-message').className = 'auth-message error';
+      throw new Error('Supabase client configuration unavailable');
+    }
     const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
     const form = document.querySelector('#auth-form');
     const nameField = document.querySelector('#name-field');
