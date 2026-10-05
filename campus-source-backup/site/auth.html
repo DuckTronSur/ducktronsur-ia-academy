@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Crear cuenta · DuckTronSur IA Academy</title>
+  <link rel="stylesheet" href="auth.css">
+</head>
+<body class="auth-page">
+  <main class="auth-wrap">
+    <header class="auth-top"><a href="./">← Volver al Campus</a><span>DuckTronSur IA Academy</span></header>
+    <section class="auth-card" aria-labelledby="auth-title">
+      <p class="auth-kicker">MI CAMPUS</p>
+      <h1 id="auth-title">Crea tu cuenta</h1>
+      <p id="auth-intro">Regístrate para guardar tu progreso y continuar tus rutas de aprendizaje.</p>
+      <form class="auth-form" id="auth-form">
+        <label id="name-field">Nombre<input id="display-name" name="displayName" autocomplete="name"></label>
+        <label>Correo electrónico<input id="email" name="email" type="email" autocomplete="email" required></label>
+        <label>Contraseña<input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required></label>
+        <button id="submit-button" type="submit">Crear mi cuenta</button>
+      </form>
+      <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
+      <p class="auth-switch" id="auth-switch">¿Ya tienes cuenta? <button type="button">Inicia sesión</button></p>
+      <p class="auth-note">Usaremos tu correo para gestionar el acceso y tu nombre para mostrar tu perfil. No guardamos contraseñas en el Campus.</p>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
+    const form = document.querySelector('#auth-form');
+    const nameField = document.querySelector('#name-field');
+    const nameInput = document.querySelector('#display-name');
+    const title = document.querySelector('#auth-title');
+    const intro = document.querySelector('#auth-intro');
+    const submit = document.querySelector('#submit-button');
+    const message = document.querySelector('#auth-message');
+    const switchBox = document.querySelector('#auth-switch');
+    let mode = 'signup';
+    function render(){
+      const login = mode === 'login';
+      nameField.hidden = login;
+      nameInput.required = !login;
+      title.textContent = login ? 'Inicia sesión' : 'Crea tu cuenta';
+      intro.textContent = login ? 'Accede a tus rutas y continúa donde lo dejaste.' : 'Regístrate para guardar tu progreso y continuar tus rutas de aprendizaje.';
+      submit.textContent = login ? 'Iniciar sesión' : 'Crear mi cuenta';
+      switchBox.innerHTML = login ? '¿Todavía no tienes cuenta? <button type="button">Regístrate</button>' : '¿Ya tienes cuenta? <button type="button">Inicia sesión</button>';
+      switchBox.querySelector('button').addEventListener('click',()=>{mode=login?'signup':'login';message.textContent='';message.className='auth-message';render()});
+    }
+    render();
+    form.addEventListener('submit',async(event)=>{
+      event.preventDefault(); message.textContent=''; message.className='auth-message'; submit.disabled=true;
+      const email=document.querySelector('#email').value.trim(); const password=document.querySelector('#password').value;
+      try{
+        if(mode==='signup'){
+          const displayName=nameInput.value.trim();
+          const {data,error}=await client.auth.signUp({email,password,options:{data:{display_name:displayName},emailRedirectTo:location.origin+'/auth.html'}});
+          if(error) throw error;
+          if(data.session){location.href='mi-campus.html'} else {message.textContent='Cuenta creada. Revisa tu correo para confirmar el acceso.';message.className='auth-message success';form.reset()}
+        }else{
+          const {error}=await client.auth.signInWithPassword({email,password}); if(error) throw error; location.href='mi-campus.html';
+        }
+      }catch(error){message.textContent=error.message||'No se ha podido completar la operación.';message.className='auth-message error'}finally{submit.disabled=false}
+    });
+  </script>
+</body>
+</html>
