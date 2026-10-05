@@ -23,7 +23,7 @@
     const key=new URLSearchParams(location.search).get('ruta')||'start';
     const route=routes[key]||routes.start;
     document.title=route.label+' · DuckTronSur IA Academy';
-    document.querySelector('#app').innerHTML=`<header><a href="./">← Volver al campus</a><span>DuckTronSur IA Academy</span></header><section class="route-hero"><div><p class="route-tag">${route.label}</p><h1>${route.title}</h1><p class="route-summary">${route.summary}</p></div><img src="${route.image}" alt="${route.label}"></section><section class="lesson-list" aria-label="Lecciones"><h2>Lecciones de esta ruta</h2>${route.lessons.map((lesson,i)=>`<article class="lesson"><strong>${String(i+1).padStart(2,'0')}</strong><span>${lesson}</span></article>`).join('')}</section><a class="route-back" href="./#rutas">Ver las cuatro rutas</a>`;
+    document.querySelector('#app').innerHTML=`<header><a href="./">← Volver al campus</a><span>DuckTronSur IA Academy</span></header><section class="route-hero"><div><p class="route-tag">${route.label}</p><h1>${route.title}</h1><p class="route-summary">${route.summary}</p></div><img src="${route.image}" alt="${route.label}"></section><section class="lesson-list" aria-label="Lecciones"><h2>Lecciones de esta ruta</h2>${route.lessons.map((lesson,i)=>`<a class="lesson" href="leccion.html?ruta=${key}&leccion=${i+1}"><strong>${String(i+1).padStart(2,'0')}</strong><span>${lesson}</span><span aria-hidden="true">→</span></a>`).join('')}</section><a class="route-back" href="./#rutas">Ver las cuatro rutas</a>`;
   </script>
 </body>
 </html>
