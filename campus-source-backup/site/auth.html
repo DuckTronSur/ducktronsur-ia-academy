@@ -20,6 +20,7 @@
         <button id="submit-button" type="submit">Crear mi cuenta</button>
       </form>
       <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
+      <button class="auth-resend" id="resend" type="button" hidden>Reenviar correo de confirmación</button>
       <p class="auth-switch" id="auth-switch">¿Ya tienes cuenta? <button type="button">Inicia sesión</button></p>
       <p class="auth-note">Usaremos tu correo para gestionar el acceso y tu nombre para mostrar tu perfil. No guardamos contraseñas en el Campus.</p>
     </section>
@@ -41,7 +42,9 @@
     const submit = document.querySelector('#submit-button');
     const message = document.querySelector('#auth-message');
     const switchBox = document.querySelector('#auth-switch');
+    const resend = document.querySelector('#resend');
     let mode = 'signup';
+    let lastSignupEmail = '';
     function render(){
       const login = mode === 'login';
       nameField.hidden = login;
@@ -59,14 +62,15 @@
       try{
         if(mode==='signup'){
           const displayName=nameInput.value.trim();
-          const {data,error}=await client.auth.signUp({email,password,options:{data:{display_name:displayName},emailRedirectTo:location.origin+'/auth.html'}});
+          const {data,error}=await client.auth.signUp({email,password,options:{data:{display_name:displayName}}});
           if(error) throw error;
-          if(data.session){location.href='mi-campus.html'} else {message.textContent='Cuenta creada. Revisa tu correo para confirmar el acceso.';message.className='auth-message success';form.reset()}
+          if(data.session){location.href='mi-campus.html'} else {lastSignupEmail=email;resend.hidden=false;message.textContent='Cuenta creada. Revisa tu correo para confirmar el acceso.';message.className='auth-message success';form.reset()}
         }else{
           const {error}=await client.auth.signInWithPassword({email,password}); if(error) throw error; location.href='mi-campus.html';
         }
-      }catch(error){message.textContent=error.message||'No se ha podido completar la operación.';message.className='auth-message error'}finally{submit.disabled=false}
+      }catch(error){const raw=error.message||'';message.textContent=/not confirmed/i.test(raw)?'Confirma primero tu correo electrónico.':/invalid login credentials/i.test(raw)?'El correo o la contraseña no son correctos.':/already registered|user already/i.test(raw)?'Esta cuenta ya existe. Revisa tu correo o inicia sesión.':raw||'No se ha podido completar la operación.';message.className='auth-message error'}finally{submit.disabled=false}
     });
+    resend.addEventListener('click',async()=>{if(!lastSignupEmail)return;resend.disabled=true;const {error}=await client.auth.resend({type:'signup',email:lastSignupEmail});message.textContent=error?'No se ha podido reenviar el correo.':'Te hemos enviado un nuevo correo de confirmación.';message.className='auth-message '+(error?'error':'success');resend.disabled=false});
   </script>
 </body>
 </html>
