@@ -2,50 +2,292 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Mi Campus · DuckTronSur IA Academy</title>
-  <link rel="stylesheet" href="/auth.css">
+  <link rel="stylesheet" href="/styles.css">
+
   <style>
-    .campus-grid{display:grid;gap:14px;margin-top:28px}
-    .campus-course{padding:20px;border:1px solid #cbd8e2;background:#f8fbfd}
-    .campus-course h2{margin:0 0 8px;font-size:1.35rem}
-    .campus-course p{margin:6px 0;color:#53657a}
-    .campus-course a{display:inline-block;margin-top:12px;padding:11px 15px;background:#00a9e2;color:#071225;text-decoration:none;font-weight:700}
-    .campus-status{font-size:.78rem;font-weight:700;color:#087eaa}
+    :root {
+      --blue: #06243f;
+      --cyan: #00cfff;
+      --soft: #f3f8fb;
+      --text: #173b4b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--soft);
+      color: var(--text);
+      font-family: Arial, sans-serif;
+    }
+
+    .campus-page {
+      max-width: 1180px;
+      margin: auto;
+      padding: 22px 18px 60px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .topbar a {
+      color: var(--blue);
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 330px;
+      gap: 24px;
+      align-items: center;
+      background: var(--blue);
+      color: white;
+      border-radius: 24px;
+      padding: 28px;
+      overflow: hidden;
+      box-shadow: 0 12px 30px #06243f22;
+    }
+
+    .hero-kicker {
+      color: var(--cyan);
+      font-weight: 900;
+      letter-spacing: .08em;
+      font-size: .8rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.7rem);
+      margin: 12px 0;
+    }
+
+    .hero p {
+      line-height: 1.6;
+      margin: 8px 0;
+    }
+
+    .hero-image {
+      width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 22px 0;
+    }
+
+    .summary-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      border: 1px solid #dce9ee;
+    }
+
+    .summary-card strong {
+      display: block;
+      color: var(--blue);
+      font-size: 1.9rem;
+      margin-bottom: 5px;
+    }
+
+    .summary-card span {
+      color: #607582;
+    }
+
+    .section-title {
+      color: var(--blue);
+      margin: 30px 0 14px;
+    }
+
+    .courses {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .course {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      border-top: 6px solid var(--course-color, var(--cyan));
+      box-shadow: 0 8px 22px #06243f12;
+    }
+
+    .course h2 {
+      color: var(--blue);
+      margin: 0 0 8px;
+    }
+
+    .course p {
+      line-height: 1.55;
+      color: #536b78;
+    }
+
+    .course-status {
+      color: var(--course-color, #087ca4);
+      font-size: .8rem;
+      font-weight: 900;
+      letter-spacing: .06em;
+    }
+
+    .progress-track {
+      height: 10px;
+      background: #e3edf1;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 14px 0 8px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: var(--progress);
+      background: var(--course-color, var(--cyan));
+    }
+
+    .course a,
+    .button {
+      display: inline-block;
+      border-radius: 9px;
+      padding: 11px 15px;
+      background: var(--course-color, var(--cyan));
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      border: 0;
+      cursor: pointer;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .actions .button {
+      background: var(--blue);
+    }
+
+    .actions .button.secondary {
+      background: #dff8ff;
+      color: #056d8d;
+    }
+
+    .whatsapp {
+      display: block;
+      width: 100%;
+      border-radius: 18px;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        max-height: 190px;
+      }
+
+      .summary,
+      .courses {
+        grid-template-columns: 1fr;
+      }
+
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
-<body class="auth-page">
-  <main class="auth-wrap">
-    <header class="auth-top">
-      <a href="/">← Campus</a>
-      <span>DuckTronSur IA Academy</span>
+
+<body>
+  <main class="campus-page">
+    <header class="topbar">
+      <a href="/">← Volver al Campus</a>
+      <a href="/auth.html">Gestionar cuenta</a>
     </header>
 
-    <section class="auth-card">
-      <p class="auth-kicker">MI CAMPUS</p>
-      <h1 id="welcome">Cargando tu Campus...</h1>
-      <p id="account">Estamos recuperando tus datos.</p>
+    <section class="hero">
+      <div>
+        <div class="hero-kicker">DUCKTRONSUR IA ACADEMY</div>
+        <h1 id="welcome">Cargando tu Campus…</h1>
+        <p id="account">Estamos recuperando tus datos.</p>
+        <p id="campus-message"></p>
+      </div>
 
-      <p id="campus-message" class="auth-message" role="status" aria-live="polite"></p>
+      <img
+        class="hero-image"
+        src="/assets/campus/Campus 024 Dashboard Mi Campus.png"
+        alt="Panel de Mi Campus">
+    </section>
 
-      <div id="courses" class="campus-grid"></div>
-
-      <div class="hero-actions">
-        <a class="button" href="/#rutas">Ver las rutas</a>
-        <button class="button" id="logout" type="button">Cerrar sesión</button>
+    <section class="summary" id="summary">
+      <div class="summary-card">
+        <strong id="course-count">0</strong>
+        <span>rutas disponibles</span>
+      </div>
+      <div class="summary-card">
+        <strong id="lesson-count">0</strong>
+        <span>lecciones completadas</span>
+      </div>
+      <div class="summary-card">
+        <strong id="progress-count">0%</strong>
+        <span>progreso total</span>
       </div>
     </section>
+
+    <h2 class="section-title">Mis rutas de aprendizaje</h2>
+
+    <p id="campus-error" class="auth-message" role="status"></p>
+    <section id="courses" class="courses"></section>
+
+    <img
+      class="whatsapp"
+      src="/assets/campus/Campus 013 CTA banner horizontal Comunidad WhatsApp.png"
+      alt="Comunidad de WhatsApp">
+
+    <div class="actions">
+      <a class="button" href="/#rutas">Explorar rutas</a>
+      <a class="button secondary" href="https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee" target="_blank" rel="noopener">
+        Unirme a WhatsApp
+      </a>
+      <button class="button" id="logout" type="button">Cerrar sesión</button>
+    </div>
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
   <script src="/supabase-config.js"></script>
 
   <script>
+    const client = window.supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_PUBLISHABLE_KEY
+    );
+
     const welcome = document.querySelector('#welcome');
     const account = document.querySelector('#account');
     const message = document.querySelector('#campus-message');
+    const errorBox = document.querySelector('#campus-error');
     const coursesBox = document.querySelector('#courses');
-    const logout = document.querySelector('#logout');
+
+    const colors = {
+      start: '#18a889',
+      intermedio: '#2474c6',
+      pro: '#e87519',
+      lab: '#7654c8'
+    };
 
     function escapeHtml(value) {
       return String(value ?? '').replace(/[&<>"']/g, char => ({
@@ -57,23 +299,7 @@
       }[char]));
     }
 
-    function showError(text) {
-      welcome.textContent = 'No se ha podido cargar Mi Campus';
-      account.textContent = text;
-      message.textContent = 'Comprueba tu sesión e inténtalo de nuevo.';
-      message.className = 'auth-message error';
-    }
-
     async function loadCampus() {
-      if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_PUBLISHABLE_KEY) {
-        throw new Error('La configuración de Supabase no está disponible.');
-      }
-
-      const client = window.supabase.createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_PUBLISHABLE_KEY
-      );
-
       const { data: userData, error: userError } = await client.auth.getUser();
 
       if (userError) throw userError;
@@ -93,12 +319,12 @@
         progressResult
       ] = await Promise.all([
         client.from('profiles')
-          .select('display_name, role')
+          .select('display_name,role')
           .eq('id', user.id)
           .maybeSingle(),
 
         client.from('courses')
-          .select('id, slug, title, level, description')
+          .select('id,slug,title,level,description')
           .eq('published', true)
           .order('created_at'),
 
@@ -107,11 +333,11 @@
           .eq('user_id', user.id),
 
         client.from('lessons')
-          .select('id, course_id')
+          .select('id,course_id')
           .eq('published', true),
 
         client.from('lesson_progress')
-          .select('lesson_id, completed')
+          .select('lesson_id,completed')
           .eq('user_id', user.id)
           .eq('completed', true)
       ]);
@@ -128,40 +354,61 @@
 
       const profile = profileResult.data;
       const courses = coursesResult.data || [];
+      const lessons = lessonsResult.data || [];
       const enrolledIds = new Set(
         (enrollmentsResult.data || []).map(item => item.course_id)
       );
-      const lessons = lessonsResult.data || [];
       const completedIds = new Set(
         (progressResult.data || []).map(item => item.lesson_id)
       );
 
-      const name = profile?.display_name || user.user_metadata?.display_name || user.email;
+      const name =
+        profile?.display_name ||
+        user.user_metadata?.display_name ||
+        user.email;
 
       welcome.textContent = 'Hola, ' + name;
       account.textContent = user.email;
-      message.textContent = courses.length
-        ? 'Estas son las rutas disponibles en tu Campus.'
-        : 'Todavía no hay rutas publicadas.';
-      message.className = 'auth-message success';
+      message.textContent = 'Continúa aprendiendo desde donde lo dejaste.';
+      message.style.color = '#b9edff';
+
+      const totalLessons = lessons.length;
+      const totalCompleted = completedIds.size;
+      const totalProgress = totalLessons
+        ? Math.round((totalCompleted / totalLessons) * 100)
+        : 0;
+
+      document.querySelector('#course-count').textContent = courses.length;
+      document.querySelector('#lesson-count').textContent = totalCompleted;
+      document.querySelector('#progress-count').textContent = totalProgress + '%';
 
       coursesBox.innerHTML = courses.map(course => {
-        const courseLessons = lessons.filter(lesson => lesson.course_id === course.id);
-        const completed = courseLessons.filter(lesson => completedIds.has(lesson.id)).length;
-        const enrolled = enrolledIds.has(course.id);
+        const route = course.slug || 'start';
+        const courseLessons = lessons.filter(
+          lesson => lesson.course_id === course.id
+        );
+        const completed = courseLessons.filter(
+          lesson => completedIds.has(lesson.id)
+        ).length;
         const progress = courseLessons.length
           ? Math.round((completed / courseLessons.length) * 100)
           : 0;
+        const color = colors[route] || '#00cfff';
 
         return `
-          <article class="campus-course">
-            <p class="campus-status">${enrolled ? 'MATRICULADO' : 'DISPONIBLE'}</p>
+          <article class="course" style="--course-color:${color}">
+            <div class="course-status">
+              ${enrolledIds.has(course.id) ? 'MATRICULADO' : 'DISPONIBLE'}
+            </div>
             <h2>${escapeHtml(course.title)}</h2>
-            <p>${escapeHtml(course.level)}</p>
+            <p><strong>${escapeHtml(course.level)}</strong></p>
             <p>${escapeHtml(course.description || '')}</p>
-            <p>Progreso: ${completed}/${courseLessons.length} lecciones (${progress}%)</p>
-            <a href="/ruta.html?ruta=${encodeURIComponent(course.slug)}">
-              Explorar ruta
+            <p>${completed}/${courseLessons.length} lecciones completadas · ${progress}%</p>
+            <div class="progress-track">
+              <div class="progress-bar" style="--progress:${progress}%"></div>
+            </div>
+            <a href="/ruta.html?ruta=${encodeURIComponent(route)}">
+              Continuar ruta
             </a>
           </article>
         `;
@@ -170,15 +417,12 @@
 
     loadCampus().catch(error => {
       console.error(error);
-      showError(error.message || 'Se ha producido un error de conexión.');
+      errorBox.textContent =
+        'No se ha podido cargar tu progreso. Comprueba tu sesión e inténtalo de nuevo.';
+      errorBox.className = 'auth-message error';
     });
 
-    logout.addEventListener('click', async () => {
-      const client = window.supabase.createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_PUBLISHABLE_KEY
-      );
-
+    document.querySelector('#logout').addEventListener('click', async () => {
       await client.auth.signOut();
       window.location.href = '/auth.html';
     });
