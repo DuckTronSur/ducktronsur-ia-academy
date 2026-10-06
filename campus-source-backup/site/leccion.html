@@ -1,352 +1,192 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Lección · DuckTronSur IA Academy</title>
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/auth.css">
-
-  <style>
-    :root {
-      --route-color: #18a889;
-      --route-soft: #e8f8f3;
-      --route-dark: #073b4c;
-    }
-
-    body {
-      background: #f4f8fa;
-      color: #173b4b;
-    }
-
-    .lesson-page {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 24px 18px 64px;
-    }
-
-    .lesson-nav {
-      display: flex;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 22px;
-    }
-
-    .lesson-nav a {
-      color: var(--route-dark);
-      text-decoration: none;
-      font-weight: 700;
-    }
-
-    .lesson-hero {
-      background: white;
-      border-top: 8px solid var(--route-color);
-      border-radius: 24px;
-      padding: 30px;
-      box-shadow: 0 12px 34px rgba(7, 59, 76, .10);
-    }
-
-    .lesson-kicker {
-      color: var(--route-color);
-      font-size: .82rem;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-    }
-
-    .lesson-hero h1 {
-      color: var(--route-dark);
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      margin: 12px 0;
-    }
-
-    .lesson-hero p {
-      font-size: 1.08rem;
-      line-height: 1.65;
-    }
-
-    .lesson-block {
-      background: white;
-      border-radius: 18px;
-      padding: 24px;
-      margin-top: 18px;
-      border: 1px solid #dce9ee;
-    }
-
-    .lesson-block h2 {
-      color: var(--route-dark);
-      margin-top: 0;
-    }
-
-    .lesson-block p,
-    .lesson-block li {
-      line-height: 1.7;
-    }
-
-    .lesson-practice {
-      background: var(--route-soft);
-      border-left: 6px solid var(--route-color);
-    }
-
-    .lesson-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      align-items: center;
-      margin-top: 24px;
-    }
-
-    .lesson-button {
-      border: 0;
-      border-radius: 10px;
-      padding: 13px 18px;
-      background: var(--route-color);
-      color: white;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .lesson-button:disabled {
-      opacity: .65;
-      cursor: default;
-    }
-
-    .lesson-link {
-      color: var(--route-color);
-      font-weight: 800;
-      text-decoration: none;
-    }
-
-    @media (max-width: 680px) {
-      .lesson-nav {
-        flex-direction: column;
-      }
-
-      .lesson-hero,
-      .lesson-block {
-        padding: 20px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lección · DuckTronSur IA Academy</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/auth.css">
+<style>
+:root{--route-color:#18a889;--route-soft:#e8f8f3;--route-dark:#073b4c}
+body{background:#f4f8fa;color:#173b4b}
+.lesson-page{max-width:980px;margin:auto;padding:24px 18px 64px}
+.lesson-nav{display:flex;justify-content:space-between;gap:14px;margin-bottom:22px}
+.lesson-nav a,.lesson-link{color:var(--route-dark);text-decoration:none;font-weight:700}
+.lesson-hero{background:#fff;border-top:8px solid var(--route-color);border-radius:24px;padding:28px;box-shadow:0 12px 34px #073b4c1a;display:grid;grid-template-columns:1fr 240px;gap:20px;align-items:center}
+.lesson-kicker{color:var(--route-color);font-size:.82rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+.lesson-hero h1{color:var(--route-dark);font-size:clamp(2rem,5vw,3.4rem);margin:12px 0}
+.lesson-hero p,.lesson-block p,.lesson-block li{font-size:1.06rem;line-height:1.7}
+.lesson-visual{width:100%;max-height:220px;object-fit:contain}
+.lesson-duck{display:block;width:90px;height:90px;object-fit:contain;margin:0 auto 8px}
+.lesson-block{background:#fff;border-radius:18px;padding:24px;margin-top:18px;border:1px solid #dce9ee}
+.lesson-block h2{color:var(--route-dark);margin-top:0}
+.lesson-practice{background:var(--route-soft);border-left:6px solid var(--route-color)}
+.lesson-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px}
+.lesson-button{border:0;border-radius:10px;padding:13px 18px;background:var(--route-color);color:#fff;font-weight:800;cursor:pointer}
+.lesson-button:disabled{opacity:.65;cursor:default}
+.lesson-link{color:var(--route-color)}
+@media(max-width:680px){.lesson-nav{flex-direction:column}.lesson-hero{grid-template-columns:1fr;padding:20px}.lesson-visual{max-height:170px}.lesson-block{padding:20px}}
+</style>
 </head>
-
 <body>
-  <main class="lesson-page">
-    <nav class="lesson-nav">
-      <a id="back-route" href="/">← Volver a la ruta</a>
-      <a href="/mi-campus.html">Mi Campus</a>
-    </nav>
+<main class="lesson-page">
+<nav class="lesson-nav">
+<a id="back-route" href="/">← Volver a la ruta</a>
+<a href="/mi-campus.html">Mi Campus</a>
+</nav>
+<div id="lesson-app"><p>Cargando lección…</p></div>
+</main>
 
-    <div id="lesson-app">
-      <p>Cargando lección…</p>
-    </div>
-  </main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/supabase-config.js"></script>
+<script>
+const client=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="/supabase-config.js"></script>
+const routeData={
+start:{name:'START',color:'#18a889',soft:'#e8f8f3',image:'/assets/ruta-start-v1.png',lessons:[
+['Qué es la IA y qué puede hacer','Comprende qué es la inteligencia artificial y dónde puede ayudarte.'],
+['Cómo escribir una buena instrucción','Aprende a pedir mejores resultados a una herramienta de IA.'],
+['Cómo comprobar una respuesta','Aprende a revisar y contrastar una respuesta generada por IA.'],
+['Tu primer flujo de trabajo','Construye un proceso sencillo y repetible con inteligencia artificial.']]},
+intermedio:{name:'INTERMEDIO',color:'#2474c6',soft:'#eaf2ff',image:'/assets/ruta-intermedio-v1.png',lessons:[
+['Contexto y objetivos','Define correctamente el contexto y el resultado que necesitas.'],
+['Plantillas de prompts','Crea instrucciones reutilizables para tareas frecuentes.'],
+['Revisión y mejora','Mejora tus resultados mediante revisión y reformulación.'],
+['Trabajar con documentos','Organiza y analiza documentos con ayuda de la IA.'],
+['Proceso reutilizable','Convierte una tarea puntual en un procedimiento estable.']]},
+pro:{name:'PRO',color:'#e87519',soft:'#fff1e5',image:'/assets/ruta-pro-v1.png',lessons:[
+['Diseñar un proceso','Diseña procesos de IA aplicados a proyectos reales.'],
+['Automatizaciones básicas','Identifica tareas repetitivas que pueden automatizarse.'],
+['Conectar herramientas','Combina distintas herramientas para completar un flujo.'],
+['Agentes y supervisión','Comprende cómo supervisar sistemas con capacidad de acción.'],
+['Seguridad y control','Aplica controles básicos de seguridad, privacidad y calidad.']]},
+lab:{name:'LAB',color:'#7654c8',soft:'#f0ebff',image:'/assets/ruta-lab-v1.png',lessons:[
+['Definir un caso de uso','Selecciona un problema concreto que merezca un piloto.'],
+['Prototipo funcional','Construye una primera solución comprobable.'],
+['Pruebas y evaluación','Mide si el prototipo produce resultados útiles.'],
+['Documentación y entrega','Deja preparado el procedimiento para continuar o escalar.']]}
+};
 
-  <script>
-    const client = supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_PUBLISHABLE_KEY
-    );
+const params=new URLSearchParams(location.search);
+const routeSlug=(params.get('ruta')||'start').toLowerCase();
+const lessonNumber=Number(params.get('leccion')||'1');
+const route=routeData[routeSlug]||routeData.start;
+const lesson=route.lessons[lessonNumber-1]||route.lessons[0];
 
-    const routeData = {
-      start: {
-        name: 'START',
-        color: '#18a889',
-        soft: '#e8f8f3',
-        lessons: [
-          ['Qué es la IA y qué puede hacer', 'Comprende qué es la inteligencia artificial y dónde puede ayudarte.'],
-          ['Cómo escribir una buena instrucción', 'Aprende a pedir mejores resultados a una herramienta de IA.'],
-          ['Cómo comprobar una respuesta', 'Aprende a revisar y contrastar una respuesta generada por IA.'],
-          ['Tu primer flujo de trabajo', 'Construye un proceso sencillo y repetible con inteligencia artificial.']
-        ]
-      },
-      intermedio: {
-        name: 'INTERMEDIO',
-        color: '#2474c6',
-        soft: '#eaf2ff',
-        lessons: [
-          ['Contexto y objetivos', 'Define correctamente el contexto y el resultado que necesitas.'],
-          ['Plantillas de prompts', 'Crea instrucciones reutilizables para tareas frecuentes.'],
-          ['Revisión y mejora', 'Mejora tus resultados mediante revisión y reformulación.'],
-          ['Trabajar con documentos', 'Organiza y analiza documentos con ayuda de la IA.'],
-          ['Proceso reutilizable', 'Convierte una tarea puntual en un procedimiento estable.']
-        ]
-      },
-      pro: {
-        name: 'PRO',
-        color: '#e87519',
-        soft: '#fff1e5',
-        lessons: [
-          ['Diseñar un proceso', 'Diseña procesos de IA aplicados a proyectos reales.'],
-          ['Automatizaciones básicas', 'Identifica tareas repetitivas que pueden automatizarse.'],
-          ['Conectar herramientas', 'Combina distintas herramientas para completar un flujo.'],
-          ['Agentes y supervisión', 'Comprende cómo supervisar sistemas con capacidad de acción.'],
-          ['Seguridad y control', 'Aplica controles básicos de seguridad, privacidad y calidad.']
-        ]
-      },
-      lab: {
-        name: 'LAB',
-        color: '#7654c8',
-        soft: '#f0ebff',
-        lessons: [
-          ['Definir un caso de uso', 'Selecciona un problema concreto que merezca un piloto.'],
-          ['Prototipo funcional', 'Construye una primera solución comprobable.'],
-          ['Pruebas y evaluación', 'Mide si el prototipo produce resultados útiles.'],
-          ['Documentación y entrega', 'Deja preparado el procedimiento para continuar o escalar.']
-        ]
-      }
-    };
+document.documentElement.style.setProperty('--route-color',route.color);
+document.documentElement.style.setProperty('--route-soft',route.soft);
+document.querySelector('#back-route').href='/ruta.html?ruta='+routeSlug;
 
-    const params = new URLSearchParams(location.search);
-    const routeSlug = (params.get('ruta') || 'start').toLowerCase();
-    const lessonNumber = Number(params.get('leccion') || '1');
-    const route = routeData[routeSlug] || routeData.start;
-    const lesson = route.lessons[lessonNumber - 1] || route.lessons[0];
+const app=document.querySelector('#lesson-app');
 
-    document.documentElement.style.setProperty('--route-color', route.color);
-    document.documentElement.style.setProperty('--route-soft', route.soft);
-    document.querySelector('#back-route').href = `/ruta.html?ruta=${routeSlug}`;
+async function loadLesson(){
+const {data:{user}}=await client.auth.getUser();
+let dbLesson=null,completed=false;
 
-    const app = document.querySelector('#lesson-app');
+const {data:course}=await client.from('courses').select('id,title')
+.eq('slug',routeSlug).eq('published',true).maybeSingle();
 
-    async function loadLesson() {
-      const { data: { user } } = await client.auth.getUser();
+if(course){
+const {data:foundLesson}=await client.from('lessons')
+.select('id,title,content').eq('course_id',course.id)
+.eq('published',true).order('position',{ascending:true})
+.range(lessonNumber-1,lessonNumber-1).maybeSingle();
 
-      let dbCourse = null;
-      let dbLesson = null;
-      let completed = false;
+dbLesson=foundLesson;
 
-      const { data: course } = await client
-        .from('courses')
-        .select('id,title')
-        .eq('slug', routeSlug)
-        .eq('published', true)
-        .maybeSingle();
+if(user&&dbLesson){
+const {data:progress}=await client.from('lesson_progress')
+.select('completed').eq('user_id',user.id).eq('lesson_id',dbLesson.id).maybeSingle();
+completed=Boolean(progress?.completed);
+}
+}
 
-      dbCourse = course;
+const title=dbLesson?.title||lesson[0];
+const objective=lesson[1];
+const content=dbLesson?.content||`
+<p>En esta lección aprenderás a aplicar este concepto paso a paso y a relacionarlo con una tarea real.</p>
+<p>Trabaja con un objetivo claro, revisa el resultado y conserva el procedimiento que te funcione.</p>`;
 
-      if (dbCourse) {
-        const { data: foundLesson } = await client
-          .from('lessons')
-          .select('id,title,content')
-          .eq('course_id', dbCourse.id)
-          .eq('published', true)
-          .order('position', { ascending: true })
-          .range(lessonNumber - 1, lessonNumber - 1)
-          .maybeSingle();
+app.innerHTML=`
+<section class="lesson-hero">
+<div>
+<img class="lesson-duck" src="/assets/duck-profesor.png" alt="Patito profesor">
+<div class="lesson-kicker">${route.name} · Lección ${lessonNumber}</div>
+<h1>${title}</h1>
+<p>${objective}</p>
+</div>
+<img class="lesson-visual" src="${route.image}" alt="Imagen de la ruta ${route.name}">
+</section>
 
-        dbLesson = foundLesson;
+<section class="lesson-block">
+<h2>Objetivo</h2>
+<p>${objective}</p>
+</section>
 
-        if (user && dbLesson) {
-          const { data: progress } = await client
-            .from('lesson_progress')
-            .select('completed')
-            .eq('user_id', user.id)
-            .eq('lesson_id', dbLesson.id)
-            .maybeSingle();
+<section class="lesson-block">
+<h2>Contenido de la lección</h2>
+${content}
+</section>
 
-          completed = Boolean(progress?.completed);
-        }
-      }
+<section class="lesson-block lesson-practice">
+<h2>Actividad práctica</h2>
+<ol>
+<li>Elige una tarea real de tu trabajo o de tu vida diaria.</li>
+<li>Aplica el concepto de esta lección.</li>
+<li>Revisa el resultado y anota qué mejorarías.</li>
+</ol>
+</section>
 
-      const title = dbLesson?.title || lesson[0];
-      const objective = lesson[1];
-      const databaseContent = dbLesson?.content;
+<div class="lesson-actions">
+<button id="complete-button" class="lesson-button" ${completed?'disabled':''}>
+${completed?'Lección completada':'Marcar como completada'}
+</button>
+<a class="lesson-link" href="/ruta.html?ruta=${routeSlug}">Volver a ${route.name}</a>
+</div>
+<p id="lesson-message" class="auth-message"></p>`;
 
-      app.innerHTML = `
-        <section class="lesson-hero">
-          <div class="lesson-kicker">${route.name} · Lección ${lessonNumber}</div>
-          <h1>${title}</h1>
-          <p>${objective}</p>
-        </section>
+const button=document.querySelector('#complete-button');
+const message=document.querySelector('#lesson-message');
 
-        <section class="lesson-block">
-          <h2>Objetivo</h2>
-          <p>${objective}</p>
-        </section>
+button.addEventListener('click',async()=>{
+if(!user){
+message.textContent='Inicia sesión para guardar tu progreso.';
+message.className='auth-message error';
+return;
+}
+if(!dbLesson){
+message.textContent='Esta lección todavía no está disponible en la base de datos.';
+message.className='auth-message error';
+return;
+}
 
-        <section class="lesson-block">
-          <h2>Contenido de la lección</h2>
-          ${
-            databaseContent ||
-            `<p>En esta lección aprenderás a aplicar este concepto paso a paso y a relacionarlo con una tarea real.</p>
-             <p>Trabaja siempre con un objetivo claro, revisa el resultado y conserva el procedimiento que te funcione.</p>`
-          }
-        </section>
+button.disabled=true;
 
-        <section class="lesson-block lesson-practice">
-          <h2>Actividad práctica</h2>
-          <ol>
-            <li>Elige una tarea real de tu trabajo o de tu vida diaria.</li>
-            <li>Aplica el concepto de esta lección.</li>
-            <li>Revisa el resultado y anota qué mejorarías.</li>
-          </ol>
-        </section>
+const {error}=await client.from('lesson_progress').upsert({
+user_id:user.id,lesson_id:dbLesson.id,completed:true
+},{onConflict:'user_id,lesson_id'});
 
-        <div class="lesson-actions">
-          <button id="complete-button" class="lesson-button" ${completed ? 'disabled' : ''}>
-            ${completed ? 'Lección completada' : 'Marcar como completada'}
-          </button>
-          <a class="lesson-link" href="/ruta.html?ruta=${routeSlug}">Volver a ${route.name}</a>
-        </div>
+if(error){
+button.disabled=false;
+message.textContent='No se ha podido guardar el progreso.';
+message.className='auth-message error';
+return;
+}
 
-        <p id="lesson-message" class="auth-message"></p>
-      `;
+button.textContent='Lección completada';
+message.textContent='Tu progreso se ha guardado correctamente.';
+message.className='auth-message success';
+});
+}
 
-      const button = document.querySelector('#complete-button');
-      const message = document.querySelector('#lesson-message');
-
-      button.addEventListener('click', async () => {
-        if (!user) {
-          message.textContent = 'Inicia sesión para guardar tu progreso.';
-          message.className = 'auth-message error';
-          return;
-        }
-
-        if (!dbLesson) {
-          message.textContent = 'Esta lección todavía no está disponible en la base de datos.';
-          message.className = 'auth-message error';
-          return;
-        }
-
-        button.disabled = true;
-
-        const { error } = await client
-          .from('lesson_progress')
-          .upsert(
-            {
-              user_id: user.id,
-              lesson_id: dbLesson.id,
-              completed: true
-            },
-            { onConflict: 'user_id,lesson_id' }
-          );
-
-        if (error) {
-          button.disabled = false;
-          message.textContent = 'No se ha podido guardar el progreso.';
-          message.className = 'auth-message error';
-          return;
-        }
-
-        button.textContent = 'Lección completada';
-        message.textContent = 'Tu progreso se ha guardado correctamente.';
-        message.className = 'auth-message success';
-      });
-    }
-
-    loadLesson().catch(error => {
-      app.innerHTML = `
-        <section class="lesson-block">
-          <h1>No se ha podido cargar la lección</h1>
-          <p class="auth-message error">${error.message}</p>
-          <a class="lesson-link" href="/">Volver al Campus</a>
-        </section>
-      `;
-    });
-  </script>
+loadLesson().catch(error=>{
+app.innerHTML=`
+<section class="lesson-block">
+<h1>No se ha podido cargar la lección</h1>
+<p class="auth-message error">${error.message}</p>
+<a class="lesson-link" href="/">Volver al Campus</a>
+</section>`;
+});
+</script>
 </body>
 </html>
