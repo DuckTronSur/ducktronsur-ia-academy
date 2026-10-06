@@ -1,336 +1,110 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>DuckTronSur IA Academy · Campus</title>
-  <link rel="stylesheet" href="/styles.css">
-
-  <style>
-    :root {
-      --blue: #06243f;
-      --cyan: #00cfff;
-      --text: #123047;
-      --soft: #f3f8fb;
-    }
-
-    * { box-sizing: border-box; }
-
-    body {
-      margin: 0;
-      background: var(--soft);
-      color: var(--text);
-      font-family: Arial, sans-serif;
-    }
-
-    a { text-decoration: none; }
-
-    .site-header {
-      background: var(--blue);
-      color: white;
-      padding: 14px 20px;
-    }
-
-    .nav {
-      max-width: 1180px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .logo {
-      width: 210px;
-      max-width: 70vw;
-    }
-
-    .nav-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: white;
-      font-weight: 700;
-      font-size: .95rem;
-    }
-
-    .nav-button {
-      background: var(--cyan);
-      color: #042038 !important;
-      border-radius: 9px;
-      padding: 10px 15px;
-    }
-
-    .hero {
-      min-height: 460px;
-      background:
-        linear-gradient(90deg, rgba(3,24,46,.88), rgba(3,24,46,.18)),
-        url("/assets/campus/Campus 001 Hero  portada principal del Campus patitoedificio Campus Online.png") center/cover;
-      display: flex;
-      align-items: center;
-      color: white;
-    }
-
-    .hero-inner {
-      max-width: 1180px;
-      width: 100%;
-      margin: auto;
-      padding: 70px 20px;
-    }
-
-    .hero h1 {
-      max-width: 650px;
-      font-size: clamp(2.4rem, 6vw, 5rem);
-      line-height: 1.02;
-      margin: 0 0 18px;
-    }
-
-    .hero p {
-      max-width: 560px;
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 26px;
-    }
-
-    .button {
-      display: inline-block;
-      border-radius: 10px;
-      padding: 14px 20px;
-      font-weight: 800;
-      background: var(--cyan);
-      color: #042038;
-    }
-
-    .button.secondary {
-      background: white;
-      color: var(--blue);
-    }
-
-    .section {
-      max-width: 1180px;
-      margin: auto;
-      padding: 58px 20px;
-    }
-
-    .section h2 {
-      color: var(--blue);
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      margin: 0 0 12px;
-    }
-
-    .section-intro {
-      max-width: 700px;
-      line-height: 1.65;
-      font-size: 1.06rem;
-    }
-
-    .feature-image,
-    .whatsapp-image {
-      display: block;
-      width: 100%;
-      max-height: 360px;
-      object-fit: cover;
-      border-radius: 20px;
-      margin-top: 24px;
-      box-shadow: 0 12px 30px #06243f1c;
-    }
-
-    .route-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-      margin-top: 28px;
-    }
-
-    .route-card {
-      background: white;
-      border-radius: 18px;
-      overflow: hidden;
-      box-shadow: 0 8px 22px #06243f15;
-      transition: transform .15s ease;
-    }
-
-    .route-card:hover {
-      transform: translateY(-4px);
-    }
-
-    .route-card img {
-      display: block;
-      width: 100%;
-      height: 190px;
-      object-fit: cover;
-    }
-
-    .route-card-body {
-      padding: 18px;
-    }
-
-    .route-card h3 {
-      color: var(--blue);
-      margin: 0 0 8px;
-    }
-
-    .route-card p {
-      line-height: 1.5;
-      margin: 0 0 16px;
-      color: #526b78;
-    }
-
-    .route-link {
-      color: #087ca4;
-      font-weight: 800;
-    }
-
-    .whatsapp {
-      background: #e9fff0;
-    }
-
-    .footer {
-      background: var(--blue);
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-    }
-
-    @media (max-width: 850px) {
-      .route-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .nav {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .route-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        min-height: 530px;
-      }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DuckTronSur IA Academy · Campus</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/brand-overrides.css">
+<style>
+:root{--blue:#06243f;--cyan:#00cfff;--soft:#f3f8fb;--text:#123047}
+*{box-sizing:border-box}
+body{margin:0;background:var(--soft);color:var(--text);font-family:Arial,sans-serif}
+a{text-decoration:none}
+.site-header{background:var(--blue);color:#fff;padding:14px 20px}
+.nav{max-width:1180px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.logo{width:210px;max-width:70vw}
+.nav-links{display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.nav-links a{color:#fff;font-weight:700}
+.nav-links .nav-button{background:var(--cyan);color:#042038;border-radius:9px;padding:10px 15px}
+.hero{min-height:460px;background:linear-gradient(90deg,#03182ee6,#03182e2e),url("/assets/campus/Campus 001 Hero  portada principal del Campus patitoedificio Campus Online.png") center/cover;display:flex;align-items:center;color:#fff}
+.hero-inner{max-width:1180px;width:100%;margin:auto;padding:70px 20px}
+.hero h1{max-width:650px;font-size:clamp(2.4rem,6vw,5rem);line-height:1.02;margin:0 0 18px}
+.hero p{max-width:560px;font-size:1.2rem;line-height:1.6}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.section{max-width:1180px;margin:auto;padding:58px 20px}
+.section h2{color:var(--blue);font-size:clamp(1.8rem,4vw,3rem);margin:0 0 12px}
+.section-intro{max-width:700px;line-height:1.65;font-size:1.06rem}
+.feature-image,.whatsapp-image{display:block;width:100%;max-height:360px;object-fit:cover;border-radius:20px;margin-top:24px;box-shadow:0 12px 30px #06243f1c}
+.route-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:28px}
+.route-card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 22px #06243f15}
+.route-card img{display:block;width:100%;height:190px;object-fit:cover}
+.route-card-body{padding:18px}
+.route-card h3{color:var(--blue);margin:0 0 8px}
+.route-card p{line-height:1.5;color:#526b78;margin:0 0 16px}
+.route-link{color:#087ca4;font-weight:800}
+.whatsapp{background:#e9fff0}
+.footer{background:var(--blue);color:#fff;text-align:center;padding:30px 20px}
+@media(max-width:850px){.route-grid{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start;flex-direction:column}}
+@media(max-width:560px){.route-grid{grid-template-columns:1fr}.hero{min-height:530px}}
+</style>
 </head>
 
 <body>
-  <header class="site-header">
-    <nav class="nav">
-      <a href="/">
-        <img class="logo" src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy">
-      </a>
+<header class="site-header">
+<nav class="nav">
+<a href="/"><img class="logo" src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a>
+<div class="nav-links">
+<a href="#rutas">Rutas</a>
+<a href="/mi-campus.html">Mi Campus</a>
+<a class="nav-button" href="/auth.html">Acceder</a>
+</div>
+</nav>
+</header>
 
-      <div class="nav-links">
-        <a href="#rutas">Rutas</a>
-        <a href="/mi-campus.html">Mi Campus</a>
-        <a class="nav-button" href="/auth.html">Acceder</a>
-      </div>
-    </nav>
-  </header>
+<main>
+<section class="hero">
+<div class="hero-inner">
+<h1>Aprende, practica y aplica la inteligencia artificial</h1>
+<p>Un Campus organizado para avanzar desde los primeros pasos hasta la creación de proyectos reales con IA.</p>
+<div class="cta-row">
+<a class="button button--dark" href="#rutas">Explorar rutas</a>
+<a class="button button--secondary" href="/auth.html">Crear mi cuenta</a>
+</div>
+</div>
+</section>
 
-  <main>
-    <section class="hero">
-      <div class="hero-inner">
-        <h1>Aprende, practica y aplica la inteligencia artificial</h1>
-        <p>
-          Un Campus organizado para avanzar desde los primeros pasos hasta la creación
-          de proyectos reales con IA.
-        </p>
+<section class="section">
+<h2>Qué encontrarás en el Campus</h2>
+<p class="section-intro">Cursos progresivos, prácticas guiadas, proyectos, herramientas, comunidad y seguimiento de tu progreso.</p>
+<img class="feature-image" src="/assets/campus/Campus 003 Qué encontrarás en el Campus — Cursos, Prácticas, Proyectos, Herramientas, Comunidad y Progreso.png" alt="Qué encontrarás en el Campus">
+</section>
 
-        <div class="cta-row">
-          <a class="button" href="#rutas">Explorar rutas</a>
-          <a class="button secondary" href="/auth.html">Crear mi cuenta</a>
-        </div>
-      </div>
-    </section>
+<section class="section" id="rutas">
+<h2>Elige tu ruta de aprendizaje</h2>
+<p class="section-intro">Empieza por el nivel que mejor encaje contigo y avanza a tu ritmo.</p>
 
-    <section class="section">
-      <h2>Qué encontrarás en el Campus</h2>
-      <p class="section-intro">
-        Cursos progresivos, prácticas guiadas, proyectos, herramientas, comunidad
-        y seguimiento de tu progreso.
-      </p>
+<div class="route-grid">
+<article class="route-card">
+<img src="/assets/campus/Campus 006 START  Iniciación — tarjeta individual amarilla.png" alt="Ruta START">
+<div class="route-card-body"><h3>START</h3><p>Iniciación y fundamentos para comenzar con seguridad.</p><a class="route-link" href="/ruta.html?ruta=start">Explorar START →</a></div>
+</article>
 
-      <img
-        class="feature-image"
-        src="/assets/campus/Campus 003 Qué encontrarás en el Campus — Cursos, Prácticas, Proyectos, Herramientas, Comunidad y Progreso.png"
-        alt="Qué encontrarás en el Campus">
-    </section>
+<article class="route-card">
+<img src="/assets/campus/Campus 007 INTERMEDIO — tarjeta individual azul.png" alt="Ruta INTERMEDIO">
+<div class="route-card-body"><h3>INTERMEDIO</h3><p>Mejora tus instrucciones y crea procesos reutilizables.</p><a class="route-link" href="/ruta.html?ruta=intermedio">Explorar INTERMEDIO →</a></div>
+</article>
 
-    <section class="section" id="rutas">
-      <h2>Elige tu ruta de aprendizaje</h2>
-      <p class="section-intro">
-        Empieza por el nivel que mejor encaje contigo y avanza a tu ritmo.
-      </p>
+<article class="route-card">
+<img src="/assets/campus/Campus 008 AVANZADO — tarjeta individual naranja.png" alt="Ruta PRO">
+<div class="route-card-body"><h3>PRO</h3><p>Aplica la IA a proyectos, herramientas y automatizaciones.</p><a class="route-link" href="/ruta.html?ruta=pro">Explorar PRO →</a></div>
+</article>
 
-      <div class="route-grid">
-        <article class="route-card">
-          <img src="/assets/campus/Campus 006 START  Iniciación — tarjeta individual amarilla.png" alt="Ruta START">
-          <div class="route-card-body">
-            <h3>START</h3>
-            <p>Iniciación y fundamentos para comenzar con seguridad.</p>
-            <a class="route-link" href="/ruta.html?ruta=start">Explorar START →</a>
-          </div>
-        </article>
+<article class="route-card">
+<img src="/assets/campus/Campus 009 Profesional  Laboratorio — violeta.png" alt="Ruta LAB">
+<div class="route-card-body"><h3>LAB</h3><p>Diseña, prueba y documenta pilotos profesionales.</p><a class="route-link" href="/ruta.html?ruta=lab">Explorar LAB →</a></div>
+</article>
+</div>
+</section>
 
-        <article class="route-card">
-          <img src="/assets/campus/Campus 007 INTERMEDIO — tarjeta individual azul.png" alt="Ruta INTERMEDIO">
-          <div class="route-card-body">
-            <h3>INTERMEDIO</h3>
-            <p>Mejora tus instrucciones y crea procesos reutilizables.</p>
-            <a class="route-link" href="/ruta.html?ruta=intermedio">Explorar INTERMEDIO →</a>
-          </div>
-        </article>
+<section class="section whatsapp">
+<h2>Comunidad DuckTronSur IA Academy</h2>
+<p class="section-intro">Consejos, avisos, recursos y acompañamiento para seguir aprendiendo.</p>
+<a class="button button--whatsapp" href="https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee" target="_blank" rel="noopener">Unirme a WhatsApp</a>
+<img class="whatsapp-image" src="/assets/campus/Campus 002 Comunidad WhatsApp — banner principal con patito y acceso a la comunidad.png" alt="Comunidad de WhatsApp">
+</section>
+</main>
 
-        <article class="route-card">
-          <img src="/assets/campus/Campus 008 AVANZADO — tarjeta individual naranja.png" alt="Ruta PRO">
-          <div class="route-card-body">
-            <h3>PRO</h3>
-            <p>Aplica la IA a proyectos, herramientas y automatizaciones.</p>
-            <a class="route-link" href="/ruta.html?ruta=pro">Explorar PRO →</a>
-          </div>
-        </article>
-
-        <article class="route-card">
-          <img src="/assets/campus/Campus 009 Profesional  Laboratorio — violeta.png" alt="Ruta LAB">
-          <div class="route-card-body">
-            <h3>LAB</h3>
-            <p>Diseña, prueba y documenta pilotos profesionales.</p>
-            <a class="route-link" href="/ruta.html?ruta=lab">Explorar LAB →</a>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section whatsapp">
-      <h2>Comunidad DuckTronSur IA Academy</h2>
-      <p class="section-intro">
-        Consejos, avisos, recursos y acompañamiento para seguir aprendiendo.
-      </p>
-
-      <a href="https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee" target="_blank" rel="noopener">
-        <img
-          class="whatsapp-image"
-          src="/assets/campus/Campus 002 Comunidad WhatsApp — banner principal con patito y acceso a la comunidad.png"
-          alt="Unirse a la comunidad de WhatsApp">
-      </a>
-    </section>
-  </main>
-
-  <footer class="footer">
-    DuckTronSur IA Academy · Aprende · Practica · Crea · Aplica
-  </footer>
+<footer class="footer">DuckTronSur IA Academy · Aprende · Practica · Crea · Aplica</footer>
 </body>
 </html>
