@@ -1,80 +1,197 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Crear cuenta · DuckTronSur IA Academy</title>
-  <link rel="stylesheet" href="auth.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Acceso · DuckTronSur IA Academy</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/auth.css">
+<link rel="stylesheet" href="/brand-overrides.css">
+
+<style>
+body{background:#061f38}
+.auth-page{min-height:100vh;display:grid;place-items:center;padding:22px}
+.auth-wrap{width:min(100%,980px)}
+.auth-top{display:flex;justify-content:space-between;gap:15px;color:#fff;margin-bottom:18px}
+.auth-top a{color:#fff;text-decoration:none;font-weight:800}
+.auth-card{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:center;background:#fff;border-radius:24px;padding:32px;box-shadow:0 18px 50px #0005}
+.auth-art{width:100%;max-height:310px;object-fit:contain}
+.auth-kicker{color:#087ca4;font-weight:900;letter-spacing:.08em}
+.auth-card h1{color:#06243f;font-size:clamp(2rem,5vw,3.6rem);margin:10px 0}
+.auth-card>div>p{line-height:1.6}
+.auth-form{display:grid;gap:15px;margin-top:22px}
+.auth-form label{display:grid;gap:7px;color:#173b4b;font-weight:800}
+.auth-form input{width:100%;padding:13px;border:1px solid #bcd0da;border-radius:9px;font-size:1rem}
+.auth-form input:focus{outline:3px solid #00cfff55;border-color:#00a9e2}
+#submit-button,.auth-resend,.auth-forgot,.auth-switch button{border:0;border-radius:10px;padding:13px 16px;font-weight:800;cursor:pointer}
+#submit-button{background:#00cfff;color:#042038}
+.auth-resend{background:#e5f8fd;color:#056d8d;margin-top:12px}
+.auth-forgot{background:transparent;color:#087ca4;text-decoration:underline;margin-top:10px}
+.auth-switch button{background:transparent;color:#087ca4;padding:0;text-decoration:underline}
+.auth-note{font-size:.86rem;color:#667b86}
+.auth-message{margin-top:15px}
+.auth-message.success{color:#16824f}
+.auth-message.error{color:#b42318}
+@media(max-width:760px){.auth-card{grid-template-columns:1fr;padding:24px}.auth-art{max-height:190px}.auth-top{flex-direction:column}}
+</style>
 </head>
+
 <body class="auth-page">
-  <main class="auth-wrap">
-    <header class="auth-top"><a href="./">← Volver al Campus</a><span>DuckTronSur IA Academy</span></header>
-    <section class="auth-card" aria-labelledby="auth-title">
-      <p class="auth-kicker">MI CAMPUS</p>
-      <h1 id="auth-title">Crea tu cuenta</h1>
-      <p id="auth-intro">Regístrate para guardar tu progreso y continuar tus rutas de aprendizaje.</p>
-      <form class="auth-form" id="auth-form">
-        <label id="name-field">Nombre<input id="display-name" name="displayName" autocomplete="name"></label>
-        <label>Correo electrónico<input id="email" name="email" type="email" autocomplete="email" required></label>
-        <label>Contraseña<input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required></label>
-        <button id="submit-button" type="submit">Crear mi cuenta</button>
-      </form>
-      <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
-      <button class="auth-resend" id="resend" type="button" hidden>Reenviar correo de confirmación</button>
-      <button class="auth-forgot" id="forgot" type="button" hidden>He olvidado mi contraseña</button>
-      <p class="auth-switch" id="auth-switch">¿Ya tienes cuenta? <button type="button">Inicia sesión</button></p>
-      <p class="auth-note">Usaremos tu correo para gestionar el acceso y tu nombre para mostrar tu perfil. No guardamos contraseñas en el Campus.</p>
-    </section>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
-  <script src="supabase-config.js"></script>
-  <script>
-    if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_PUBLISHABLE_KEY) {
-      document.querySelector('#auth-message').textContent = 'El servicio de acceso no está disponible ahora. Inténtalo de nuevo en unos minutos.';
-      document.querySelector('#auth-message').className = 'auth-message error';
-      throw new Error('Supabase client configuration unavailable');
-    }
-    const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
-    const form = document.querySelector('#auth-form');
-    const nameField = document.querySelector('#name-field');
-    const nameInput = document.querySelector('#display-name');
-    const title = document.querySelector('#auth-title');
-    const intro = document.querySelector('#auth-intro');
-    const submit = document.querySelector('#submit-button');
-    const message = document.querySelector('#auth-message');
-    const switchBox = document.querySelector('#auth-switch');
-    const resend = document.querySelector('#resend');
-    const forgot = document.querySelector('#forgot');
-    const redirectUrl = `${location.origin}/`;
-    let mode = new URLSearchParams(location.search).has('reset') ? 'update' : 'signup';
-    let lastSignupEmail = '';
-    function render(){
-      const login = mode === 'login'; const update = mode === 'update';
-      nameField.hidden = login || update; nameInput.required = !login && !update;
-      title.textContent = update ? 'Cambia tu contraseña' : login ? 'Inicia sesión' : 'Crea tu cuenta';
-      intro.textContent = update ? 'Elige una contraseña nueva para recuperar el acceso.' : login ? 'Accede a tus rutas y continúa donde lo dejaste.' : 'Regístrate para guardar tu progreso y continuar tus rutas de aprendizaje.';
-      submit.textContent = update ? 'Guardar contraseña' : login ? 'Iniciar sesión' : 'Crear mi cuenta'; forgot.hidden = !login; switchBox.hidden = update;
-      if(!update){switchBox.innerHTML = login ? '¿Todavía no tienes cuenta? <button type="button">Regístrate</button>' : '¿Ya tienes cuenta? <button type="button">Inicia sesión</button>';switchBox.querySelector('button').addEventListener('click',()=>{mode=login?'signup':'login';message.textContent='';message.className='auth-message';render()});}
-    }
-    render();
-    form.addEventListener('submit',async(event)=>{
-      event.preventDefault(); message.textContent=''; message.className='auth-message'; submit.disabled=true;
-      const email=document.querySelector('#email').value.trim(); const password=document.querySelector('#password').value;
-      try{
-        if(mode==='update'){
-          const {error}=await client.auth.updateUser({password}); if(error) throw error; message.textContent='Contraseña actualizada. Ya puedes entrar en tu Campus.'; message.className='auth-message success'; setTimeout(()=>location.href='mi-campus.html',900);
-        }else if(mode==='signup'){
-          const displayName=nameInput.value.trim();
-          const {data,error}=await client.auth.signUp({email,password,options:{data:{display_name:displayName},emailRedirectTo:redirectUrl}});
-          if(error) throw error;
-          if(data.session){location.href='mi-campus.html'} else {lastSignupEmail=email;resend.hidden=false;message.textContent='Cuenta creada. Revisa tu correo para confirmar el acceso.';message.className='auth-message success';form.reset()}
-        }else{
-          const {error}=await client.auth.signInWithPassword({email,password}); if(error) throw error; location.href='mi-campus.html';
-        }
-      }catch(error){const raw=error.message||'';message.textContent=/not confirmed/i.test(raw)?'Confirma primero tu correo electrónico.':/invalid login credentials/i.test(raw)?'El correo o la contraseña no son correctos.':/already registered|user already/i.test(raw)?'Esta cuenta ya existe. Revisa tu correo o inicia sesión.':raw||'No se ha podido completar la operación.';message.className='auth-message error'}finally{submit.disabled=false}
-    });
-    resend.addEventListener('click',async()=>{if(!lastSignupEmail)return;resend.disabled=true;const {error}=await client.auth.resend({type:'signup',email:lastSignupEmail});message.textContent=error?'No se ha podido reenviar el correo.':'Te hemos enviado un nuevo correo de confirmación.';message.className='auth-message '+(error?'error':'success');resend.disabled=false});
-    forgot.addEventListener('click',async()=>{const email=document.querySelector('#email').value.trim();if(!email){message.textContent='Escribe primero tu correo electrónico.';message.className='auth-message error';return}forgot.disabled=true;const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:redirectUrl});message.textContent=error?'No se ha podido enviar el correo de recuperación.':'Te hemos enviado un enlace para cambiar la contraseña.';message.className='auth-message '+(error?'error':'success');forgot.disabled=false});
-  </script>
+<main class="auth-wrap">
+<header class="auth-top">
+<a href="/">← Volver al Campus</a>
+<span>DuckTronSur IA Academy</span>
+</header>
+
+<section class="auth-card" aria-labelledby="auth-title">
+<img class="auth-art" src="/assets/duck-profesor.png" alt="Patito profesor de DuckTronSur IA Academy">
+
+<div>
+<p class="auth-kicker">MI CAMPUS</p>
+<h1 id="auth-title">Crea tu cuenta</h1>
+<p id="auth-intro">Regístrate para guardar tu progreso y continuar tus rutas de aprendizaje.</p>
+
+<form class="auth-form" id="auth-form">
+<label id="name-field">Nombre
+<input id="display-name" name="displayName" autocomplete="name">
+</label>
+
+<label>Correo electrónico
+<input id="email" name="email" type="email" autocomplete="email" required>
+</label>
+
+<label>Contraseña
+<input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+</label>
+
+<button id="submit-button" type="submit">Crear mi cuenta</button>
+</form>
+
+<p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
+<button class="auth-resend" id="resend" type="button" hidden>Reenviar correo de confirmación</button>
+<button class="auth-forgot" id="forgot" type="button" hidden>He olvidado mi contraseña</button>
+<p class="auth-switch" id="auth-switch">¿Ya tienes cuenta? <button type="button">Inicia sesión</button></p>
+<p class="auth-note">Usaremos tu correo para gestionar el acceso y tu nombre para mostrar tu perfil. No guardamos contraseñas en el Campus.</p>
+</div>
+</section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+<script src="/supabase-config.js"></script>
+<script>
+if(!window.supabase||!window.SUPABASE_URL||!window.SUPABASE_PUBLISHABLE_KEY){
+document.querySelector('#auth-message').textContent='El servicio de acceso no está disponible ahora.';
+document.querySelector('#auth-message').className='auth-message error';
+throw new Error('Supabase client configuration unavailable');
+}
+
+const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+const form=document.querySelector('#auth-form');
+const nameField=document.querySelector('#name-field');
+const nameInput=document.querySelector('#display-name');
+const title=document.querySelector('#auth-title');
+const intro=document.querySelector('#auth-intro');
+const submit=document.querySelector('#submit-button');
+const message=document.querySelector('#auth-message');
+const switchBox=document.querySelector('#auth-switch');
+const resend=document.querySelector('#resend');
+const forgot=document.querySelector('#forgot');
+const redirectUrl=location.origin+'/';
+let mode=new URLSearchParams(location.search).has('reset')?'update':'signup';
+let lastSignupEmail='';
+
+function render(){
+const login=mode==='login';
+const update=mode==='update';
+
+nameField.hidden=login||update;
+nameInput.required=!login&&!update;
+title.textContent=update?'Cambia tu contraseña':login?'Inicia sesión':'Crea tu cuenta';
+intro.textContent=update?'Elige una contraseña nueva para recuperar el acceso.':login?'Accede a tus rutas y continúa donde lo dejaste.':'Regístrate para guardar tu progreso y continuar tus rutas de aprendizaje.';
+submit.textContent=update?'Guardar contraseña':login?'Iniciar sesión':'Crear mi cuenta';
+forgot.hidden=!login;
+switchBox.hidden=update;
+
+if(!update){
+switchBox.innerHTML=login?'¿Todavía no tienes cuenta? <button type="button">Regístrate</button>':'¿Ya tienes cuenta? <button type="button">Inicia sesión</button>';
+switchBox.querySelector('button').addEventListener('click',()=>{
+mode=login?'signup':'login';
+message.textContent='';
+message.className='auth-message';
+render();
+});
+}
+}
+
+render();
+
+form.addEventListener('submit',async event=>{
+event.preventDefault();
+message.textContent='';
+message.className='auth-message';
+submit.disabled=true;
+
+const email=document.querySelector('#email').value.trim();
+const password=document.querySelector('#password').value;
+
+try{
+if(mode==='update'){
+const {error}=await client.auth.updateUser({password});
+if(error)throw error;
+message.textContent='Contraseña actualizada. Ya puedes entrar en tu Campus.';
+message.className='auth-message success';
+setTimeout(()=>location.href='/mi-campus.html',900);
+}else if(mode==='signup'){
+const displayName=nameInput.value.trim();
+const {data,error}=await client.auth.signUp({
+email,password,
+options:{data:{display_name:displayName},emailRedirectTo:redirectUrl}
+});
+if(error)throw error;
+if(data.session)location.href='/mi-campus.html';
+else{
+lastSignupEmail=email;
+resend.hidden=false;
+message.textContent='Cuenta creada. Revisa tu correo para confirmar el acceso.';
+message.className='auth-message success';
+form.reset();
+}
+}else{
+const {error}=await client.auth.signInWithPassword({email,password});
+if(error)throw error;
+location.href='/mi-campus.html';
+}
+}catch(error){
+const raw=error.message||'';
+message.textContent=/not confirmed/i.test(raw)?'Confirma primero tu correo electrónico.':/invalid login credentials/i.test(raw)?'El correo o la contraseña no son correctos.':/already registered|user already/i.test(raw)?'Esta cuenta ya existe. Revisa tu correo o inicia sesión.':raw||'No se ha podido completar la operación.';
+message.className='auth-message error';
+}finally{
+submit.disabled=false;
+}
+});
+
+resend.addEventListener('click',async()=>{
+if(!lastSignupEmail)return;
+resend.disabled=true;
+const {error}=await client.auth.resend({type:'signup',email:lastSignupEmail});
+message.textContent=error?'No se ha podido reenviar el correo.':'Te hemos enviado un nuevo correo de confirmación.';
+message.className='auth-message '+(error?'error':'success');
+resend.disabled=false;
+});
+
+forgot.addEventListener('click',async()=>{
+const email=document.querySelector('#email').value.trim();
+if(!email){
+message.textContent='Escribe primero tu correo electrónico.';
+message.className='auth-message error';
+return;
+}
+forgot.disabled=true;
+const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:redirectUrl});
+message.textContent=error?'No se ha podido enviar el correo de recuperación.':'Te hemos enviado un enlace para cambiar la contraseña.';
+message.className='auth-message '+(error?'error':'success');
+forgot.disabled=false;
+});
+</script>
 </body>
 </html>
