@@ -2,164 +2,314 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Ruta · DuckTronSur IA Academy</title>
   <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/brand-overrides.css">
-  <link rel="stylesheet" href="/visual-v2.css">
+  <link rel="stylesheet" href="/auth.css">
+
   <style>
-    .route-page{max-width:980px;margin:0 auto;padding:48px 24px 80px}
-    .route-page header{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:70px}
-    .route-page a{color:inherit}
-    .user-box{font-size:.82rem;color:#087eaa;text-align:right}
-    .user-box a{font-weight:700;color:#087eaa}
-    .user-box button{border:0;background:none;color:#087eaa;font:inherit;font-weight:700;cursor:pointer}
-    .route-hero{display:grid;grid-template-columns:1fr 280px;gap:48px;align-items:center}
-    .route-hero img{width:100%;max-height:280px;object-fit:contain}
-    .route-tag{font-family:monospace;letter-spacing:.12em;color:#008dbe;font-size:.78rem}
-    .route-page h1{font-size:clamp(2.7rem,6vw,5rem);line-height:1;letter-spacing:-.06em;margin:16px 0}
-    .route-summary{font-size:1.1rem;line-height:1.7;color:#4d6075}
-    .lesson-list{display:grid;gap:12px;margin-top:52px}
-    .lesson{display:flex;gap:18px;align-items:center;padding:20px;border:1px solid rgba(8,25,51,.16);background:#fff;text-decoration:none}
-    .lesson strong{font-family:monospace;color:#008dbe}
-    .route-back{display:inline-block;margin-top:44px;font-weight:700;text-decoration:none}
-    @media(max-width:700px){
-      .route-hero{grid-template-columns:1fr}
-      .route-page header{margin-bottom:40px}
-      .user-box{font-size:.72rem}
+    :root {
+      --route-color: #18a889;
+      --route-soft: #e8f8f3;
+      --route-dark: #073b4c;
+    }
+
+    body {
+      background: #f4f8fa;
+      color: #123047;
+    }
+
+    .route-page {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 24px 18px 64px;
+    }
+
+    .route-nav {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+
+    .route-nav a {
+      color: var(--route-dark);
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .route-hero {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 28px;
+      align-items: center;
+      background: white;
+      border-top: 8px solid var(--route-color);
+      border-radius: 24px;
+      padding: 30px;
+      box-shadow: 0 12px 35px rgba(7, 59, 76, .10);
+    }
+
+    .route-badge {
+      display: inline-block;
+      background: var(--route-soft);
+      color: var(--route-color);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: .82rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+
+    .route-hero h1 {
+      margin: 14px 0 10px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--route-dark);
+    }
+
+    .route-hero p {
+      font-size: 1.08rem;
+      line-height: 1.65;
+    }
+
+    .route-image {
+      width: 100%;
+      max-height: 260px;
+      object-fit: contain;
+    }
+
+    .route-section {
+      margin-top: 28px;
+    }
+
+    .route-section h2 {
+      color: var(--route-dark);
+    }
+
+    .lesson-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .lesson-card {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: white;
+      border: 1px solid #dce9ee;
+      border-left: 6px solid var(--route-color);
+      border-radius: 16px;
+      padding: 18px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+
+    .lesson-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(7, 59, 76, .10);
+    }
+
+    .lesson-number {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 40px;
+      border-radius: 50%;
+      background: var(--route-soft);
+      color: var(--route-color);
+      font-weight: 900;
+    }
+
+    .lesson-card strong {
+      display: block;
+      color: var(--route-dark);
+      margin-bottom: 4px;
+    }
+
+    .lesson-card small {
+      color: #5d7280;
+    }
+
+    .route-footer {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .route-button {
+      display: inline-block;
+      background: var(--route-color);
+      color: white;
+      border-radius: 10px;
+      padding: 12px 18px;
+      text-decoration: none;
+      font-weight: 800;
+    }
+
+    .route-button.secondary {
+      background: var(--route-soft);
+      color: var(--route-color);
+    }
+
+    @media (max-width: 720px) {
+      .route-hero {
+        grid-template-columns: 1fr;
+        padding: 22px;
+      }
+
+      .route-image {
+        max-height: 180px;
+      }
+
+      .route-nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
     }
   </style>
 </head>
-<body>
-  <main class="route-page" id="app"></main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+<body>
+  <main class="route-page">
+    <nav class="route-nav">
+      <a href="/">← Volver al Campus</a>
+      <a href="/mi-campus.html">Mi Campus</a>
+    </nav>
+
+    <section id="route-app">
+      <p>Cargando ruta…</p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/supabase-config.js"></script>
 
   <script>
-    const routes = {
+    const client = supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_PUBLISHABLE_KEY
+    );
+
+    const routeData = {
       start: {
-        label: 'START · INICIACIÓN',
-        title: 'Empieza con buen criterio',
-        summary: 'Entiende lo esencial de la inteligencia artificial y aprende a utilizarla con seguridad.',
+        name: 'START',
+        level: 'Iniciación',
+        color: '#18a889',
+        soft: '#e8f8f3',
         image: '/assets/ruta-start-v1.png',
+        description: 'Empieza desde cero y aprende a utilizar la inteligencia artificial con criterio y seguridad.',
         lessons: [
-          'Qué es la IA y qué puede hacer',
-          'Cómo escribir una buena instrucción',
-          'Cómo comprobar una respuesta',
-          'Tu primer flujo de trabajo'
+          ['que-es-la-ia', 'Qué es la IA y qué puede hacer'],
+          ['como-escribir-una-buena-instruccion', 'Cómo escribir una buena instrucción'],
+          ['como-comprobar-una-respuesta', 'Cómo comprobar una respuesta'],
+          ['tu-primer-flujo-de-trabajo', 'Tu primer flujo de trabajo']
         ]
       },
       intermedio: {
-        label: 'INTERMEDIO',
-        title: 'Mejora tus resultados',
-        summary: 'Trabaja con mejores instrucciones, contexto y procesos reutilizables.',
+        name: 'INTERMEDIO',
+        level: 'Consolidación',
+        color: '#2474c6',
+        soft: '#eaf2ff',
         image: '/assets/ruta-intermedio-v1.png',
+        description: 'Mejora tus resultados y convierte tus instrucciones en procesos reutilizables.',
         lessons: [
-          'Contexto y objetivos',
-          'Plantillas de prompts',
-          'Revisión y mejora',
-          'Trabajar con documentos',
-          'Proceso reutilizable'
+          ['contexto-y-objetivos', 'Contexto y objetivos'],
+          ['plantillas-de-prompts', 'Plantillas de prompts'],
+          ['revision-y-mejora', 'Revisión y mejora'],
+          ['trabajar-con-documentos', 'Trabajar con documentos'],
+          ['proceso-reutilizable', 'Proceso reutilizable']
         ]
       },
       pro: {
-        label: 'PRO · AVANZADO',
-        title: 'Construye sistemas',
-        summary: 'Conecta herramientas y automatiza tareas repetitivas con criterio.',
+        name: 'PRO',
+        level: 'Avanzado',
+        color: '#e87519',
+        soft: '#fff1e5',
         image: '/assets/ruta-pro-v1.png',
+        description: 'Diseña sistemas de trabajo con IA aplicados a proyectos reales.',
         lessons: [
-          'Diseñar un proceso',
-          'Automatizaciones básicas',
-          'Conectar herramientas',
-          'Agentes y supervisión',
-          'Seguridad y control'
+          ['disenar-un-proceso', 'Diseñar un proceso'],
+          ['automatizaciones-basicas', 'Automatizaciones básicas'],
+          ['conectar-herramientas', 'Conectar herramientas'],
+          ['agentes-y-supervision', 'Agentes y supervisión'],
+          ['seguridad-y-control', 'Seguridad y control']
         ]
       },
       lab: {
-        label: 'LAB · PROFESIONAL',
-        title: 'Convierte ideas en proyectos',
-        summary: 'Lleva la IA a casos de uso reales y crea soluciones que puedas mantener.',
+        name: 'LAB',
+        level: 'Profesional',
+        color: '#7654c8',
+        soft: '#f0ebff',
         image: '/assets/ruta-lab-v1.png',
+        description: 'Lleva una idea desde el caso de uso hasta un piloto documentado y evaluable.',
         lessons: [
-          'Definir un caso de uso',
-          'Prototipo funcional',
-          'Pruebas y evaluación',
-          'Documentación y entrega'
+          ['definir-un-caso-de-uso', 'Definir un caso de uso'],
+          ['prototipo-funcional', 'Prototipo funcional'],
+          ['pruebas-y-evaluacion', 'Pruebas y evaluación'],
+          ['documentacion-y-entrega', 'Documentación y entrega']
         ]
       }
     };
 
-    const key = new URLSearchParams(location.search).get('ruta') || 'start';
-    const route = routes[key] || routes.start;
+    const params = new URLSearchParams(location.search);
+    const slug = (params.get('ruta') || 'start').toLowerCase();
+    const route = routeData[slug] || routeData.start;
 
-    document.title = route.label + ' · DuckTronSur IA Academy';
+    document.documentElement.style.setProperty('--route-color', route.color);
+    document.documentElement.style.setProperty('--route-soft', route.soft);
 
-    document.querySelector('#app').innerHTML = `
-      <header>
-        <a href="/">← Volver al Campus</a>
-        <div class="user-box" id="user-box">Comprobando sesión...</div>
-      </header>
+    const app = document.querySelector('#route-app');
 
-      <section class="route-hero">
-        <div>
-          <p class="route-tag">${route.label}</p>
-          <h1>${route.title}</h1>
-          <p class="route-summary">${route.summary}</p>
-        </div>
-        <img src="${route.image}" alt="${route.label}">
-      </section>
+    async function renderRoute() {
+      const { data: { user } } = await client.auth.getUser();
 
-      <section class="lesson-list" aria-label="Lecciones">
-        <h2>Lecciones de esta ruta</h2>
-        ${route.lessons.map((lesson, index) => `
-          <a class="lesson" href="/leccion.html?ruta=${key}&leccion=${index + 1}">
-            <strong>${String(index + 1).padStart(2, '0')}</strong>
-            <span>${lesson}</span>
-            <span aria-hidden="true">→</span>
-          </a>
-        `).join('')}
-      </section>
+      app.innerHTML = `
+        <section class="route-hero">
+          <div>
+            <span class="route-badge">${route.name} · ${route.level}</span>
+            <h1>Ruta ${route.name}</h1>
+            <p>${route.description}</p>
+          </div>
+          <img class="route-image" src="${route.image}" alt="Ilustración de la ruta ${route.name}">
+        </section>
 
-      <a class="route-back" href="/mi-campus">Ir a Mi Campus</a>
-    `;
+        <section class="route-section">
+          <h2>Tu itinerario de aprendizaje</h2>
+          <p>Completa las lecciones en orden y aplica cada concepto a una tarea real.</p>
 
-    async function loadUser() {
-      const userBox = document.querySelector('#user-box');
+          <div class="lesson-list">
+            ${route.lessons.map((lesson, index) => `
+              <a class="lesson-card" href="/leccion.html?ruta=${slug}&leccion=${index + 1}">
+                <span class="lesson-number">${index + 1}</span>
+                <span>
+                  <strong>${lesson[1]}</strong>
+                  <small>Lección ${index + 1} · ${route.name}</small>
+                </span>
+              </a>
+            `).join('')}
+          </div>
+        </section>
 
-      if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_PUBLISHABLE_KEY) {
-        userBox.innerHTML = '<a href="/auth.html">Inicia sesión</a>';
-        return;
-      }
-
-      const client = window.supabase.createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_PUBLISHABLE_KEY
-      );
-
-      const { data } = await client.auth.getUser();
-
-      if (!data.user) {
-        userBox.innerHTML = '<a href="/auth.html">Inicia sesión</a>';
-        return;
-      }
-
-      const name = data.user.user_metadata?.display_name || data.user.email;
-
-      userBox.innerHTML = `
-        <span>Hola, ${name}</span><br>
-        <a href="/mi-campus">Mi Campus</a>
-        ·
-        <button id="logout" type="button">Salir</button>
+        <footer class="route-footer">
+          <a class="route-button" href="/mi-campus.html">Ver mi progreso</a>
+          <a class="route-button secondary" href="/#rutas">Explorar otras rutas</a>
+          ${user ? '<span class="auth-message success">Sesión iniciada</span>' : ''}
+        </footer>
       `;
-
-      document.querySelector('#logout').addEventListener('click', async () => {
-        await client.auth.signOut();
-        location.href = '/auth.html';
-      });
     }
 
-    loadUser();
+    renderRoute().catch(error => {
+      app.innerHTML = `
+        <h1>No se ha podido cargar la ruta</h1>
+        <p class="auth-message error">${error.message}</p>
+        <a class="route-button" href="/">Volver al Campus</a>
+      `;
+    });
   </script>
 </body>
 </html>
