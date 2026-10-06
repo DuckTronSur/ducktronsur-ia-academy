@@ -1,6 +1,140 @@
-.hero-image{background-image:url('assets/hero-web.png')!important}
-.brand-logo{display:block;width:188px;height:auto}
-.experience-art{width:100%;max-width:420px;border-radius:4px;box-shadow:18px 18px 0 #f7c948}
-.experience-grid{align-items:center}
-@media(max-width:800px){.brand-logo{width:165px}.experience-art{max-width:360px}}
+:root {
+  --academy-blue: #06243f;
+  --academy-cyan: #00cfff;
+  --academy-green: #18a889;
+  --academy-orange: #e87519;
+  --academy-violet: #7654c8;
+  --academy-text: #173b4b;
+  --academy-soft: #f3f8fb;
+}
 
+.brand-logo {
+  display: block;
+  width: 188px;
+  height: auto;
+}
+
+.experience-art {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 14px;
+  box-shadow: 18px 18px 0 #f7c948;
+}
+
+.experience-grid {
+  align-items: center;
+}
+
+/* Sistema general de botones */
+
+.button,
+.auth-button,
+.lesson-button,
+.route-button,
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--academy-cyan);
+  color: #042038;
+  font-weight: 800;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .15s ease, filter .15s ease, opacity .15s ease;
+}
+
+.button:hover,
+.auth-button:hover,
+.lesson-button:hover,
+.route-button:hover,
+.cta-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+}
+
+.button:active,
+.auth-button:active,
+.lesson-button:active,
+.route-button:active,
+.cta-button:active {
+  transform: translateY(0);
+}
+
+.button.secondary,
+.button--secondary {
+  background: #e5f8fd;
+  color: #056d8d;
+}
+
+.button.whatsapp,
+.button--whatsapp {
+  background: #25d366;
+  color: #062b18;
+}
+
+.button.dark,
+.button--dark {
+  background: var(--academy-blue);
+  color: white;
+}
+
+.button.green,
+.button--green {
+  background: var(--academy-green);
+  color: white;
+}
+
+.button.orange,
+.button--orange {
+  background: var(--academy-orange);
+  color: white;
+}
+
+.button.violet,
+.button--violet {
+  background: var(--academy-violet);
+  color: white;
+}
+
+.button:disabled,
+.auth-button:disabled,
+.lesson-button:disabled,
+.route-button:disabled,
+.cta-button:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button-full {
+  width: 100%;
+}
+
+.hero-image {
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 800px) {
+  .brand-logo {
+    width: 165px;
+  }
+
+  .experience-art {
+    max-width: 360px;
+  }
+
+  .button,
+  .auth-button,
+  .lesson-button,
+  .route-button,
+  .cta-button {
+    width: 100%;
+  }
+}
