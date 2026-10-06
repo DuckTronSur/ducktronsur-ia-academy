@@ -4,7 +4,15 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Mi Campus · DuckTronSur IA Academy</title>
-  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="/auth.css">
+  <style>
+    .campus-grid{display:grid;gap:14px;margin-top:28px}
+    .campus-course{padding:20px;border:1px solid #cbd8e2;background:#f8fbfd}
+    .campus-course h2{margin:0 0 8px;font-size:1.35rem}
+    .campus-course p{margin:6px 0;color:#53657a}
+    .campus-course a{display:inline-block;margin-top:12px;padding:11px 15px;background:#00a9e2;color:#071225;text-decoration:none;font-weight:700}
+    .campus-status{font-size:.78rem;font-weight:700;color:#087eaa}
+  </style>
 </head>
 <body class="auth-page">
   <main class="auth-wrap">
@@ -15,15 +23,17 @@
 
     <section class="auth-card">
       <p class="auth-kicker">MI CAMPUS</p>
-      <h1 id="welcome">Tu espacio de aprendizaje</h1>
-      <p id="account">Comprobando tu sesión...</p>
+      <h1 id="welcome">Cargando tu Campus...</h1>
+      <p id="account">Estamos recuperando tus datos.</p>
+
+      <p id="campus-message" class="auth-message" role="status" aria-live="polite"></p>
+
+      <div id="courses" class="campus-grid"></div>
 
       <div class="hero-actions">
         <a class="button" href="/#rutas">Ver las rutas</a>
         <button class="button" id="logout" type="button">Cerrar sesión</button>
       </div>
-
-      <p class="auth-message" id="campus-message" role="status" aria-live="polite"></p>
     </section>
   </main>
 
@@ -34,50 +44,144 @@
     const welcome = document.querySelector('#welcome');
     const account = document.querySelector('#account');
     const message = document.querySelector('#campus-message');
+    const coursesBox = document.querySelector('#courses');
     const logout = document.querySelector('#logout');
+
+    function escapeHtml(value) {
+      return String(value ?? '').replace(/[&<>"']/g, char => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      }[char]));
+    }
 
     function showError(text) {
       welcome.textContent = 'No se ha podido cargar Mi Campus';
       account.textContent = text;
-      message.textContent = 'Vuelve a iniciar sesión y prueba de nuevo.';
+      message.textContent = 'Comprueba tu sesión e inténtalo de nuevo.';
       message.className = 'auth-message error';
     }
 
-    if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_PUBLISHABLE_KEY) {
-      showError('La configuración de acceso no está disponible.');
-    } else {
+    async function loadCampus() {
+      if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_PUBLISHABLE_KEY) {
+        throw new Error('La configuración de Supabase no está disponible.');
+      }
+
       const client = window.supabase.createClient(
         window.SUPABASE_URL,
         window.SUPABASE_PUBLISHABLE_KEY
       );
 
-      (async () => {
-        try {
-          const { data, error } = await client.auth.getUser();
+      const { data: userData, error: userError } = await client.auth.getUser();
 
-          if (error) throw error;
+      if (userError) throw userError;
 
-          if (!data.user) {
-            window.location.href = '/auth.html';
-            return;
-          }
-
-          const name = data.user.user_metadata?.display_name || data.user.email;
-          welcome.textContent = 'Hola, ' + name;
-          account.textContent = 'Has iniciado sesión con ' + data.user.email + '.';
-          message.textContent = 'Tu sesión está activa.';
-          message.className = 'auth-message success';
-        } catch (error) {
-          console.error(error);
-          showError('No se ha podido recuperar la sesión de Supabase.');
-        }
-      })();
-
-      logout.addEventListener('click', async () => {
-        await client.auth.signOut();
+      if (!userData.user) {
         window.location.href = '/auth.html';
-      });
+        return;
+      }
+
+      const user = userData.user;
+
+      const [
+        profileResult,
+        coursesResult,
+        enrollmentsResult,
+        lessonsResult,
+        progressResult
+      ] = await Promise.all([
+        client.from('profiles')
+          .select('display_name, role')
+          .eq('id', user.id)
+          .maybeSingle(),
+
+        client.from('courses')
+          .select('id, slug, title, level, description')
+          .eq('published', true)
+          .order('created_at'),
+
+        client.from('enrollments')
+          .select('course_id')
+          .eq('user_id', user.id),
+
+        client.from('lessons')
+          .select('id, course_id')
+          .eq('published', true),
+
+        client.from('lesson_progress')
+          .select('lesson_id, completed')
+          .eq('user_id', user.id)
+          .eq('completed', true)
+      ]);
+
+      const firstError = [
+        profileResult,
+        coursesResult,
+        enrollmentsResult,
+        lessonsResult,
+        progressResult
+      ].find(result => result.error);
+
+      if (firstError) throw firstError.error;
+
+      const profile = profileResult.data;
+      const courses = coursesResult.data || [];
+      const enrolledIds = new Set(
+        (enrollmentsResult.data || []).map(item => item.course_id)
+      );
+      const lessons = lessonsResult.data || [];
+      const completedIds = new Set(
+        (progressResult.data || []).map(item => item.lesson_id)
+      );
+
+      const name = profile?.display_name || user.user_metadata?.display_name || user.email;
+
+      welcome.textContent = 'Hola, ' + name;
+      account.textContent = user.email;
+      message.textContent = courses.length
+        ? 'Estas son las rutas disponibles en tu Campus.'
+        : 'Todavía no hay rutas publicadas.';
+      message.className = 'auth-message success';
+
+      coursesBox.innerHTML = courses.map(course => {
+        const courseLessons = lessons.filter(lesson => lesson.course_id === course.id);
+        const completed = courseLessons.filter(lesson => completedIds.has(lesson.id)).length;
+        const enrolled = enrolledIds.has(course.id);
+        const progress = courseLessons.length
+          ? Math.round((completed / courseLessons.length) * 100)
+          : 0;
+
+        return `
+          <article class="campus-course">
+            <p class="campus-status">${enrolled ? 'MATRICULADO' : 'DISPONIBLE'}</p>
+            <h2>${escapeHtml(course.title)}</h2>
+            <p>${escapeHtml(course.level)}</p>
+            <p>${escapeHtml(course.description || '')}</p>
+            <p>Progreso: ${completed}/${courseLessons.length} lecciones (${progress}%)</p>
+            <a href="/ruta.html?ruta=${encodeURIComponent(course.slug)}">
+              Explorar ruta
+            </a>
+          </article>
+        `;
+      }).join('');
     }
+
+    loadCampus().catch(error => {
+      console.error(error);
+      showError(error.message || 'Se ha producido un error de conexión.');
+    });
+
+    logout.addEventListener('click', async () => {
+      const client = window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_PUBLISHABLE_KEY
+      );
+
+      await client.auth.signOut();
+      window.location.href = '/auth.html';
+    });
   </script>
 </body>
 </html>
