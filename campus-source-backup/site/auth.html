@@ -45,6 +45,7 @@
     const switchBox = document.querySelector('#auth-switch');
     const resend = document.querySelector('#resend');
     const forgot = document.querySelector('#forgot');
+    const redirectUrl = `${location.origin}/`;
     let mode = new URLSearchParams(location.search).has('reset') ? 'update' : 'signup';
     let lastSignupEmail = '';
     function render(){
@@ -64,7 +65,7 @@
           const {error}=await client.auth.updateUser({password}); if(error) throw error; message.textContent='Contraseña actualizada. Ya puedes entrar en tu Campus.'; message.className='auth-message success'; setTimeout(()=>location.href='mi-campus.html',900);
         }else if(mode==='signup'){
           const displayName=nameInput.value.trim();
-          const {data,error}=await client.auth.signUp({email,password,options:{data:{display_name:displayName}}});
+          const {data,error}=await client.auth.signUp({email,password,options:{data:{display_name:displayName},emailRedirectTo:redirectUrl}});
           if(error) throw error;
           if(data.session){location.href='mi-campus.html'} else {lastSignupEmail=email;resend.hidden=false;message.textContent='Cuenta creada. Revisa tu correo para confirmar el acceso.';message.className='auth-message success';form.reset()}
         }else{
@@ -73,7 +74,7 @@
       }catch(error){const raw=error.message||'';message.textContent=/not confirmed/i.test(raw)?'Confirma primero tu correo electrónico.':/invalid login credentials/i.test(raw)?'El correo o la contraseña no son correctos.':/already registered|user already/i.test(raw)?'Esta cuenta ya existe. Revisa tu correo o inicia sesión.':raw||'No se ha podido completar la operación.';message.className='auth-message error'}finally{submit.disabled=false}
     });
     resend.addEventListener('click',async()=>{if(!lastSignupEmail)return;resend.disabled=true;const {error}=await client.auth.resend({type:'signup',email:lastSignupEmail});message.textContent=error?'No se ha podido reenviar el correo.':'Te hemos enviado un nuevo correo de confirmación.';message.className='auth-message '+(error?'error':'success');resend.disabled=false});
-    forgot.addEventListener('click',async()=>{const email=document.querySelector('#email').value.trim();if(!email){message.textContent='Escribe primero tu correo electrónico.';message.className='auth-message error';return}forgot.disabled=true;const {error}=await client.auth.resetPasswordForEmail(email);message.textContent=error?'No se ha podido enviar el correo de recuperación.':'Te hemos enviado un enlace para cambiar la contraseña.';message.className='auth-message '+(error?'error':'success');forgot.disabled=false});
+    forgot.addEventListener('click',async()=>{const email=document.querySelector('#email').value.trim();if(!email){message.textContent='Escribe primero tu correo electrónico.';message.className='auth-message error';return}forgot.disabled=true;const {error}=await client.auth.resetPasswordForEmail(email,{redirectTo:redirectUrl});message.textContent=error?'No se ha podido enviar el correo de recuperación.':'Te hemos enviado un enlace para cambiar la contraseña.';message.className='auth-message '+(error?'error':'success');forgot.disabled=false});
   </script>
 </body>
 </html>
