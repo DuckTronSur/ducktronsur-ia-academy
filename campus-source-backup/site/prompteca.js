@@ -35,6 +35,7 @@
     const fav = favorites.has(prompt.id);
     const info = featured ? "" : `<div class="prompt-meta"><span>${escapeHtml(prompt.compatibility.split(",")[0])}</span>${prompt.needsWeb === "Sí" ? "<span>Web</span>" : ""}${prompt.needsFile === "Sí" ? "<span>Archivo</span>" : ""}</div><p class="prompt-preview">${escapeHtml(prompt.prompt)}</p>`;
     return `<article class="${featured ? "featured-card" : "prompt-card"}" style="--level:${color}">
+      <div class="prompt-card-media"><img src="${categoryImages[prompt.category]}" alt="" loading="lazy"></div>
       <div class="card-top"><span class="level-pill">${escapeHtml(prompt.level)}</span><button class="favorite" type="button" data-favorite="${prompt.id}" aria-pressed="${fav}" aria-label="${fav ? "Quitar de favoritos" : "Añadir a favoritos"}">★</button></div>
       ${featured ? "" : `<span class="category-label">${escapeHtml(prompt.category)}</span>`}
       <h3>${escapeHtml(prompt.title)}</h3><p>${escapeHtml(prompt.description)}</p>${info}
