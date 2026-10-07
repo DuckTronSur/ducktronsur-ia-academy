@@ -13,3 +13,35 @@
 @media(max-width:960px){.category-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.category-grid{grid-template-columns:1fr}.prompt-grid{grid-template-columns:1fr}.category-section{padding:12px 0 45px}}
 
+/* Acciones principales del campus, compartidas con la portada. */
+.prompteca-header nav.prompteca-actions{gap:12px}
+.prompteca-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:10px 16px;border:1px solid var(--pt-cyan);border-radius:9px;color:#effaff;background:rgba(5,20,42,.72);box-shadow:0 0 12px rgba(57,213,255,.28);font-size:.74rem;font-weight:800;text-decoration:none;transition:background .2s ease,box-shadow .2s ease,transform .2s ease}
+.prompteca-actions a:hover,.prompteca-actions a.active{background:rgba(0,182,242,.22);box-shadow:0 0 18px rgba(57,213,255,.5);transform:translateY(-1px)}
+.prompteca-actions .header-access{border-color:#54ff7d;color:#fff;box-shadow:0 0 13px rgba(84,255,125,.3)}
+.prompteca-actions .header-access:hover{background:rgba(84,255,125,.18);box-shadow:0 0 18px rgba(84,255,125,.5)}
+@media(max-width:960px){.prompteca-header nav.prompteca-actions{gap:9px}.prompteca-actions a{padding:9px 12px;font-size:.68rem}}
+@media(max-width:720px){.prompteca-header nav.prompteca-actions{gap:6px}.prompteca-actions a{min-height:34px;padding:7px 9px;font-size:.61rem}}
+
+/* Tratamiento neon compartido para todas las acciones interactivas. */
+.prompteca-page button{transition:background .2s ease,border-color .2s ease,box-shadow .2s ease,transform .2s ease}
+.category-card{box-shadow:0 0 12px rgba(57,213,255,.2)}
+.category-card:hover{box-shadow:0 0 22px rgba(57,213,255,.5);transform:translateY(-1px)}
+.copy-button,.detail-button,.related-button,.empty-state button,.icon-button{box-shadow:0 0 12px rgba(57,213,255,.3)}
+.copy-button:hover,.detail-button:hover,.related-button:hover,.empty-state button:hover,.icon-button:hover{box-shadow:0 0 20px rgba(57,213,255,.62);transform:translateY(-1px)}
+.favorite{box-shadow:0 0 9px rgba(173,112,255,.24)}
+.favorite:hover,.favorite[aria-pressed="true"]{box-shadow:0 0 17px rgba(173,112,255,.55);transform:translateY(-1px)}
+.level-filter{box-shadow:0 0 8px color-mix(in srgb,var(--level) 22%,transparent)}
+.level-filter:hover,.level-filter[aria-pressed="true"]{box-shadow:0 0 16px color-mix(in srgb,var(--level) 60%,transparent);transform:translateY(-1px)}
+.filter-head button,#clear-filters{border-radius:7px;box-shadow:0 0 9px rgba(57,213,255,.22)}
+.filter-head button:hover,#clear-filters:hover{background:rgba(57,213,255,.12);box-shadow:0 0 16px rgba(57,213,255,.52);transform:translateY(-1px)}
+
+.prompteca-hero{isolation:isolate}
+.prompteca-hero-art{position:absolute;z-index:-1;top:0;right:0;width:min(52vw,720px);height:100%;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0%,#000 28%,#000 100%);opacity:.9}
+.prompteca-hero-art::after{position:absolute;inset:0;background:linear-gradient(90deg,#071a35 0%,rgba(7,26,53,.32) 45%,rgba(5,13,28,.04) 100%);content:""}
+.prompteca-hero-art img{width:100%;height:100%;object-fit:cover;object-position:72% center;filter:saturate(1.06) contrast(1.04)}
+.prompt-card-media{height:auto;aspect-ratio:16 / 9;margin:-18px -18px 14px;overflow:hidden;border-bottom:1px solid color-mix(in srgb,var(--level) 55%,transparent);border-radius:12px 12px 0 0;background:#071a35;opacity:.88}
+.prompt-card-media img{display:block;width:100%;height:100%;object-fit:contain;object-position:center center}
+.featured-card .prompt-card-media{height:auto;aspect-ratio:16 / 9;margin:-18px -18px 13px;background:#071a35}
+.featured-card .prompt-card-media img{object-fit:contain;object-position:center center}
+@media(max-width:720px){.prompteca-hero-art{right:-28%;width:90vw;opacity:.62}.prompteca-hero-art img{object-position:74% center}.prompt-card-media{height:auto;aspect-ratio:16 / 9}.featured-card .prompt-card-media{height:auto;aspect-ratio:16 / 9}.featured-card .prompt-card-media img{object-fit:contain}}
+
