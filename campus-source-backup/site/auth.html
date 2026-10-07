@@ -34,6 +34,11 @@ body{background:#061f38}
 .auth-message.error{color:#b42318}
 @media(max-width:760px){.auth-card{grid-template-columns:1fr;padding:24px}.auth-art{max-height:190px}.auth-top{flex-direction:column}}
 #submit-button,.auth-create{border:2px solid #00cfff;border-radius:12px;background:linear-gradient(135deg,#55ecff,#00a9e2);color:#042038;box-shadow:0 0 12px #00cfff,0 0 24px #00cfff66,inset 0 0 12px #ffffff66}.auth-create{width:100%;margin-top:12px;min-height:48px;font-weight:900;cursor:pointer}.auth-resend{border:2px solid #ffc83d!important;border-radius:12px!important;background:#06152e!important;color:#ffc83d!important;box-shadow:0 0 10px #ffc83d!important}.auth-forgot{color:#51e6ff!important}.auth-switch button{color:#51e6ff!important}@media(max-width:760px){.auth-art{max-height:260px!important;object-fit:cover!important;object-position:center 42%}}
+
+.auth-form label[hidden]{display:none!important}
+.auth-card{grid-template-columns:minmax(280px,42%) 1fr;align-items:stretch}
+.auth-art{width:100%;height:100%;min-height:500px;max-height:none;object-fit:cover;object-position:center;border-radius:16px;box-shadow:0 0 18px #00cfff55}
+@media(max-width:760px){.auth-card{grid-template-columns:1fr}.auth-art{height:260px;min-height:0;max-height:260px;object-fit:cover;object-position:center 42%}}
 </style>
 </head>
 
