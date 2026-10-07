@@ -5,153 +5,61 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mi Campus · DuckTronSur IA Academy</title>
 <link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/brand-overrides.css">
 <style>
-:root{--blue:#06243f;--cyan:#00cfff;--soft:#f3f8fb;--text:#173b4b}
-*{box-sizing:border-box}
-body{margin:0;background:var(--soft);color:var(--text);font-family:Arial,sans-serif}
-.campus-page{max-width:1180px;margin:auto;padding:22px 18px 60px}
-.topbar{display:flex;justify-content:space-between;gap:16px;margin-bottom:22px}
-.topbar a{color:var(--blue);font-weight:800;text-decoration:none}
-.hero{display:grid;grid-template-columns:1fr 330px;gap:24px;align-items:center;background:var(--blue);color:white;border-radius:24px;padding:28px;box-shadow:0 12px 30px #06243f22}
-.hero-kicker{color:var(--cyan);font-weight:900;letter-spacing:.08em;font-size:.8rem}
-.hero h1{font-size:clamp(2rem,5vw,3.7rem);margin:12px 0}
-.hero p{line-height:1.6}
-.hero-image{width:260px;height:260px;object-fit:contain;display:block;margin:auto}
-.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:22px 0}
-.summary-card{background:white;border-radius:16px;padding:20px;border:1px solid #dce9ee}
-.summary-card strong{display:block;color:var(--blue);font-size:1.9rem}
-.summary-card span{color:#607582}
-.section-title{color:var(--blue);margin:30px 0 14px}
-.courses{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
-.course{background:white;border-radius:18px;padding:20px;border-top:6px solid var(--course-color,var(--cyan));box-shadow:0 8px 22px #06243f12}
-.course h2{color:var(--blue);margin:0 0 8px}
-.course p{line-height:1.55;color:#536b78}
-.course-status{color:var(--course-color,#087ca4);font-size:.8rem;font-weight:900}
-.progress-track{height:10px;background:#e3edf1;border-radius:999px;overflow:hidden;margin:14px 0 8px}
-.progress-bar{height:100%;width:var(--progress);background:var(--course-color,var(--cyan))}
-.course a,.button{display:inline-block;border-radius:9px;padding:11px 15px;background:var(--course-color,var(--cyan));color:white;text-decoration:none;font-weight:800;border:0;cursor:pointer}
-.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
-.actions .button{background:var(--blue)}
-.actions .secondary{background:#dff8ff;color:#056d8d}
-.whatsapp{display:block;width:100%;border-radius:18px;margin-top:28px}
-@media(max-width:760px){.hero{grid-template-columns:1fr}.hero-image{width:210px;height:210px}.summary,.courses{grid-template-columns:1fr}.topbar{align-items:flex-start;flex-direction:column}}
+:root{--navy:#06152e;--blue:#0f5fd7;--cyan:#00cfff;--paper:#f3f7fb;--ink:#0a203a;--muted:#5c7184;--start:#ffc83d;--inter:#16a7ed;--pro:#ff8a00;--lab:#a855f7;--green:#20d879}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,Arial,sans-serif}.campus-shell{width:min(1240px,calc(100% - 40px));margin:auto}.campus-nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}.campus-brand img{display:block;width:190px;height:auto}.campus-nav-links{display:flex;align-items:center;gap:10px}.campus-nav-links a,.campus-account{padding:10px 13px;color:var(--ink);font-size:.78rem;font-weight:800;text-decoration:none;border-radius:10px}.campus-nav-links a:hover,.campus-account:hover{background:#e4f5fb}.campus-account{border:2px solid var(--cyan)}
+.campus-hero{position:relative;overflow:hidden;min-height:310px;display:grid;grid-template-columns:1.05fr .95fr;align-items:stretch;border-radius:24px;background:linear-gradient(100deg,#06152e 20%,#0b3b68 65%,#087eaa);box-shadow:0 18px 42px #06152e2b;color:#fff}.campus-hero::after{position:absolute;inset:0;content:"";background:linear-gradient(90deg,#06152ed9 0%,#06152e80 48%,transparent 82%);pointer-events:none}.campus-hero-copy{position:relative;z-index:1;padding:38px 38px 34px}.eyebrow{margin:0;color:#75e6ff;font:700 .68rem 'DM Mono',monospace;letter-spacing:.14em}.campus-hero h1{margin:12px 0 8px;font-size:clamp(2.4rem,6vw,4.8rem);letter-spacing:-.07em;line-height:.98}.campus-hero p{margin:8px 0;color:#d6e8f4;line-height:1.55}.hero-email{color:#8eeaff!important;font-size:.86rem}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}.neon-button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 17px;border:2px solid var(--cyan);border-radius:12px;background:#041b35;color:#fff;font-weight:900;text-decoration:none;box-shadow:0 0 9px var(--cyan),0 0 22px #00cfff55,inset 0 0 12px #fff2;cursor:pointer}.neon-button:hover{filter:brightness(1.2);transform:translateY(-1px)}.neon-button.green{border-color:var(--green);color:var(--green);box-shadow:0 0 9px var(--green),0 0 22px #20d87955}.campus-hero-art{position:relative;z-index:1;width:100%;height:100%;min-height:310px;object-fit:cover;object-position:center;border-radius:0 24px 24px 0}
+.summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0}.summary-card{display:flex;align-items:center;gap:14px;min-height:92px;padding:16px 18px;background:#fff;border:1px solid #dce9ee;border-radius:16px;box-shadow:0 8px 20px #173b4b0d}.summary-icon{width:44px;height:44px;display:grid;place-items:center;flex:0 0 44px;border-radius:14px;background:#eaf7fd;color:var(--blue);font-size:1.4rem}.summary-card strong{display:block;color:var(--ink);font-size:1.65rem}.summary-card span{display:block;color:var(--muted);font-size:.78rem}
+.section-heading{display:flex;justify-content:space-between;align-items:end;gap:18px;margin:34px 0 14px}.section-heading h2{margin:0;color:var(--ink);font-size:clamp(1.45rem,3vw,2.2rem);letter-spacing:-.05em}.section-heading p{max-width:360px;margin:0;color:var(--muted);font-size:.85rem;line-height:1.5}.dashboard-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:16px}.panel{background:linear-gradient(125deg,#072b55,#06182f);border-radius:20px;padding:23px;color:#ecf7ff;box-shadow:0 12px 28px #06152e20}.panel h3{margin:0 0 18px;color:#76e7ff;font-size:1rem;letter-spacing:.03em}.progress-panel{display:grid;grid-template-columns:190px 1fr;gap:24px;align-items:center}.progress-ring{--value:0;position:relative;width:168px;height:168px;display:grid;place-items:center;border-radius:50%;background:conic-gradient(var(--cyan) calc(var(--value)*1%),#173b63 0);box-shadow:0 0 22px #00cfff66}.progress-ring::after{position:absolute;inset:12px;content:"";border-radius:50%;background:#071a34}.progress-ring-content{position:relative;z-index:1;text-align:center}.progress-ring strong{display:block;font-size:2.25rem}.progress-ring span{font:700 .62rem 'DM Mono',monospace;color:#9deaff;letter-spacing:.08em}.metric-list{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.metric{padding:13px;border:1px solid #2c5a83;border-radius:13px;background:#08213e}.metric b{display:block;color:#fff;font-size:1.28rem}.metric span{color:#afd0e4;font-size:.72rem}.activity-empty{min-height:176px;display:grid;place-items:center;text-align:center;color:#afd0e4;border:1px dashed #3a668c;border-radius:14px;padding:18px}.activity-empty strong{display:block;color:#fff;margin-bottom:6px}
+.path-panel{display:grid;grid-template-columns:1fr 290px;gap:22px;align-items:center;background:#fff;border:1px solid #dce9ee;border-radius:20px;padding:24px;box-shadow:0 10px 25px #173b4b0d}.path-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;position:relative}.path-flow::before{position:absolute;top:25px;left:9%;right:9%;height:4px;content:"";background:#d9e5ec;z-index:0}.path-step{position:relative;z-index:1;text-align:center}.path-dot{width:50px;height:50px;display:grid;place-items:center;margin:0 auto 9px;border:4px solid #d9e5ec;border-radius:50%;background:#fff;color:#8598a7;font-weight:900}.path-step.done .path-dot{border-color:var(--green);background:var(--green);color:#062a2a;box-shadow:0 0 15px #20d87999}.path-step.current .path-dot{border-color:var(--cyan);background:#d9f8ff;color:#056d8d;box-shadow:0 0 15px #00cfff99}.path-step strong{display:block;font-size:.72rem;color:var(--ink)}.path-step small{display:block;margin-top:4px;color:var(--muted);font-size:.68rem}.next-card{padding:20px;border-radius:16px;background:linear-gradient(135deg,#e6f9ff,#fff);border:2px solid var(--cyan);box-shadow:0 0 16px #00cfff44}.next-card .eyebrow{color:#0784ae}.next-card h3{margin:10px 0;color:var(--ink);font-size:1.12rem}.next-card p{margin:0 0 14px;color:var(--muted);font-size:.82rem;line-height:1.5}
+.route-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}.route-card{overflow:hidden;display:flex;flex-direction:column;background:#fff;border:1px solid #dce9ee;border-top:5px solid var(--route);border-radius:18px;box-shadow:0 9px 24px #173b4b0f}.route-card-image{width:100%;height:135px;object-fit:cover;background:#071a34}.route-card-body{display:flex;flex:1;flex-direction:column;padding:16px}.route-card-body h3{margin:0;color:var(--route);font-size:1.55rem;letter-spacing:-.05em}.route-level{margin:3px 0 9px;color:var(--muted);font-size:.78rem;font-weight:800}.route-card-body p{margin:0;color:#506579;font-size:.78rem;line-height:1.45}.route-meta{display:flex;justify-content:space-between;margin-top:13px;color:var(--muted);font-size:.7rem;font-weight:800}.route-track{height:8px;margin:7px 0 13px;overflow:hidden;border-radius:99px;background:#e5edf1}.route-track span{display:block;width:var(--progress);height:100%;border-radius:inherit;background:var(--route)}.route-card .neon-button{width:100%;border-color:var(--route);color:var(--route);box-shadow:0 0 8px var(--route),0 0 18px color-mix(in srgb,var(--route),transparent 65%);font-size:.75rem}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.badge-card{padding:20px 12px;text-align:center;background:#fff;border:1px solid #dce9ee;border-radius:18px}.badge-medal{width:76px;height:76px;display:grid;place-items:center;margin:0 auto 10px;border:5px solid var(--badge);border-radius:50%;background:radial-gradient(circle at 35% 25%,#fff,var(--badge));color:#fff;font-size:2rem;text-shadow:0 2px 4px #0008;box-shadow:0 7px 18px #173b4b22}.badge-card.locked{filter:grayscale(.8);opacity:.58}.badge-card h3{margin:0;color:var(--ink);font-size:.9rem}.badge-card p{margin:4px 0 0;color:var(--muted);font-size:.7rem}.badge-state{display:inline-block;margin-top:10px;padding:4px 8px;border-radius:999px;background:#eaf7fd;color:#087ca4;font:700 .62rem 'DM Mono',monospace}
+.quick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.quick-card{display:flex;align-items:center;gap:14px;min-height:82px;padding:14px 16px;border:2px solid var(--quick);border-radius:16px;background:#06182f;color:#fff;text-decoration:none;box-shadow:0 0 10px var(--quick),0 0 22px color-mix(in srgb,var(--quick),transparent 70%)}.quick-card:hover{transform:translateY(-2px);filter:brightness(1.15)}.quick-icon{width:43px;height:43px;display:grid;place-items:center;border:2px solid var(--quick);border-radius:50%;color:var(--quick);font-size:1.25rem}.quick-card strong{display:block;font-size:.83rem}.quick-card span{display:block;margin-top:3px;color:#aed1e6;font-size:.69rem}.quick-card.disabled{opacity:.55;cursor:not-allowed;box-shadow:none}.campus-footer{padding:38px 0;color:#5e7184;font-size:.76rem;text-align:center}
+.error-box{margin-top:15px;color:#a32929;font-size:.85rem}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:1000px){.campus-nav-links{display:none}.summary-grid{grid-template-columns:repeat(2,1fr)}.route-grid{grid-template-columns:repeat(2,1fr)}.path-panel{grid-template-columns:1fr}.next-card{max-width:none}}
+@media(max-width:720px){.campus-shell{width:min(100% - 26px,620px)}.campus-nav{min-height:68px}.campus-brand img{width:160px}.campus-hero{grid-template-columns:1fr}.campus-hero::after{background:linear-gradient(0deg,#06152ed9,#06152e36)}.campus-hero-copy{padding:28px 24px 22px}.campus-hero-art{min-height:210px;height:210px;border-radius:0 0 24px 24px;object-position:center 38%}.dashboard-grid{grid-template-columns:1fr}.progress-panel{grid-template-columns:1fr}.progress-ring{margin:auto}.path-flow{grid-template-columns:1fr;gap:13px}.path-flow::before{top:25px;bottom:25px;left:25px;right:auto;width:4px;height:auto}.path-step{display:grid;grid-template-columns:50px 1fr;gap:12px;align-items:center;text-align:left}.path-dot{margin:0}.badges{grid-template-columns:repeat(2,1fr)}.quick-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.summary-grid,.route-grid,.quick-grid{grid-template-columns:1fr}.campus-hero h1{font-size:2.75rem}.section-heading{align-items:flex-start;flex-direction:column}.metric-list{grid-template-columns:1fr}.path-panel{padding:18px}.badge-medal{width:66px;height:66px}}
 </style>
 </head>
-
 <body>
-<main class="campus-page">
-<header class="topbar">
-<a href="/">← Volver al Campus</a>
-<a href="/auth.html">Gestionar cuenta</a>
-</header>
+<main class="campus-shell">
+<nav class="campus-nav" aria-label="Navegación de Mi Campus">
+<a class="campus-brand" href="/"><img src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a>
+<div class="campus-nav-links"><a href="/#rutas">Mis cursos</a><a href="/prompteca.html">Recursos</a><a href="https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee" target="_blank" rel="noopener">Comunidad</a><a href="/#como-funciona">Ayuda</a></div>
+<a class="campus-account" href="/auth.html">Gestionar cuenta</a>
+</nav>
 
-<section class="hero">
-<div>
-<div class="hero-kicker">DUCKTRONSUR IA ACADEMY</div>
-<h1 id="welcome">Cargando tu Campus…</h1>
-<p id="account">Estamos recuperando tus datos.</p>
-<p id="campus-message"></p>
-</div>
-<img class="hero-image" src="/assets/duck-profesor.png" alt="Patito profesor">
+<section class="campus-hero" aria-labelledby="welcome">
+<div class="campus-hero-copy"><p class="eyebrow">DUCKTRONSUR IA ACADEMY</p><h1 id="welcome">Cargando tu Campus…</h1><p id="account">Estamos recuperando tus datos.</p><p class="hero-email" id="hero-email"></p><div class="hero-actions"><a class="neon-button" href="#routes">Ver mis rutas</a><a class="neon-button green" href="/auth.html">Gestionar cuenta</a></div></div>
+<img class="campus-hero-art" src="/assets/ducktronsur-ia-academy-hero-v2.png" alt="DuckTronSur IA Academy y su Campus de aprendizaje">
 </section>
 
-<section class="summary">
-<div class="summary-card"><strong id="course-count">0</strong><span>rutas disponibles</span></div>
-<div class="summary-card"><strong id="lesson-count">0</strong><span>lecciones completadas</span></div>
-<div class="summary-card"><strong id="progress-count">0%</strong><span>progreso total</span></div>
-</section>
+<section class="summary-grid" aria-label="Resumen de progreso"><div class="summary-card"><div class="summary-icon">▣</div><div><strong id="course-count">—</strong><span>rutas disponibles</span></div></div><div class="summary-card"><div class="summary-icon">▤</div><div><strong id="lesson-count">—</strong><span>lecciones completadas</span></div></div><div class="summary-card"><div class="summary-icon">◔</div><div><strong id="progress-count">—</strong><span>progreso total</span></div></div><div class="summary-card"><div class="summary-icon">★</div><div><strong id="badge-count">—</strong><span>insignias obtenidas</span></div></div></section>
 
-<h2 class="section-title">Mis rutas de aprendizaje</h2>
-<p id="campus-error" class="auth-message"></p>
-<section id="courses" class="courses"></section>
+<section aria-labelledby="general-progress"><div class="section-heading"><h2 id="general-progress">Tu progreso general</h2><p>Datos calculados con tu sesión y el progreso guardado en el Campus.</p></div><div class="dashboard-grid"><article class="panel progress-panel"><div><h3>PROGRESO TOTAL</h3><div class="progress-ring" id="progress-ring"><div class="progress-ring-content"><strong id="ring-value">0%</strong><span>COMPLETADO</span></div></div></div><div class="metric-list"><div class="metric"><b id="active-routes">0</b><span>rutas activas</span></div><div class="metric"><b id="metric-lessons">0</b><span>lecciones completadas</span></div><div class="metric"><b id="metric-time">—</b><span>tiempo de aprendizaje</span></div><div class="metric"><b id="metric-badges">0</b><span>insignias obtenidas</span></div></div></article><article class="panel"><h3>ACTIVIDAD SEMANAL</h3><div class="activity-empty"><div><strong>Aún no hay historial semanal</strong><span>Cuando el Campus registre sesiones, aquí aparecerá tu actividad de L · M · X · J · V · S · D.</span></div></div></article></div></section>
 
-<img class="whatsapp" src="/assets/campus/Campus 013 CTA banner horizontal Comunidad WhatsApp.png" alt="Comunidad de WhatsApp">
+<section aria-labelledby="learning-path"><div class="section-heading"><h2 id="learning-path">Tu camino de aprendizaje</h2><p>La secuencia se actualiza según las lecciones que hayas completado.</p></div><div class="path-panel"><div class="path-flow" id="path-flow"></div><div class="next-card"><p class="eyebrow">PRÓXIMO PASO</p><h3 id="next-title">Cargando tu siguiente paso…</h3><p id="next-copy">Estamos revisando tu progreso.</p><a class="neon-button" id="next-link" href="/ruta.html?ruta=start">Continuar ahora</a></div></div></section>
 
-<div class="actions">
-<a class="button" href="/#rutas">Explorar rutas</a>
-<a class="button secondary" href="https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee" target="_blank" rel="noopener">Unirme a WhatsApp</a>
-<button class="button" id="logout" type="button">Cerrar sesión</button>
-</div>
+<section id="routes" aria-labelledby="routes-title"><div class="section-heading"><h2 id="routes-title">Mis rutas de aprendizaje</h2><p>Continúa una ruta o empieza otra cuando estés preparado.</p></div><div id="route-grid" class="route-grid"></div></section>
+
+<section aria-labelledby="badges-title"><div class="section-heading"><h2 id="badges-title">Mis logros y medallas de nivel</h2><p>Estados derivados de tu progreso real.</p></div><div id="badges" class="badges"></div></section>
+
+<section aria-labelledby="quick-title"><div class="section-heading"><h2 id="quick-title">Accesos rápidos</h2><p>Entra directamente en las áreas disponibles del Campus.</p></div><div class="quick-grid"><a class="quick-card" style="--quick:#20d879" id="continue-link" href="/ruta.html?ruta=start"><div class="quick-icon">▶</div><div><strong>Continuar aprendiendo</strong><span>Tu próxima lección</span></div></a><a class="quick-card" style="--quick:#00cfff" href="/#rutas"><div class="quick-icon">▤</div><div><strong>Ver cursos</strong><span>Explora todas las rutas</span></div></a><a class="quick-card disabled" style="--quick:#ff8a00" href="#" aria-disabled="true" title="Próximamente"><div class="quick-icon">▣</div><div><strong>Mis proyectos</strong><span>Preparado para una próxima fase</span></div></a><a class="quick-card" style="--quick:#00cfff" href="/prompteca.html"><div class="quick-icon">↓</div><div><strong>Recursos</strong><span>Prompteca y materiales</span></div></a><a class="quick-card" style="--quick:#e52cff" href="https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee" target="_blank" rel="noopener"><div class="quick-icon">♣</div><div><strong>Comunidad</strong><span>Participa y comparte</span></div></a><a class="quick-card disabled" style="--quick:#a855f7" href="#" aria-disabled="true" title="Próximamente"><div class="quick-icon">◆</div><div><strong>Certificados</strong><span>Se habilitarán con el sistema de logros</span></div></a></div></section>
+<p class="error-box" id="campus-error" role="alert"></p><footer class="campus-footer">DuckTronSur IA Academy · Aprende · Practica · Crea · Aplica</footer>
 </main>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
-<script src="/supabase-config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script><script src="/supabase-config.js"></script>
 <script>
 const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
-const welcome=document.querySelector('#welcome');
-const account=document.querySelector('#account');
-const message=document.querySelector('#campus-message');
-const errorBox=document.querySelector('#campus-error');
-const coursesBox=document.querySelector('#courses');
-const colors={start:'#18a889',intermedio:'#2474c6',pro:'#e87519',lab:'#7654c8'};
-
-function escapeHtml(value){
-return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
-}
-
-async function loadCampus(){
-const {data:userData,error:userError}=await client.auth.getUser();
-if(userError)throw userError;
-if(!userData.user){location.href='/auth.html';return}
-
-const user=userData.user;
-const [profileResult,coursesResult,enrollmentsResult,lessonsResult,progressResult]=await Promise.all([
-client.from('profiles').select('display_name,role').eq('id',user.id).maybeSingle(),
-client.from('courses').select('id,slug,title,level,description').eq('published',true).order('created_at'),
-client.from('enrollments').select('course_id').eq('user_id',user.id),
-client.from('lessons').select('id,course_id').eq('published',true),
-client.from('lesson_progress').select('lesson_id,completed').eq('user_id',user.id).eq('completed',true)
-]);
-
-const firstError=[profileResult,coursesResult,enrollmentsResult,lessonsResult,progressResult].find(r=>r.error);
-if(firstError)throw firstError.error;
-
-const profile=profileResult.data;
-const courses=coursesResult.data||[];
-const lessons=lessonsResult.data||[];
-const enrolledIds=new Set((enrollmentsResult.data||[]).map(x=>x.course_id));
-const completedIds=new Set((progressResult.data||[]).map(x=>x.lesson_id));
-const name=profile?.display_name||user.user_metadata?.display_name||user.email;
-
-welcome.textContent='Hola, '+name;
-account.textContent=user.email;
-message.textContent='Continúa aprendiendo desde donde lo dejaste.';
-
-const totalCompleted=completedIds.size;
-const totalProgress=lessons.length?Math.round(totalCompleted/lessons.length*100):0;
-document.querySelector('#course-count').textContent=courses.length;
-document.querySelector('#lesson-count').textContent=totalCompleted;
-document.querySelector('#progress-count').textContent=totalProgress+'%';
-
-coursesBox.innerHTML=courses.map(course=>{
-const route=course.slug||'start';
-const routeLessons=lessons.filter(l=>l.course_id===course.id);
-const completed=routeLessons.filter(l=>completedIds.has(l.id)).length;
-const progress=routeLessons.length?Math.round(completed/routeLessons.length*100):0;
-const color=colors[route]||'#00cfff';
-
-return `<article class="course" style="--course-color:${color}">
-<div class="course-status">${enrolledIds.has(course.id)?'MATRICULADO':'DISPONIBLE'}</div>
-<h2>${escapeHtml(course.title)}</h2>
-<p><strong>${escapeHtml(course.level)}</strong></p>
-<p>${escapeHtml(course.description||'')}</p>
-<p>${completed}/${routeLessons.length} lecciones completadas · ${progress}%</p>
-<div class="progress-track"><div class="progress-bar" style="--progress:${progress}%"></div></div>
-<a href="/ruta.html?ruta=${encodeURIComponent(route)}">Continuar ruta</a>
-</article>`;
-}).join('');
-}
-
-loadCampus().catch(error=>{
-console.error(error);
-errorBox.textContent='No se ha podido cargar tu progreso. Comprueba tu sesión e inténtalo de nuevo.';
-errorBox.className='auth-message error';
-});
-
-document.querySelector('#logout').addEventListener('click',async()=>{
-await client.auth.signOut();
-location.href='/auth.html';
-});
+const routeMeta={start:{name:'START',level:'Iniciación',color:'#ffc83d',image:'/assets/ruta-start-v1.png',description:'Fundamentos para empezar a trabajar con inteligencia artificial.'},intermedio:{name:'INTERMEDIO',level:'Consolidación',color:'#16a7ed',image:'/assets/ruta-intermedio-v1.png',description:'Mejores instrucciones, contexto y procesos reutilizables.'},pro:{name:'PRO',level:'Avanzado',color:'#ff8a00',image:'/assets/ruta-pro-v1.png',description:'Automatizaciones, herramientas y sistemas de IA.'},lab:{name:'LAB',level:'Profesional',color:'#a855f7',image:'/assets/ruta-lab-v1.png',description:'Diseño y evaluación de proyectos reales.'}};
+const order=['start','intermedio','pro','lab'];
+const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const $=id=>document.getElementById(id);
+function setPath(progress){const stages=['LECCIÓN','PRÁCTICA','PROYECTO','EVALUACIÓN','COMPLETADO'];const current=progress>=100?4:progress>0?2:0;$('path-flow').innerHTML=stages.map((stage,i)=>`<div class="path-step ${i<current?'done':i===current?'current':''}"><div class="path-dot">${i<current?'✓':i+1}</div><strong>${stage}</strong><small>${i<current?'Completado':i===current?'En curso':'Pendiente'}</small></div>`).join('')}
+function renderBadges(routeStats){$('badges').innerHTML=order.map(slug=>{const r=routeMeta[slug],s=routeStats[slug]||{progress:0};const achieved=s.progress>=100,inProgress=s.progress>0;return `<article class="badge-card ${achieved||inProgress?'':'locked'}" style="--badge:${r.color}"><div class="badge-medal">★</div><h3>${r.name}</h3><p>${r.level}</p><span class="badge-state">${achieved?'CONSEGUIDA':inProgress?'EN PROGRESO':'BLOQUEADA'}</span></article>`}).join('')}
+async function loadCampus(){const {data,error}=await client.auth.getUser();if(error)throw error;if(!data.user){location.href='/auth.html';return}const user=data.user;const results=await Promise.all([client.from('profiles').select('display_name').eq('id',user.id).maybeSingle(),client.from('courses').select('id,slug,title,description,published').eq('published',true).order('created_at'),client.from('lessons').select('id,course_id,title,position,published').eq('published',true).order('position'),client.from('enrollments').select('course_id').eq('user_id',user.id),client.from('lesson_progress').select('lesson_id,completed').eq('user_id',user.id).eq('completed',true)]);const first=results.find(r=>r.error);if(first)throw first.error;const [profile,courses,lessons,enrollments,completedRows]=results.map(r=>r.data||[]);const completed=new Set(completedRows.map(x=>x.lesson_id));const name=profile?.[0]?.display_name||user.user_metadata?.display_name||user.email;$('welcome').textContent='Hola, '+name;$('account').textContent='Continúa aprendiendo desde donde lo dejaste.';$('hero-email').textContent=user.email;const routeStats={};let totalLessons=0,totalCompleted=0;const enrolled=new Set(enrollments.map(x=>x.course_id));const courseBySlug=new Map(courses.map(c=>[c.slug,c]));order.forEach(slug=>{const course=courseBySlug.get(slug);const ls=course?lessons.filter(l=>l.course_id===course.id):[];const done=ls.filter(l=>completed.has(l.id)).length;routeStats[slug]={course,lessons:ls,done,total:ls.length,progress:ls.length?Math.round(done/ls.length*100):0};totalLessons+=ls.length;totalCompleted+=done});const overall=totalLessons?Math.round(totalCompleted/totalLessons*100):0;const badges=Object.values(routeStats).filter(s=>s.progress>=100).length;$('course-count').textContent=courses.length;$('lesson-count').textContent=totalCompleted;$('progress-count').textContent=overall+'%';$('badge-count').textContent=badges;$('ring-value').textContent=overall+'%';$('progress-ring').style.setProperty('--value',overall);$('active-routes').textContent=Object.values(routeStats).filter(s=>s.done>0).length;$('metric-lessons').textContent=totalCompleted;$('metric-badges').textContent=badges;setPath(overall);renderBadges(routeStats);$('route-grid').innerHTML=order.map(slug=>{const r=routeMeta[slug],s=routeStats[slug],course=s.course,href=`/ruta.html?ruta=${slug}`;return `<article class="route-card" style="--route:${r.color};--progress:${s.progress}%"><img class="route-card-image" src="${r.image}" alt="Ruta ${r.name}" loading="lazy"><div class="route-card-body"><h3>${r.name}</h3><div class="route-level">${r.level}</div><p>${r.description}</p><div class="route-meta"><span>${s.done}/${s.total} lecciones</span><span>${s.progress}%</span></div><div class="route-track"><span></span></div><a class="neon-button" href="${href}">${enrolled.has(course?.id)?'Continuar ruta':'Explorar ruta'}</a></div></article>`}).join('');let nextSlug='start',nextLesson=null;for(const slug of order){const s=routeStats[slug];nextLesson=s?.lessons.find(l=>!completed.has(l.id));if(nextLesson){nextSlug=slug;break}}const ns=routeMeta[nextSlug];if(nextLesson){$('next-title').textContent=nextLesson.title||'Continúa tu siguiente lección';$('next-copy').textContent=`Sigue en la ruta ${ns.name} · ${ns.level}.`;$('next-link').href=`/leccion.html?ruta=${nextSlug}&leccion=${routeStats[nextSlug].lessons.indexOf(nextLesson)+1}`;$('continue-link').href=$('next-link').href}else{$('next-title').textContent='Has completado las lecciones disponibles';$('next-copy').textContent='Explora otra ruta para seguir avanzando.';$('next-link').href='/#rutas';$('next-link').textContent='Ver rutas';$('continue-link').href='/#rutas'}}
+loadCampus().catch(error=>{$('campus-error').textContent='No se ha podido cargar tu progreso. Comprueba tu sesión e inténtalo de nuevo.';console.error(error)});
 </script>
 </body>
 </html>
+
