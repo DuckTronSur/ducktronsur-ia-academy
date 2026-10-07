@@ -13,3 +13,12 @@
 @media(max-width:960px){.category-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:720px){.category-grid{grid-template-columns:1fr}.prompt-grid{grid-template-columns:1fr}.category-section{padding:12px 0 45px}}
 
+/* Acciones principales del campus, compartidas con la portada. */
+.prompteca-header nav.prompteca-actions{gap:12px}
+.prompteca-actions a{display:inline-flex;align-items:center;justify-content:center;min-height:40px;padding:10px 16px;border:1px solid var(--pt-cyan);border-radius:9px;color:#effaff;background:rgba(5,20,42,.72);box-shadow:0 0 12px rgba(57,213,255,.28);font-size:.74rem;font-weight:800;text-decoration:none;transition:background .2s ease,box-shadow .2s ease,transform .2s ease}
+.prompteca-actions a:hover,.prompteca-actions a.active{background:rgba(0,182,242,.22);box-shadow:0 0 18px rgba(57,213,255,.5);transform:translateY(-1px)}
+.prompteca-actions .header-access{border-color:#54ff7d;color:#fff;box-shadow:0 0 13px rgba(84,255,125,.3)}
+.prompteca-actions .header-access:hover{background:rgba(84,255,125,.18);box-shadow:0 0 18px rgba(84,255,125,.5)}
+@media(max-width:960px){.prompteca-header nav.prompteca-actions{gap:9px}.prompteca-actions a{padding:9px 12px;font-size:.68rem}}
+@media(max-width:720px){.prompteca-header nav.prompteca-actions{gap:6px}.prompteca-actions a{min-height:34px;padding:7px 9px;font-size:.61rem}}
+
