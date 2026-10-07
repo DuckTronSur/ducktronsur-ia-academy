@@ -33,6 +33,7 @@ body{background:#061f38}
 .auth-message.success{color:#16824f}
 .auth-message.error{color:#b42318}
 @media(max-width:760px){.auth-card{grid-template-columns:1fr;padding:24px}.auth-art{max-height:190px}.auth-top{flex-direction:column}}
+#submit-button,.auth-create{border:2px solid #00cfff;border-radius:12px;background:linear-gradient(135deg,#55ecff,#00a9e2);color:#042038;box-shadow:0 0 12px #00cfff,0 0 24px #00cfff66,inset 0 0 12px #ffffff66}.auth-create{width:100%;margin-top:12px;min-height:48px;font-weight:900;cursor:pointer}.auth-resend{border:2px solid #ffc83d!important;border-radius:12px!important;background:#06152e!important;color:#ffc83d!important;box-shadow:0 0 10px #ffc83d!important}.auth-forgot{color:#51e6ff!important}.auth-switch button{color:#51e6ff!important}@media(max-width:760px){.auth-art{max-height:260px!important;object-fit:cover!important;object-position:center 42%}}
 </style>
 </head>
 
@@ -44,7 +45,7 @@ body{background:#061f38}
 </header>
 
 <section class="auth-card" aria-labelledby="auth-title">
-<img class="auth-art" src="/assets/duck-profesor.png" alt="Patito profesor de DuckTronSur IA Academy">
+<img class="auth-art" id="auth-art" src="/assets/auth-login-campus.png" alt="DuckTronSur IA Academy">
 
 <div>
 <p class="auth-kicker">MI CAMPUS</p>
@@ -68,6 +69,7 @@ body{background:#061f38}
 </form>
 
 <p class="auth-message" id="auth-message" role="status" aria-live="polite"></p>
+<button class="auth-create" id="create-account" type="button" hidden>Crear cuenta</button>
 <button class="auth-resend" id="resend" type="button" hidden>Reenviar correo de confirmación</button>
 <button class="auth-forgot" id="forgot" type="button" hidden>He olvidado mi contraseña</button>
 <p class="auth-switch" id="auth-switch">¿Ya tienes cuenta? <button type="button">Inicia sesión</button></p>
@@ -96,13 +98,17 @@ const message=document.querySelector('#auth-message');
 const switchBox=document.querySelector('#auth-switch');
 const resend=document.querySelector('#resend');
 const forgot=document.querySelector('#forgot');
+const createAccount=document.querySelector('#create-account');
+const art=document.querySelector('#auth-art');
 const redirectUrl=location.origin+'/';
-let mode=new URLSearchParams(location.search).has('reset')?'update':'signup';
+let mode=new URLSearchParams(location.search).has('reset')?'update':'login';
 let lastSignupEmail='';
 
 function render(){
 const login=mode==='login';
 const update=mode==='update';
+art.src=login||update?'/assets/auth-login-campus.png':'/assets/auth-signup-campus.png';
+createAccount.hidden=!login;
 
 nameField.hidden=login||update;
 nameInput.required=!login&&!update;
@@ -113,7 +119,7 @@ forgot.hidden=!login;
 switchBox.hidden=update;
 
 if(!update){
-switchBox.innerHTML=login?'¿Todavía no tienes cuenta? <button type="button">Regístrate</button>':'¿Ya tienes cuenta? <button type="button">Inicia sesión</button>';
+switchBox.innerHTML=login?'¿Todavía no tienes cuenta? <button type="button">Crea tu cuenta</button>':'¿Ya tienes cuenta? <button type="button">Inicia sesión</button>';
 switchBox.querySelector('button').addEventListener('click',()=>{
 mode=login?'signup':'login';
 message.textContent='';
@@ -125,10 +131,13 @@ render();
 
 render();
 
+createAccount.addEventListener('click',()=>{mode='signup';message.textContent='';message.className='auth-message';render()});
+
 form.addEventListener('submit',async event=>{
 event.preventDefault();
 message.textContent='';
 message.className='auth-message';
+createAccount.hidden=true;
 submit.disabled=true;
 
 const email=document.querySelector('#email').value.trim();
@@ -163,8 +172,10 @@ location.href='/mi-campus.html';
 }
 }catch(error){
 const raw=error.message||'';
-message.textContent=/not confirmed/i.test(raw)?'Confirma primero tu correo electrónico.':/invalid login credentials/i.test(raw)?'El correo o la contraseña no son correctos.':/already registered|user already/i.test(raw)?'Esta cuenta ya existe. Revisa tu correo o inicia sesión.':raw||'No se ha podido completar la operación.';
+const invalidLogin=mode==='login'&&/invalid login credentials|user not found|invalid/i.test(raw);
+message.textContent=invalidLogin?'No encontramos una cuenta con ese correo. ¿Quieres crearla?':/not confirmed/i.test(raw)?'Confirma primero tu correo electrónico.':/already registered|user already/i.test(raw)?'Esta cuenta ya existe. Inicia sesión para continuar.':raw||'No se ha podido completar la operación.';
 message.className='auth-message error';
+if(invalidLogin)createAccount.hidden=false;
 }finally{
 submit.disabled=false;
 }
