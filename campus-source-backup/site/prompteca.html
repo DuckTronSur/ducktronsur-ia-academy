@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Prompteca DuckTronSur IA Academy: prompts prácticos para aprender y trabajar con inteligencia artificial.">
+  <title>Prompteca · DuckTronSur IA Academy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="brand-overrides.css">
+  <link rel="stylesheet" href="prompteca.css">
+</head>
+<body class="prompteca-page">
+  <header class="prompteca-header">
+    <a class="prompteca-brand" href="index.html"><img src="assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a>
+    <nav aria-label="Navegación principal">
+      <a href="index.html#rutas">Rutas</a>
+      <a href="index.html#metodo">Cómo funciona</a>
+      <a href="descarga.html">Recursos</a>
+      <a class="active" aria-current="page" href="prompteca.html">Prompteca</a>
+      <a href="index.html#comunidad">Comunidad</a>
+    </nav>
+    <a class="header-access" href="auth.html">Acceder</a>
+  </header>
+
+  <main>
+    <section class="prompteca-hero">
+      <div class="shell">
+        <p class="prompteca-kicker">DUCKTRONSUR IA ACADEMY · PROMPTECA</p>
+        <h1>Prompts para pasar de la idea a la acción.</h1>
+        <p>Explora plantillas prácticas, adáptalas a tu contexto y revisa el resultado antes de usarlo.</p>
+        <label class="search-box" for="prompt-search">
+          <span aria-hidden="true">⌕</span>
+          <input id="prompt-search" type="search" autocomplete="off" placeholder="¿Qué tipo de prompt necesitas hoy?">
+          <kbd>ESC</kbd>
+        </label>
+        <div class="hero-metrics" aria-label="Resumen de la Prompteca">
+          <span><strong id="prompt-count">24</strong> fichas</span>
+          <span><strong>8</strong> categorías</span>
+          <span><strong>4</strong> niveles</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="featured-section shell" aria-labelledby="featured-title">
+      <div class="section-heading">
+        <div>
+          <p class="prompteca-kicker">PARA EMPEZAR</p>
+          <h2 id="featured-title">Destacados</h2>
+        </div>
+        <p>Ocho fichas para resolver tareas habituales con una base clara.</p>
+      </div>
+      <div id="featured-grid" class="featured-grid"></div>
+    </section>
+
+    <section class="library-section">
+      <div class="shell">
+        <div class="library-heading">
+          <div>
+            <p class="prompteca-kicker">BIBLIOTECA</p>
+            <h2>Encuentra el prompt que necesitas</h2>
+          </div>
+          <p id="results-summary" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="prompteca-layout">
+          <aside class="filters" aria-label="Filtros de la Prompteca">
+            <div class="filter-head">
+              <h3>Filtrar</h3>
+              <button id="clear-filters" type="button">Limpiar</button>
+            </div>
+            <fieldset class="filter-group">
+              <legend>Nivel</legend>
+              <div id="level-filters" class="level-filters"></div>
+            </fieldset>
+            <label class="select-label" for="category-filter">Categoría</label>
+            <select id="category-filter"><option value="">Todas las categorías</option></select>
+            <fieldset class="filter-group checks">
+              <legend>Características</legend>
+              <label><input id="filter-web" type="checkbox"> Necesita web</label>
+              <label><input id="filter-file" type="checkbox"> Necesita archivo</label>
+              <label><input id="filter-example" type="checkbox"> Incluye ejemplo</label>
+              <label><input id="filter-favorites" type="checkbox"> Mis favoritos</label>
+            </fieldset>
+          </aside>
+
+          <div class="prompt-results">
+            <div id="active-filters" class="active-filters" aria-live="polite"></div>
+            <div id="prompt-grid" class="prompt-grid"></div>
+            <div id="empty-state" class="empty-state" hidden>
+              <p>No hay fichas con estos filtros.</p>
+              <button type="button" id="empty-reset">Ver todas las fichas</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="prompteca-footer shell">
+    <span>© DuckTronSur IA Academy</span>
+    <span>Prompteca v1 · fichas provisionales</span>
+  </footer>
+
+  <dialog id="prompt-dialog" class="prompt-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-head">
+      <button id="dialog-close" class="icon-button" type="button" aria-label="Cerrar ficha">×</button>
+    </div>
+    <div id="dialog-content"></div>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="prompteca-data.js"></script>
+  <script src="prompteca.js"></script>
+</body>
+</html>
