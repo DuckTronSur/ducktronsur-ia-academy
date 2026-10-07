@@ -18,6 +18,7 @@ a{text-decoration:none}
 .nav-links{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .nav-links a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:2px solid var(--cyan);border-radius:12px;background:#041b35;color:#fff;font-weight:900;box-shadow:0 0 8px var(--cyan),inset 0 0 10px #00cfff33;transition:.15s}
 .nav-links a:hover{transform:translateY(-2px);filter:brightness(1.2)}
+.nav-tools{display:flex;align-items:center;gap:12px}.nav-access{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:2px solid #20f06b;border-radius:12px;background:#041b35;color:#20f06b;font-weight:900;box-shadow:0 0 8px #20f06b,inset 0 0 10px #20f06b33;white-space:nowrap}.nav-toggle{display:none;cursor:pointer;font:inherit;min-height:42px;padding:10px 14px;border:2px solid var(--cyan);border-radius:12px;background:#041b35;color:#fff;font-weight:900;box-shadow:0 0 8px var(--cyan),inset 0 0 10px #00cfff33}
 .nav-links .nav-button{border-color:#20f06b;color:#20f06b;box-shadow:0 0 8px #20f06b,inset 0 0 10px #20f06b33}
 .hero{min-height:460px;background:linear-gradient(90deg,#03182ee6,#03182e2e),url("/assets/campus/Campus 001 Hero  portada principal del Campus patitoedificio Campus Online.png") center/cover;display:flex;align-items:center;color:#fff}
 .hero-inner{max-width:1180px;width:100%;margin:auto;padding:70px 20px}
@@ -37,8 +38,8 @@ a{text-decoration:none}
 .route-link{color:#087ca4;font-weight:800}
 .whatsapp{background:#e9fff0}
 .footer{background:var(--blue);color:#fff;text-align:center;padding:30px 20px}
-@media(max-width:850px){.route-grid{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start;flex-direction:column}}
-@media(max-width:560px){.route-grid{grid-template-columns:1fr}.hero{min-height:530px}.nav{position:relative;width:100%}.nav-toggle{display:inline-flex;align-items:center;gap:8px;position:absolute;top:0;right:0;min-height:42px;padding:10px 14px;border:2px solid var(--cyan);border-radius:12px;background:#041b35;color:#fff;font-weight:900;box-shadow:0 0 8px var(--cyan),inset 0 0 10px #00cfff33}.nav-links{display:none;width:100%;padding-top:12px;flex-direction:column;align-items:stretch}.nav-links.is-open{display:flex}.nav-links a{flex:none;width:100%}}
+@media(max-width:850px){.route-grid{grid-template-columns:repeat(2,1fr)}.nav{align-items:flex-start;flex-direction:column}.nav-tools{position:relative;width:100%;justify-content:flex-end}.nav-toggle{display:inline-flex}.nav-links{display:none;width:100%;padding-top:12px;flex-direction:column;align-items:stretch}.nav-links.is-open{display:flex}.nav-links a{width:100%}}
+@media(max-width:560px){.route-grid{grid-template-columns:1fr}.hero{min-height:530px}.nav{position:relative;width:100%}.nav-tools{justify-content:flex-end}.nav-toggle{display:inline-flex}.nav-links a{flex:none;width:100%}}
 .nav-toggle{display:none;cursor:pointer;font:inherit}
 @media(max-width:560px){.nav-toggle{display:inline-flex}}
 </style>
@@ -48,12 +49,14 @@ a{text-decoration:none}
 <header class="site-header">
 <nav class="nav">
 <a href="/"><img class="logo" src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a>
+<div class="nav-tools">
+<a class="nav-button nav-access" href="/auth.html">Acceder</a>
 <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-nav">☰ <span>Menú</span></button>
 <div class="nav-links" id="mobile-nav">
 <a href="#rutas">Rutas</a>
 <a href="/mi-campus.html">Mi Campus</a>
 <a href="/prompteca.html">Prompteca</a>
-<a class="nav-button" href="/auth.html">Acceder</a>
+</div>
 </div>
 </nav>
 </header>
