@@ -18,7 +18,7 @@ a{text-decoration:none}
 .nav-links{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
 .nav-links a{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:2px solid var(--cyan);border-radius:12px;background:#041b35;color:#fff;font-weight:900;box-shadow:0 0 8px var(--cyan),inset 0 0 10px #00cfff33;transition:.15s}
 .nav-links a:hover{transform:translateY(-2px);filter:brightness(1.2)}
-.nav-tools{display:flex;align-items:center;gap:12px}.nav-access{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:2px solid #20f06b;border-radius:12px;background:#041b35;color:#20f06b;font-weight:900;box-shadow:0 0 8px #20f06b,inset 0 0 10px #20f06b33;white-space:nowrap}.nav-toggle{display:none;cursor:pointer;font:inherit;min-height:42px;padding:10px 14px;border:2px solid var(--cyan);border-radius:12px;background:#041b35;color:#fff;font-weight:900;box-shadow:0 0 8px var(--cyan),inset 0 0 10px #00cfff33}
+.nav-tools{display:flex;align-items:center;gap:12px}.nav-access{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:10px 16px;border:2px solid #20f06b;border-radius:12px;background:#041b35;color:#20f06b;font-weight:900;box-shadow:0 0 8px #20f06b,inset 0 0 10px #20f06b33;white-space:nowrap}.nav-toggle{display:none;cursor:pointer;font:inherit;min-height:42px;padding:10px 14px;border:2px solid var(--cyan);border-radius:12px;background:#041b35;color:#fff;font-weight:900;box-shadow:0 0 8px var(--cyan),inset 0 0 10px #00cfff33}.mobile-header{display:none}
 .nav-links .nav-button{border-color:#20f06b;color:#20f06b;box-shadow:0 0 8px #20f06b,inset 0 0 10px #20f06b33}
 .hero{min-height:460px;background:linear-gradient(90deg,#03182ee6,#03182e2e),url("/assets/campus/Campus 001 Hero  portada principal del Campus patitoedificio Campus Online.png") center/cover;display:flex;align-items:center;color:#fff}
 .hero-inner{max-width:1180px;width:100%;margin:auto;padding:70px 20px}
@@ -38,7 +38,7 @@ a{text-decoration:none}
 .route-link{color:#087ca4;font-weight:800}
 .whatsapp{background:#e9fff0}
 .footer{background:var(--blue);color:#fff;text-align:center;padding:30px 20px}
-@media(max-width:850px){.route-grid{grid-template-columns:repeat(2,1fr)}.site-header .nav{display:flex!important;align-items:flex-start;flex-direction:column}.nav-tools{position:relative;width:100%;justify-content:flex-end}.nav-toggle{display:inline-flex}.nav-links{display:none;width:100%;padding-top:12px;flex-direction:column;align-items:stretch}.nav-links.is-open{display:flex}.nav-links a{width:100%}}
+@media(max-width:900px){.route-grid{grid-template-columns:repeat(2,1fr)}.site-header{height:auto;min-height:74px;padding:0 14px}.site-header .nav{display:none!important}.mobile-header{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;width:100%;min-height:74px;gap:10px}.mobile-header .mobile-logo{display:block;width:145px;line-height:0}.mobile-header .mobile-logo img{display:block;width:100%;height:auto}.mobile-header .mobile-actions{display:flex;align-items:center;gap:8px}.mobile-header .nav-access,.mobile-header .nav-toggle{display:inline-flex;font-size:.72rem}.mobile-menu-links{display:none;width:100%;padding:0 0 14px;flex-direction:column;gap:8px}.mobile-menu-links.is-open{display:flex}.mobile-menu-links a{display:flex;align-items:center;min-height:44px;padding:11px 14px;border:2px solid var(--cyan);border-radius:12px;background:#041b35;color:#fff;font-weight:900;box-shadow:0 0 8px var(--cyan),inset 0 0 10px #00cfff33}}
 @media(max-width:560px){.route-grid{grid-template-columns:1fr}.hero{min-height:530px}.nav{position:relative;width:100%}.nav-tools{justify-content:flex-end}.nav-toggle{display:inline-flex}.nav-links a{flex:none;width:100%}}
 .nav-toggle{display:none;cursor:pointer;font:inherit}
 @media(max-width:560px){.nav-toggle{display:inline-flex}}
@@ -47,6 +47,18 @@ a{text-decoration:none}
 
 <body>
 <header class="site-header">
+<div class="mobile-header">
+  <a class="mobile-logo" href="/"><img src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a>
+  <div class="mobile-actions">
+    <a class="nav-access" href="/auth.html">Acceder</a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">☰ <span>Menú</span></button>
+  </div>
+  <div class="mobile-menu-links" id="mobile-menu">
+    <a href="#rutas">Rutas</a>
+    <a href="/mi-campus.html">Mi Campus</a>
+    <a href="/prompteca.html">Prompteca</a>
+  </div>
+</div>
 <nav class="nav">
 <a href="/"><img class="logo" src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a>
 <div class="nav-tools">
@@ -117,8 +129,8 @@ a{text-decoration:none}
 <footer class="footer">DuckTronSur IA Academy · Aprende · Practica · Crea · Aplica</footer>
 <script>
 (() => {
-  const toggle = document.querySelector('.nav-toggle');
-  const menu = document.querySelector('#mobile-nav');
+  const toggle = document.querySelector('.mobile-header .nav-toggle');
+  const menu = document.querySelector('#mobile-menu');
   if (!toggle || !menu) return;
   toggle.addEventListener('click', () => {
     const open = menu.classList.toggle('is-open');
