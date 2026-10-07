@@ -1,5 +1,15 @@
 (() => {
   const prompts = window.PROMPTECA_PROMPTS || [];
+  const categoryImages = {
+    "ChatGPT e IA general": "assets/prompteca-visual-kit-web/categoria-chatgpt-ia-general.jpg",
+    "Empresa y productividad": "assets/prompteca-visual-kit-web/categoria-empresa-productividad.jpg",
+    "Estudio y aprendizaje": "assets/prompteca-visual-kit-web/categoria-estudio-aprendizaje.jpg",
+    "Imagen y vídeo": "assets/prompteca-visual-kit-web/categoria-imagen-video.jpg",
+    "Informática y programación": "assets/prompteca-visual-kit-web/categoria-informatica-programacion.jpg",
+    "Investigación": "assets/prompteca-visual-kit-web/categoria-investigacion.jpg",
+    "Redes sociales": "assets/prompteca-visual-kit-web/categoria-redes-sociales.jpg",
+    "Trabajo y oficina": "assets/prompteca-visual-kit-web/categoria-trabajo-oficina.jpg"
+  };
   const $ = (selector) => document.querySelector(selector);
   const levels = [
     { value: "START", label: "START · Iniciación", color: "#f6ca37" },
@@ -50,6 +60,23 @@
     const labels = [state.query && `“${state.query}”`, state.level, state.category, state.web && "Web", state.file && "Archivo", state.example && "Con ejemplo", state.favorites && "Favoritos"].filter(Boolean);
     $("#active-filters").innerHTML = labels.map(label => `<span>${escapeHtml(label)}</span>`).join("");
   };
+
+  const renderCategories = () => {
+    const categories = [...new Set(prompts.map(item => item.category))].sort((a, b) => a.localeCompare(b, "es"));
+    $("#category-grid").innerHTML = categories.map(category => {
+      const count = prompts.filter(item => item.category === category).length;
+      return `<button class="category-card" type="button" data-category="${escapeHtml(category)}">
+        <img src="${categoryImages[category]}" alt="">
+        <span class="category-card-copy"><strong>${escapeHtml(category)}</strong><small>${count} ${count === 1 ? "ficha" : "fichas"}</small></span>
+      </button>`;
+    }).join("");
+    $("#category-grid").querySelectorAll("[data-category]").forEach(button => button.addEventListener("click", () => {
+      state.category = button.dataset.category;
+      $("#category-filter").value = state.category;
+      render();
+      $("#prompt-grid").scrollIntoView({ behavior: "smooth", block: "start" });
+    }));
+  };
   const copy = async (id) => {
     const prompt = prompts.find(item => item.id === id);
     if (!prompt) return;
@@ -92,6 +119,7 @@
   const init = () => {
     const categories = [...new Set(prompts.map(item => item.category))].sort((a,b) => a.localeCompare(b,"es"));
     $("#category-filter").insertAdjacentHTML("beforeend", categories.map(category => `<option value="${escapeHtml(category)}">${escapeHtml(category)}</option>`).join(""));
+    renderCategories();
     $("#level-filters").innerHTML = levels.map(level => `<button class="level-filter" style="--level:${level.color}" type="button" data-level="${level.value}" aria-pressed="false">${level.label}</button>`).join("");
     $("#featured-grid").innerHTML = prompts.filter(item => item.featured === "Sí").sort((a,b) => Number(a.order) - Number(b.order)).map(item => card(item,true)).join("");
     $("#prompt-search").addEventListener("input", event => { state.query = event.target.value.trim().toLocaleLowerCase("es"); render(); });
@@ -107,3 +135,4 @@
   };
   init();
 })();
+
