@@ -50,7 +50,7 @@ body{background:#061f38}
 </header>
 
 <section class="auth-card" aria-labelledby="auth-title">
-<img class="auth-art" id="auth-art" src="/assets/auth-login-campus.png" alt="DuckTronSur IA Academy">
+<img class="auth-art" id="auth-art" src="/assets/auth-login-campus.jpg" alt="DuckTronSur IA Academy">
 
 <div>
 <p class="auth-kicker">MI CAMPUS</p>
@@ -112,7 +112,7 @@ let lastSignupEmail='';
 function render(){
 const login=mode==='login';
 const update=mode==='update';
-art.src=login||update?'/assets/auth-login-campus.png':'/assets/auth-signup-campus.png';
+art.src=login||update?'/assets/auth-login-campus.jpg':'/assets/auth-signup-campus.jpg';
 createAccount.hidden=!login;
 
 nameField.hidden=login||update;
