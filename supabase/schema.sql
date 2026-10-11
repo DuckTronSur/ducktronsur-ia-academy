@@ -83,3 +83,32 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute procedure public.handle_new_user();
 
+-- Mínimo privilegio para perfiles: el alumno solo puede cambiar su nombre visible.
+REVOKE UPDATE ON TABLE public.profiles
+FROM PUBLIC, anon, authenticated;
+
+REVOKE UPDATE (id, display_name, role, created_at, updated_at)
+ON TABLE public.profiles
+FROM PUBLIC, anon, authenticated;
+
+GRANT UPDATE (display_name)
+ON TABLE public.profiles
+TO authenticated;
+
+-- Mantener updated_at en servidor, sin aceptar su valor desde el cliente.
+CREATE OR REPLACE FUNCTION public.set_profile_updated_at()
+RETURNS trigger
+LANGUAGE plpgsql
+SET search_path = pg_catalog
+AS $$
+BEGIN
+  NEW.updated_at := now();
+  RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS profiles_set_updated_at ON public.profiles;
+
+CREATE TRIGGER profiles_set_updated_at
+  BEFORE UPDATE ON public.profiles
+  FOR EACH ROW EXECUTE FUNCTION public.set_profile_updated_at();
