@@ -13,3 +13,8 @@ Incluye perfiles, roles, cursos, lecciones, inscripciones y progreso. Las polít
 - Mantener la clave de servicio únicamente fuera del navegador.
 - Probar registro, recuperación de contraseña, acceso y eliminación de cuenta con datos de prueba.
 
+## Seguridad de perfiles
+
+El esquema aplica mínimo privilegio en `public.profiles`: los usuarios autenticados solo pueden actualizar `display_name`. `id`, `role`, `created_at` y `updated_at` quedan protegidos. El campo `updated_at` se mantiene mediante un trigger de servidor.
+
+La validación transaccional con el rol `authenticated` confirmó el aislamiento RLS y el rechazo de actualizaciones sobre campos protegidos. La prueba final con JWT real de una cuenta de alumno queda reservada para una cuenta de prueba no personal.
