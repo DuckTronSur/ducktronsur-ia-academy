@@ -79,28 +79,18 @@ document.querySelector('#back-route').href='/ruta.html?ruta='+routeSlug;
 
 const app=document.querySelector('#lesson-app');
 
+async function withTimeout(promise,ms=5000){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error('Tiempo de espera agotado')),ms))])}
 async function loadLesson(){
-const {data:{user}}=await client.auth.getUser();
-let dbLesson=null,completed=false;
-
-const {data:course}=await client.from('courses').select('id,title')
-.eq('slug',routeSlug).eq('published',true).maybeSingle();
-
-if(course){
-const {data:foundLesson}=await client.from('lessons')
-.select('id,title,content').eq('course_id',course.id)
-.eq('published',true).order('position',{ascending:true})
-.range(lessonNumber-1,lessonNumber-1).maybeSingle();
-
-dbLesson=foundLesson;
-
-if(user&&dbLesson){
-const {data:progress}=await client.from('lesson_progress')
-.select('completed').eq('user_id',user.id).eq('lesson_id',dbLesson.id).maybeSingle();
-completed=Boolean(progress?.completed);
+let user=null,dbLesson=null,completed=false;
+try{const auth=await withTimeout(client.auth.getUser(),4000);user=auth.data?.user||null}catch(error){console.warn('No se pudo recuperar la sesión; se muestra la lección pública.',error)}
+try{
+const {data:course,error:courseError}=await withTimeout(client.from('courses').select('id,title').eq('slug',routeSlug).eq('published',true).maybeSingle(),5000);
+if(!courseError&&course){
+const {data:foundLesson,error:lessonError}=await withTimeout(client.from('lessons').select('id,title,content').eq('course_id',course.id).eq('published',true).order('position',{ascending:true}).range(lessonNumber-1,lessonNumber-1).maybeSingle(),5000);
+if(!lessonError)dbLesson=foundLesson;
+if(user&&dbLesson){const {data:progress}=await withTimeout(client.from('lesson_progress').select('completed').eq('user_id',user.id).eq('lesson_id',dbLesson.id).maybeSingle(),4000);completed=Boolean(progress?.completed)}
 }
-}
-
+}catch(error){console.warn('No se pudo cargar el contenido de Supabase; se usa la lección de respaldo.',error)}
 const title=dbLesson?.title||lesson[0];
 const objective=lesson[1];
 const content=dbLesson?.content||`
