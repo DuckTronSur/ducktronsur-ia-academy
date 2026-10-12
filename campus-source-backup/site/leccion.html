@@ -72,7 +72,7 @@ const lesson=route.lessons[lessonNumber-1]||route.lessons[0];
 
 document.documentElement.style.setProperty('--route-color',route.color);
 document.documentElement.style.setProperty('--route-soft',route.soft);
-document.querySelector('#back-route').href='/ruta.html?ruta='+routeSlug;
+const backRoute=document.querySelector('#back-route');if(backRoute)backRoute.href='/ruta.html?ruta='+routeSlug;
 
 const app=document.querySelector('#lesson-app');
 
