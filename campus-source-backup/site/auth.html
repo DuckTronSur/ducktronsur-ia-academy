@@ -70,6 +70,10 @@ body{background:#061f38}
 <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required>
 </label>
 
+<label id="password-confirm-field" hidden>Repite la contraseña
+<input id="password-confirm" name="passwordConfirm" type="password" minlength="8" autocomplete="new-password">
+</label>
+
 <button id="submit-button" type="submit">Crear mi cuenta</button>
 </form>
 
@@ -103,6 +107,8 @@ const message=document.querySelector('#auth-message');
 const switchBox=document.querySelector('#auth-switch');
 const resend=document.querySelector('#resend');
 const forgot=document.querySelector('#forgot');
+const passwordConfirmField=document.querySelector('#password-confirm-field');
+const passwordConfirm=document.querySelector('#password-confirm');
 const createAccount=document.querySelector('#create-account');
 const art=document.querySelector('#auth-art');
 const redirectUrl=location.origin+'/';
@@ -117,6 +123,8 @@ createAccount.hidden=!login;
 
 nameField.hidden=login||update;
 nameInput.required=!login&&!update;
+passwordConfirmField.hidden=!update;
+passwordConfirm.required=update;
 title.textContent=update?'Cambia tu contraseña':login?'Inicia sesión':'Crea tu cuenta';
 intro.textContent=update?'Elige una contraseña nueva para recuperar el acceso.':login?'Accede a tus rutas y continúa donde lo dejaste.':'Regístrate para guardar tu progreso y continuar tus rutas de aprendizaje.';
 submit.textContent=update?'Guardar contraseña':login?'Iniciar sesión':'Crear mi cuenta';
@@ -150,6 +158,11 @@ const password=document.querySelector('#password').value;
 
 try{
 if(mode==='update'){
+if(password!==passwordConfirm.value){
+message.textContent='Las contraseñas no coinciden.';
+message.className='auth-message error';
+return;
+}
 const {error}=await client.auth.updateUser({password});
 if(error)throw error;
 message.textContent='Contraseña actualizada. Ya puedes entrar en tu Campus.';
