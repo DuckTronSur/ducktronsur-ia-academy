@@ -22,6 +22,10 @@ body{background:#061f38}
 .auth-form{display:grid;gap:15px;margin-top:22px}
 .auth-form label{display:grid;gap:7px;color:#173b4b;font-weight:800}
 .auth-form input{width:100%;padding:13px;border:1px solid #bcd0da;border-radius:9px;font-size:1rem}
+.password-input-wrap{position:relative;display:flex;align-items:center}
+.password-input-wrap input{padding-right:52px}
+.password-toggle{position:absolute;right:8px;display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border:0;border-radius:8px;background:transparent;color:#087ca4;font-size:1.2rem;line-height:1;cursor:pointer}
+.password-toggle:hover,.password-toggle:focus-visible{background:#e5f8fd;outline:2px solid #00cfff}
 .auth-form input:focus{outline:3px solid #00cfff55;border-color:#00a9e2}
 #submit-button,.auth-resend,.auth-forgot,.auth-switch button{border:0;border-radius:10px;padding:13px 16px;font-weight:800;cursor:pointer}
 #submit-button{background:#00cfff;color:#042038}
@@ -67,11 +71,17 @@ body{background:#061f38}
 </label>
 
 <label>Contraseña
+<div class="password-input-wrap">
 <input id="password" name="password" type="password" minlength="8" autocomplete="new-password" required>
+<button class="password-toggle" type="button" data-target="password" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">👁</button>
+</div>
 </label>
 
 <label id="password-confirm-field" hidden>Repite la contraseña
+<div class="password-input-wrap">
 <input id="password-confirm" name="passwordConfirm" type="password" minlength="8" autocomplete="new-password">
+<button class="password-toggle" type="button" data-target="password-confirm" aria-label="Mostrar contraseña" aria-pressed="false" title="Mostrar contraseña">👁</button>
+</div>
 </label>
 
 <button id="submit-button" type="submit">Crear mi cuenta</button>
@@ -112,6 +122,17 @@ const passwordConfirm=document.querySelector('#password-confirm');
 const createAccount=document.querySelector('#create-account');
 const art=document.querySelector('#auth-art');
 const redirectUrl=location.origin+'/';
+document.querySelectorAll('.password-toggle').forEach(toggle=>{
+const target=document.querySelector('#'+toggle.dataset.target);
+toggle.addEventListener('click',()=>{
+const showing=target.type==='password';
+target.type=showing?'text':'password';
+toggle.textContent=showing?'🙈':'👁';
+toggle.setAttribute('aria-label',showing?'Ocultar contraseña':'Mostrar contraseña');
+toggle.setAttribute('title',showing?'Ocultar contraseña':'Mostrar contraseña');
+toggle.setAttribute('aria-pressed',String(showing));
+});
+});
 let mode=new URLSearchParams(location.search).has('reset')?'update':'login';
 let lastSignupEmail='';
 
