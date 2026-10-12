@@ -143,5 +143,20 @@ a{text-decoration:none}
 })();
 </script>
 <!-- Cloudflare Pages redeploy verification 2026-10-11 -->
+
+<script>
+(() => {
+  const params = new URLSearchParams(location.search);
+  const hash = location.hash;
+  const isRecovery = hash.includes('type=recovery') || params.get('type') === 'recovery' || params.has('code');
+  if (!isRecovery) return;
+  const target = new URL('/auth.html', location.origin);
+  params.forEach((value, key) => target.searchParams.set(key, value));
+  target.searchParams.set('reset', '1');
+  target.hash = hash;
+  location.replace(target.toString());
+})();
+</script>
+
 </body>
 </html>
