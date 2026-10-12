@@ -91,6 +91,7 @@ if(!lessonError)dbLesson=foundLesson;
 if(user&&dbLesson){const {data:progress}=await withTimeout(client.from('lesson_progress').select('completed').eq('user_id',user.id).eq('lesson_id',dbLesson.id).maybeSingle(),4000);completed=Boolean(progress?.completed)}
 }
 }catch(error){console.warn('No se pudo cargar el contenido de Supabase; se usa la lección de respaldo.',error)}
+}
 const title=dbLesson?.title||lesson[0];
 const objective=lesson[1];
 const content=dbLesson?.content||`
