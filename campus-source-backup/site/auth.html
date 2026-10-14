@@ -204,6 +204,8 @@ form.reset();
 }else{
 const {error}=await client.auth.signInWithPassword({email,password});
 if(error)throw error;
+const founderClaim=await client.rpc('claim_founder_entitlement');
+if(founderClaim.error&&!/email_verification_required/i.test(founderClaim.error.message||''))console.error('Founder entitlement claim failed',founderClaim.error);
 location.href='/mi-campus.html';
 }
 }catch(error){
