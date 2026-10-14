@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Administración · DuckTronSur IA Academy</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/brand-overrides.css">
+<style>
+body{background:#061f38;color:#eef8fb}.admin-page{max-width:1180px;margin:auto;padding:24px}.admin-header{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-bottom:24px}.admin-header h1{margin:0;color:#fff}.admin-header p{margin:5px 0 0;color:#b6d5df}.admin-actions{display:flex;gap:10px;flex-wrap:wrap}.admin-actions button,.admin-form button{border:0;border-radius:10px;padding:11px 15px;font-weight:800;cursor:pointer}.primary{background:#00cfff;color:#042038}.secondary{background:#e5f8fd;color:#056d8d}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.admin-card{background:#f2f7fa;color:#173b4b;border-radius:18px;padding:20px;box-shadow:0 12px 34px #0004}.admin-card h2{margin-top:0;color:#06243f}.admin-form{display:grid;gap:10px}.admin-form label{display:grid;gap:5px;font-weight:800}.admin-form input{padding:11px;border:1px solid #bcd0da;border-radius:8px;font-size:1rem}.table-wrap{overflow:auto;max-height:440px}.admin-table{width:100%;border-collapse:collapse;font-size:.9rem}.admin-table th,.admin-table td{text-align:left;padding:8px;border-bottom:1px solid #d6e4ea}.admin-status{margin:0 0 14px;padding:10px;border-radius:8px;background:#e5f8fd;color:#056d8d}.admin-status.error{background:#ffe9e6;color:#9d2e22}.admin-status[hidden]{display:none}.muted{color:#5d7380;font-size:.9rem}.list{display:grid;gap:8px;margin-top:12px}.user-choice{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px;border:1px solid #d6e4ea;border-radius:8px}.user-choice button{border:0;border-radius:8px;background:#087ca4;color:#fff;padding:7px 10px;font-weight:700;cursor:pointer}.full{grid-column:1/-1}@media(max-width:800px){.admin-grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<main class="admin-page">
+<header class="admin-header">
+<div><p class="academy-kicker">DUCKTRONSUR IA ACADEMY</p><h1>Administración</h1><p id="admin-user">Comprobando permisos…</p></div>
+<div class="admin-actions"><button class="secondary" id="refresh" type="button">Actualizar</button><button class="secondary" id="logout" type="button">Cerrar sesión</button></div>
+</header>
+<p id="status" class="admin-status" hidden></p>
+<section class="admin-grid">
+<article class="admin-card full"><h2>Alumnos fundadores</h2><p class="muted">Vista de las 200 plazas y su estado. Las asignaciones se realizan mediante el flujo de reclamación verificada.</p><div class="table-wrap"><table class="admin-table"><thead><tr><th>Plaza</th><th>Estado</th><th>Correo</th><th>Fecha</th></tr></thead><tbody id="roster"><tr><td colspan="4">Cargando…</td></tr></tbody></table></div></article>
+<article class="admin-card"><h2>Buscar usuario</h2><form class="admin-form" id="search-form"><label>Correo o nombre<input id="query" autocomplete="off"></label><button class="primary" type="submit">Buscar</button></form><div id="users" class="list"></div></article>
+<article class="admin-card"><h2>Registrar profesor</h2><p class="muted">Selecciona un usuario de la búsqueda y añade sus especialidades.</p><form class="admin-form" id="instructor-form"><input id="instructor-id" type="hidden"><p id="selected-user" class="muted">Ningún usuario seleccionado.</p><label>Nombre visible<input id="instructor-name" required maxlength="120"></label><label>Especialidades<input id="specialties" placeholder="prompts, automatización, seguridad"></label><button class="primary" type="submit">Guardar profesor</button></form></article>
+<article class="admin-card full"><h2>Profesores activos</h2><div class="table-wrap"><table class="admin-table"><thead><tr><th>Nombre</th><th>Correo</th><th>Especialidades</th><th>Estado</th></tr></thead><tbody id="instructors"><tr><td colspan="4">Cargando…</td></tr></tbody></table></div></article>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+<script src="/supabase-config.js"></script>
+<script>
+const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+const statusBox=document.querySelector('#status');
+function showStatus(text,error=false){statusBox.textContent=text;statusBox.hidden=false;statusBox.className='admin-status'+(error?' error':'')}
+async function call(name,args){const {data,error}=await client.rpc(name,args||{});if(error)throw error;return data}
+async function load(){
+const {data:{session}}=await client.auth.getSession();
+if(!session){location.href='/auth.html?next=/admin.html';return}
+document.querySelector('#admin-user').textContent=session.user.email||'Sesión autenticada';
+try{
+if(!(await call('is_academy_admin')))throw new Error('admin_required');
+const roster=await call('admin_list_founder_roster');document.querySelector('#roster').innerHTML=roster.map(row=>'<tr><td>'+row.slot_number+'</td><td>'+row.status+'</td><td>'+ (row.email||'—')+'</td><td>'+ (row.assigned_at?new Date(row.assigned_at).toLocaleString('es-ES'):'—')+'</td></tr>').join('');
+const instructors=await call('admin_list_instructors');document.querySelector('#instructors').innerHTML=instructors.length?instructors.map(row=>'<tr><td>'+row.display_name+'</td><td>'+row.email+'</td><td>'+((row.specialties||[]).join(', ')||'—')+'</td><td>'+row.status+'</td></tr>').join(''):'<tr><td colspan="4">No hay profesores registrados.</td></tr>';
+statusBox.hidden=true;
+}catch(error){showStatus(error.message==='admin_required'?'Esta cuenta no tiene permisos de administración.':'No se ha podido cargar el panel: '+error.message,true)}
+}
+document.querySelector('#refresh').addEventListener('click',load);
+document.querySelector('#logout').addEventListener('click',async()=>{await client.auth.signOut();location.href='/auth.html'});
+document.querySelector('#search-form').addEventListener('submit',async event=>{event.preventDefault();const users=await call('admin_search_users',{p_query:document.querySelector('#query').value.trim()});document.querySelector('#users').innerHTML=users.length?users.map(user=>'<div class="user-choice"><span>'+user.email+'<br><small>'+ (user.display_name||'Sin nombre')+'</small></span><button type="button" data-id="'+user.user_id+'" data-email="'+user.email+'" data-name="'+(user.display_name||'')+'">Seleccionar</button></div>').join(''):'<p class="muted">No hay coincidencias.</p>';document.querySelectorAll('.user-choice button').forEach(button=>button.addEventListener('click',()=>{document.querySelector('#instructor-id').value=button.dataset.id;document.querySelector('#instructor-name').value=button.dataset.name;document.querySelector('#selected-user').textContent='Seleccionado: '+button.dataset.email}))});
+document.querySelector('#instructor-form').addEventListener('submit',async event=>{event.preventDefault();try{const id=document.querySelector('#instructor-id').value;if(!id)throw new Error('Selecciona primero un usuario');await call('admin_upsert_instructor',{p_user_id:id,p_display_name:document.querySelector('#instructor-name').value.trim(),p_specialties:document.querySelector('#specialties').value.split(',').map(value=>value.trim()).filter(Boolean)});showStatus('Profesor guardado correctamente.');await load()}catch(error){showStatus(error.message,true)}});
+load();
+</script>
+</body>
+</html>
