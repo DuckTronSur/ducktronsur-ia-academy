@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Perfil profesional · DuckTronSur IA Academy</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/brand-overrides.css">
+<style>
+body{margin:0;background:#dceaf1;color:#0a203a;font-family:Manrope,Arial,sans-serif}.wrap{width:min(760px,calc(100% - 32px));margin:0 auto;padding:28px 0 54px}.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:28px}.nav img{width:180px;height:auto}.nav a{color:#07577e;font-weight:800;text-decoration:none}.card{background:#f7fbfd;border:1px solid #c9e1eb;border-radius:20px;padding:28px;box-shadow:0 12px 28px #173b4b18}.eyebrow{color:#087ca4;font-weight:900;letter-spacing:.1em;font-size:.75rem}.card h1{margin:10px 0}.card p{line-height:1.55}.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:grid;gap:7px;font-weight:800;color:#173b4b}.field.full{grid-column:1/-1}input,select,textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #a9c7d4;border-radius:9px;background:#fff;font:inherit}textarea{min-height:90px;resize:vertical}.note{font-size:.88rem;color:#526c7b}.status{min-height:24px;font-weight:700}.success{color:#16754b}.error{color:#b42318}button{border:0;border-radius:10px;padding:12px 16px;background:#39d5ff;color:#042038;font-weight:900;cursor:pointer}@media(max-width:620px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.nav{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<nav class="nav"><a href="/"><img src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a><a href="/mi-campus.html">Volver a Mi Campus</a></nav>
+<section class="card">
+<div class="eyebrow">MI PERFIL</div>
+<h1>Perfil profesional</h1>
+<p>Estos datos son opcionales. Se usan para adaptar tu aprendizaje; no se muestran públicamente.</p>
+<form id="profile-form">
+<div class="grid">
+<label class="field">Rol o cargo profesional<input name="professional_title" maxlength="120" autocomplete="organization-title"></label>
+<label class="field">Organización<input name="organization" maxlength="160" autocomplete="organization"></label>
+<label class="field">Sector<input name="sector" maxlength="120"></label>
+<label class="field">Experiencia con IA<select name="experience_level"><option value="">Prefiero no indicarlo</option><option value="inicio">Inicio</option><option value="intermedio">Intermedio</option><option value="avanzado">Avanzado</option><option value="profesional">Profesional</option></select></label>
+<label class="field full">Objetivos de aprendizaje<textarea name="learning_objectives" maxlength="600" placeholder="Escribe un objetivo por línea. Máximo ocho."></textarea></label>
+</div>
+<p class="note">Puedes actualizar o eliminar los datos de estos campos cuando quieras.</p>
+<button type="submit">Guardar perfil</button>
+<p id="message" class="status" role="status" aria-live="polite"></p>
+</form>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+<script src="/supabase-config.js"></script>
+<script>
+const message=document.querySelector('#message');
+if(!window.supabase||!window.SUPABASE_URL||!window.SUPABASE_PUBLISHABLE_KEY){message.textContent='El servicio de perfil no está disponible ahora.';message.className='status error';throw new Error('Supabase client configuration unavailable')}
+const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+const form=document.querySelector('#profile-form');
+const setMessage=(text,type='')=>{message.textContent=text;message.className='status '+type};
+(async()=>{
+ const {data,error}=await client.auth.getUser();
+ if(error||!data.user){location.href='/auth.html';return}
+ const {data:profile,error:profileError}=await client.from('professional_profiles').select('professional_title,organization,sector,experience_level,learning_objectives').eq('user_id',data.user.id).maybeSingle();
+ if(profileError){setMessage('No se ha podido cargar el perfil.','error');return}
+ if(profile){for(const key of ['professional_title','organization','sector','experience_level'])form.elements[key].value=profile[key]||'';form.elements.learning_objectives.value=(profile.learning_objectives||[]).join('\n')}
+ form.addEventListener('submit',async event=>{
+  event.preventDefault();setMessage('');
+  const objectives=form.elements.learning_objectives.value.split('\n').map(value=>value.trim()).filter(Boolean);
+  if(objectives.length>8){setMessage('Indica como máximo ocho objetivos.','error');return}
+  const payload={user_id:data.user.id,professional_title:form.elements.professional_title.value.trim()||null,organization:form.elements.organization.value.trim()||null,sector:form.elements.sector.value.trim()||null,experience_level:form.elements.experience_level.value||null,learning_objectives:objectives};
+  const {error:saveError}=await client.from('professional_profiles').upsert(payload,{onConflict:'user_id'});
+  setMessage(saveError?'No se ha podido guardar el perfil.':'Perfil profesional guardado. Revisa y actualiza tus datos cuando lo necesites.',saveError?'error':'success');
+ });
+})().catch(()=>setMessage('No se ha podido validar tu sesión.','error'));
+</script>
+</body>
+</html>
