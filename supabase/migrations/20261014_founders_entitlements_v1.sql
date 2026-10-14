@@ -1,5 +1,5 @@
 -- DuckTronSur IA Academy: 200 alumnos fundadores y derechos de acceso
--- Estado: EN PRUEBAS. Aplicar solo en una rama de desarrollo de Supabase.
+-- Estado: APLICADA EN PRODUCCIÓN el 14/10/2026 con autorización expresa del responsable.
 -- No crea planes, precios, cobros, pasarelas ni datos fiscales.
 
 begin;
