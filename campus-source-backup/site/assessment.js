@@ -5,6 +5,10 @@
   const rest = base + '/rest/v1';
   const auth = base + '/auth/v1';
   const state = { session: null, assessment: null, questions: [] };
+  const routeLabels = { start: 'START', intermedio: 'INTERMEDIO', pro: 'PRO', lab: 'LAB' };
+  const rawRoute = new URLSearchParams(location.search).get('ruta');
+  const routeSlug = Object.prototype.hasOwnProperty.call(routeLabels, rawRoute) ? rawRoute : 'start';
+  const assessmentSlug = routeSlug + '-evaluacion-v1';
   const $ = (id) => document.getElementById(id);
   const headers = () => ({ apikey: key, Authorization: 'Bearer ' + (state.session ? state.session.access_token : key), 'Content-Type': 'application/json' });
   const setStatus = (id, text, error, alert) => { $(id).textContent = text; $(id).classList.toggle('alert', Boolean(alert)); $(id).style.color = error ? '#a23b25' : ''; };
@@ -12,10 +16,14 @@
   async function authRequest(path, email, password) { return json(await fetch(auth + path, { method: 'POST', headers: { apikey: key, 'Content-Type': 'application/json' }, body: JSON.stringify({ email, password }) })); }
   function escapeHtml(value) { return String(value).replace(/[&<>'"]/g, (c) => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' }[c])); }
   async function load() {
-    const a = await json(await fetch(rest + '/assessments?slug=eq.start-evaluacion-v1&published=eq.true&select=id,slug,title,pass_percent', { headers: headers() }));
-    if (!a.length) throw new Error('La evaluación START no está disponible.');
+    const a = await json(await fetch(rest + '/assessments?slug=eq.' + encodeURIComponent(assessmentSlug) + '&published=eq.true&select=id,slug,title,pass_percent', { headers: headers() }));
+    if (!a.length) throw new Error('La evaluación ' + routeLabels[routeSlug] + ' todavía no está disponible.');
     state.assessment = a[0];
     state.questions = await json(await fetch(rest + '/assessment_questions?assessment_id=eq.' + state.assessment.id + '&select=id,position,prompt,assessment_options(id,option_key,option_text,position)&order=position', { headers: headers() }));
+    $('assessmentKicker').textContent = routeLabels[routeSlug] + ' · EVALUACIÓN';
+    $('assessmentTitle').textContent = 'Evaluación ' + routeLabels[routeSlug];
+    $('assessmentMeta').textContent = state.questions.length + ' preguntas · aprobado con el ' + state.assessment.pass_percent + ' % · intentos ilimitados';
+    document.querySelector('a[href^="ruta.html"]').href = 'ruta.html?ruta=' + encodeURIComponent(routeSlug);
     $('authCard').classList.add('assessment-hidden'); $('quizCard').classList.remove('assessment-hidden');
     $('quizIntro').innerHTML = '<p>' + state.questions.length + ' preguntas · aprobado: ' + state.assessment.pass_percent + '%</p>';
     $('quizForm').innerHTML = state.questions.map((q, i) => '<fieldset class="assessment-question"><legend><strong>' + (i + 1) + '. ' + escapeHtml(q.prompt) + '</strong></legend>' + q.assessment_options.sort((x, y) => x.position - y.position).map(o => '<label class="assessment-option"><input type="radio" name="q-' + q.id + '" value="' + o.id + '" required> ' + o.option_key + '. ' + escapeHtml(o.option_text) + '</label>').join('') + '</fieldset>').join('');
