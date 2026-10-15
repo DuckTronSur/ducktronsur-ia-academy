@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contacto y ayuda · DuckTronSur IA Academy</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/brand-overrides.css">
+<link rel="stylesheet" href="/contact.css">
+</head>
+<body>
+<header class="academy-header"><nav class="academy-nav" aria-label="Navegación principal"><a class="academy-brand" href="/"><img src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a><div class="academy-links"><a href="/#rutas">Rutas</a><a href="/pildoras.html">Píldoras IA</a><a href="/prompteca.html">Prompteca</a><a class="academy-access" href="/auth.html">Acceder</a></div></nav></header>
+<main class="contact-page">
+<section class="contact-hero" aria-labelledby="contact-title"><p class="contact-kicker">🦆 DUCKTRONSUR IA ACADEMY</p><h1 id="contact-title">¿Necesitas una mano?</h1><p class="contact-lead">En DuckTronSur estamos encantados de leerte.</p><p>Puedes escribirnos si tienes una duda, necesitas ayuda con algo o quieres proponernos una colaboración educativa. El patito revisará tu mensaje y te responderemos por correo en cuanto podamos.</p></section>
+<section class="contact-layout" aria-label="Contacto y formulario">
+<div class="contact-options">
+<article class="contact-option question"><span aria-hidden="true">💬</span><h2>Tengo una duda</h2><p>Preguntas sobre cursos, herramientas o contenidos.</p></article>
+<article class="contact-option help"><span aria-hidden="true">🛠️</span><h2>Necesito ayuda</h2><p>Orientación para hacer algo relacionado con IA, automatización o tecnología.</p></article>
+<article class="contact-option collaborate"><span aria-hidden="true">🤝</span><h2>Quiero colaborar</h2><p>Ideas, contenidos, proyectos o propuestas educativas.</p></article>
+</div>
+<form id="contact-form" class="contact-form" novalidate>
+<h2>Envíanos tu mensaje</h2><p class="form-intro">Cuéntanos en qué podemos ayudarte.</p>
+<div class="message-types" role="group" aria-label="Tipo de mensaje">
+<label><input type="radio" name="type" value="DUDA" checked> <span>💬 Tengo una duda</span></label>
+<label><input type="radio" name="type" value="AYUDA"> <span>🛠️ Necesito ayuda</span></label>
+<label><input type="radio" name="type" value="COLABORACIÓN"> <span>🤝 Quiero colaborar</span></label>
+</div>
+<label for="name">Nombre *</label><input id="name" name="name" autocomplete="name" required maxlength="120">
+<label for="email">Correo electrónico *</label><input id="email" name="email" type="email" autocomplete="email" required maxlength="254">
+<label for="message">Mensaje *</label><textarea id="message" name="message" required maxlength="5000" rows="7"></textarea>
+<label class="privacy-check"><input id="privacy" name="privacy" type="checkbox" required> <span>He leído y acepto la <a href="/privacidad.html">política de privacidad</a>.</span></label>
+<input class="form-trap" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+<p id="form-status" class="form-status" role="status" aria-live="polite"></p>
+<button class="contact-submit" type="submit">Enviar al patito 🦆</button>
+</form>
+</section>
+</main>
+<footer class="footer">DuckTronSur IA Academy · <a href="/privacidad.html">Privacidad</a> · <a href="/condiciones.html">Condiciones de uso</a> · <a href="/">Volver al Campus</a></footer>
+<script src="/contact.js"></script>
+</body>
+</html>
