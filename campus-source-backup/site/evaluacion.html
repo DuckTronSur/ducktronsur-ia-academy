@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Evaluación · DuckTronSur IA Academy</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="brand-overrides.css">
+  <style>
+    .assessment-page{max-width:900px;margin:0 auto;padding:48px 24px 80px}.assessment-card{background:#fff;border:1px solid rgba(8,25,51,.16);padding:24px;margin-top:24px}.assessment-form{display:grid;gap:12px;max-width:430px}.assessment-form input{padding:12px;border:1px solid #ccd5df;border-radius:8px;font:inherit}.assessment-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}.assessment-question{border:0;border-top:1px solid #e3e8ee;padding:24px 0}.assessment-question:first-child{border-top:0}.assessment-option{display:block;padding:10px 12px;margin:8px 0;border:1px solid #dfe5eb;border-radius:8px}.assessment-status{min-height:24px;margin-top:16px}.assessment-result{padding:16px;background:#eef7ec;margin-top:20px}.assessment-result.fail{background:#fff1eb}.assessment-hidden{display:none}.muted{color:#52657a}
+  </style>
+</head>
+<body>
+  <main class="assessment-page">
+    <a href="ruta.html?ruta=start">← Volver a START</a>
+    <p id="assessmentKicker" class="muted">START · EVALUACIÓN</p>
+    <h1 id="assessmentTitle">Comprueba lo que has aprendido</h1>
+    <p class="muted">20 preguntas · aprobado con el 70 % · intentos ilimitados</p>
+    <section id="authCard" class="assessment-card">
+      <h2>Accede para comenzar</h2>
+      <form id="authForm" class="assessment-form">
+        <input id="email" type="email" placeholder="Correo electrónico" required>
+        <input id="password" type="password" placeholder="Contraseña" required>
+        <div class="assessment-actions"><button class="button button-primary" type="submit">Iniciar sesión</button><button class="button" type="button" id="signupButton">Crear cuenta</button></div>
+      </form>
+      <p id="authStatus" class="assessment-status"></p>
+    </section>
+    <section id="quizCard" class="assessment-card assessment-hidden">
+      <div id="quizIntro"></div>
+      <form id="quizForm"></form>
+      <div class="assessment-actions"><button class="button button-primary" type="submit" form="quizForm">Enviar evaluación</button><button class="button" type="button" id="logoutButton">Cerrar sesión</button></div>
+      <p id="quizStatus" class="assessment-status"></p>
+      <div id="result" class="assessment-result assessment-hidden"></div>
+    </section>
+  </main>
+  <script src="supabase-config.js"></script>
+  <script src="assessment.js"></script>
+</body>
+</html>
+
