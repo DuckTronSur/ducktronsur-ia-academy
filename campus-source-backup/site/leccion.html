@@ -22,7 +22,7 @@ body{background:#e3eef3;color:#173b4b}
 .lesson-block h2{color:var(--route-dark);margin-top:0}
 .lesson-practice{background:var(--route-soft);border-left:6px solid var(--route-color)}
 .lesson-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px}
-.lesson-button{border:0;border-radius:10px;padding:13px 18px;background:var(--route-color);color:#fff;font-weight:800;cursor:pointer}
+.lesson-button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border:2px solid var(--route-color);border-radius:12px;background:var(--route-color);color:#fff;font-weight:900;text-decoration:none;box-shadow:0 0 9px color-mix(in srgb,var(--route-color),transparent 35%),inset 0 0 10px #ffffff33;cursor:pointer;transition:transform .15s,filter .15s}.lesson-button:hover{transform:translateY(-1px);filter:brightness(1.12)}.lesson-next{background:#06152e;color:#fff;border-color:var(--route-color)}
 .lesson-button:disabled{opacity:.65;cursor:default}
 .lesson-link{color:var(--route-color)}
 @media(max-width:680px){.lesson-nav{flex-direction:column}.lesson-hero{grid-template-columns:1fr;padding:20px}.lesson-visual{max-height:170px}.lesson-block{padding:20px}}
@@ -137,6 +137,7 @@ ${content}
 </section>
 
 <div class="lesson-actions">
+<a class="lesson-button lesson-next" href="${lessonNumber<route.lessons.length?`/leccion.html?ruta=${routeSlug}&leccion=${lessonNumber+1}`:`/ruta.html?ruta=${routeSlug}`}">${lessonNumber<route.lessons.length?`Continuar con la lección ${lessonNumber+1} →`:`Volver a ${route.name} →`}</a>
 <button id="complete-button" class="lesson-button" ${completed?'disabled':''}>
 ${completed?'Lección completada':'Marcar como completada'}
 </button>
