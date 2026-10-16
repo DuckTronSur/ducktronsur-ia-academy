@@ -5,10 +5,10 @@
   const rest = base + '/rest/v1';
   const auth = base + '/auth/v1';
   const state = { session: null, assessment: null, questions: [] };
-  const routeLabels = { start: 'START', intermedio: 'INTERMEDIO', pro: 'PRO', lab: 'LAB' };
+  const routeLabels = { start: 'START', 'start-v0-4': 'START v0.4', intermedio: 'INTERMEDIO', pro: 'PRO', lab: 'LAB' };
   const rawRoute = new URLSearchParams(location.search).get('ruta');
   const routeSlug = Object.prototype.hasOwnProperty.call(routeLabels, rawRoute) ? rawRoute : 'start';
-  const assessmentSlug = routeSlug + '-evaluacion-v1';
+  const assessmentSlug = routeSlug === 'start-v0-4' ? 'start-v0-4-evaluacion-v0-2' : routeSlug + '-evaluacion-v1';
   const $ = (id) => document.getElementById(id);
   const headers = () => ({ apikey: key, Authorization: 'Bearer ' + (state.session ? state.session.access_token : key), 'Content-Type': 'application/json' });
   const setStatus = (id, text, error, alert) => { $(id).textContent = text; $(id).classList.toggle('alert', Boolean(alert)); $(id).style.color = error ? '#a23b25' : ''; };

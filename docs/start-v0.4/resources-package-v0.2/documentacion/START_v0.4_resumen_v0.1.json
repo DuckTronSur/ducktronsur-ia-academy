@@ -1,0 +1,16 @@
+{
+  "fecha": "2026-10-16",
+  "pr": 28,
+  "rama": "feat/start-v0-4-8-lecciones-candidato",
+  "archivos_documentados": 60,
+  "visuales_svg": 16,
+  "exportaciones_png": 16,
+  "exportaciones_webp": 16,
+  "plantillas_html": 8,
+  "estados": {
+    "CONFIRMADO": "Original de mascota conservado sin alteración",
+    "EN PRUEBAS": "Nuevos esquemas y plantillas pendientes de validación",
+    "PENDIENTE": "Capturas, pruebas y decisiones editoriales"
+  },
+  "produccion_modificada": false
+}

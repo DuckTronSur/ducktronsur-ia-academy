@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>START v0.4 · Vista previa técnica</title>
+<style>
+:root{--navy:#06152e;--cyan:#00cfff;--paper:#eaf3f7;--ink:#102b44;--muted:#5a7182;--yellow:#ffc83d}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif}.shell{max-width:1040px;margin:auto;padding:24px 18px 60px}header{padding:30px;border-radius:20px;background:var(--navy);color:#fff}header p{color:#75e6ff;font-size:.75rem;letter-spacing:.12em;font-weight:700}h1{margin:8px 0;font-size:clamp(2rem,6vw,4rem)}header small{color:#d8e7f0}.notice{margin:18px 0;padding:14px 16px;border:2px solid var(--yellow);border-radius:12px;background:#fff9df}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.card{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:16px;background:#fff;border:1px solid #cfdee6}.num{flex:0 0 42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--navy);color:var(--yellow);font-weight:800}.card h2{margin:0 0 8px;font-size:1.05rem}.card p{margin:0 0 8px;color:var(--muted);font-size:.84rem;line-height:1.45}.card a{color:#087ca4;font-weight:700;text-decoration:none;font-size:.8rem}.meta{font-size:.72rem;color:#78909f}.resource-preview{margin-top:28px;padding:18px;border:1px solid #cfdee6;border-radius:16px;background:#fff}.resource-preview img{display:block;width:100%;max-width:100%;height:auto;border-radius:12px}.resource-preview figcaption{margin-top:10px;color:var(--muted);font-size:.8rem;line-height:1.45}.visual-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.visual-card{min-width:0;padding:14px;border:1px solid #cfdee6;border-radius:16px;background:#fff}.visual-card img{display:block;width:100%;max-width:100%;height:auto;border-radius:10px}.visual-card h3{margin:0 0 10px;font-size:1rem}.visual-card p{margin:8px 0 0;color:var(--muted);font-size:.78rem;line-height:1.4}@media(max-width:680px){.grid,.visual-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body><main class="shell">
+<header><p>DUCKTRONSUR IA ACADEMY · RAMA DE REVISIÓN</p><h1>START v0.4</h1><small>Vista previa técnica de la ruta de ocho lecciones. No publicada ni conectada a producción.</small></header>
+<div class="notice"><strong>Estado:</strong> contenido candidato. Los ocho recursos visuales están aprobados editorialmente; la integración candidata de contenidos está completada. La evaluación v2 y la publicación siguen pendientes.</div>
+<h2>Itinerario</h2><section id="lessons" class="grid"></section>
+<h2>Evaluación candidata</h2><p><a href="start-v0.4-evaluacion.html">Probar las 40 preguntas v0.2 →</a></p><h2>Recursos visuales aprobados</h2><section id="visuals" class="visual-grid" aria-label="Recursos visuales aprobados de las ocho lecciones"></section>
+</main>
+<script src="start-v0.4-data.js"></script>
+<script>
+const root=document.querySelector('#lessons');
+root.innerHTML=START_V04.lessons.map(l=>'<article class="card"><div class="num">'+String(l.number).padStart(2,'0')+'</div><div><h2>'+l.title+'</h2><p>Contenido editorial candidato · cinco preguntas asociadas.</p><div class="meta">'+l.questions+'</div><a href="start-v0.4-leccion.html?leccion='+l.number+'">Abrir lección candidata →</a><br><a href="https://github.com/DuckTronSur/ducktronsur-ia-academy/tree/feat/start-v0-4-8-lecciones-candidato/docs/start-v0.4/content/'+l.source+'">Ver fuente editorial →</a></div></article>').join('');
+const visualRoot=document.querySelector('#visuals');
+visualRoot.innerHTML=START_V04.lessons.map(l=>{const n=String(l.number).padStart(2,'0');const version=l.number===4?'v0.2':'v0.1';const alt=l.number===4?'L04: tres pasos para mejorar una respuesta de IA: revisar el borrador, pedir una mejora y comprobar y elegir la versión útil.':'L'+n+': recurso visual candidato de la lección '+l.title+'.';return '<article class="visual-card"><h3>L'+n+' · '+l.title+'</h3><img src="assets/start/v0.4/l'+n+'/START_L'+n+'_infografia_'+version+'.webp" alt="'+alt+'"><p>Recurso '+version+' · aprobado editorialmente.</p></article>';}).join('');
+</script>
+</body></html>
