@@ -1,11 +1,10 @@
-
 (function () {
   const base = window.SUPABASE_URL;
   const key = window.SUPABASE_PUBLISHABLE_KEY;
   const rest = base + '/rest/v1';
   const auth = base + '/auth/v1';
   const state = { session: null, assessment: null, questions: [] };
-  const routeLabels = { start: 'START', 'start-v0-4': 'START v0.4', intermedio: 'INTERMEDIO', pro: 'PRO', lab: 'LAB' };
+  const routeLabels = { start: 'START', 'start-v0-4': 'START', intermedio: 'INTERMEDIO', pro: 'PRO', lab: 'LAB' };
   const rawRoute = new URLSearchParams(location.search).get('ruta');
   const routeSlug = Object.prototype.hasOwnProperty.call(routeLabels, rawRoute) ? rawRoute : 'start';
   const assessmentSlug = routeSlug === 'start-v0-4' ? 'start-v0-4-evaluacion-v0-2' : routeSlug + '-evaluacion-v1';
