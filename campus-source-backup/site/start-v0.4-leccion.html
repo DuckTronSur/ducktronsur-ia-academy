@@ -1,3 +1,4 @@
+Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
 <!doctype html>
 <html lang="es">
 <head>
@@ -5,17 +6,15 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>START v0.4 · Lección</title>
 <style>
-:root{--navy:#06152e;--cyan:#00cfff;--paper:#eaf3f7;--ink:#102b44;--muted:#5a7182;--yellow:#ffc83d}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,sans-serif}.shell{max-width:1040px;margin:auto;padding:20px 18px 60px}header{padding:24px;border-radius:20px;background:var(--navy);color:#fff}header p{color:#75e6ff;font-size:.75rem;letter-spacing:.12em;font-weight:700}h1{margin:8px 0;font-size:clamp(2rem,6vw,4rem)}header small{color:#d8e7f0}.back{display:inline-block;margin:18px 0;color:#087ca4;font-weight:700;text-decoration:none}.lesson{background:#fff;border:1px solid #cfdee6;border-radius:18px;padding:22px}.lesson-visual{display:block;width:100%;max-width:760px;margin:0 auto 22px;border-radius:12px}.meta{color:var(--muted);font-size:.88rem}.content h2{color:var(--navy);margin-top:28px;font-size:1.35rem}.content p{line-height:1.65}.content .label{font-weight:700;color:#176a85}.content a{color:#087ca4}.actions{display:flex;justify-content:space-between;gap:12px;margin-top:28px;flex-wrap:wrap}.button{display:inline-block;padding:12px 16px;border-radius:10px;background:var(--navy);color:#fff;text-decoration:none;font-weight:700}.button.secondary{background:#fff;color:#087ca4;border:1px solid #087ca4}@media(max-width:680px){.shell{padding:14px 12px 40px}.lesson{padding:16px}.content p{font-size:.98rem}}
+:root{--navy:#06152e;--cyan:#00cfff;--paper:#dceaf1;--ink:#0a203a;--muted:#5c7184;--route:#18a889;--route-soft:#e8f8f3}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,Arial,sans-serif}.shell{max-width:980px;margin:auto;padding:24px 18px 64px}.lesson-nav{display:flex;justify-content:space-between;gap:14px;margin-bottom:22px}.lesson-nav a,.back{color:#087ca4;text-decoration:none;font-weight:800}.lesson-hero{background:#f2f7fa;border-top:8px solid var(--route);border-radius:24px;padding:28px;box-shadow:0 12px 34px #073b4c1a;display:grid;grid-template-columns:1fr 240px;gap:20px;align-items:center}.lesson-kicker{color:var(--route);font-size:.82rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase}.lesson-hero h1{color:var(--ink);font-size:clamp(2rem,5vw,3.4rem);margin:12px 0}.lesson-hero small{color:var(--muted);line-height:1.5}.lesson-visual{width:100%;max-height:220px;object-fit:contain;border-radius:12px;background:#06152e}.lesson-duck{display:block;width:90px;height:90px;object-fit:contain;margin:0 auto 8px}.lesson{background:transparent;border:0;border-radius:0;padding:0}.lesson-block{background:#f2f7fa;border-radius:18px;padding:24px;margin-top:18px;border:1px solid #dce9ee}.lesson-block h2,.content h2{color:var(--ink);margin-top:0}.lesson-block p,.content p{font-size:1.06rem;line-height:1.7}.content{padding:0}.content a{color:#087ca4}.content .label{font-weight:800;color:#176a85}.lesson-practice{background:var(--route-soft);border-left:6px solid var(--route)}.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:24px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 18px;border:2px solid var(--route);border-radius:12px;background:var(--route);color:#fff;text-decoration:none;font-weight:900;box-shadow:0 0 9px color-mix(in srgb,var(--route),transparent 35%),inset 0 0 10px #ffffff33}.button.secondary{background:#fff;color:#087ca4;border-color:#087ca4}.lesson-next{background:var(--navy);border-color:var(--route)}@media(max-width:680px){.shell{padding:14px 12px 40px}.lesson-nav{flex-direction:column}.lesson-hero{grid-template-columns:1fr;padding:20px}.lesson-visual{max-height:190px}.lesson-block{padding:20px}.lesson-block p,.content p{font-size:.98rem}}
 </style>
 </head>
 <body><main class="shell">
-<header><p>DUCKTRONSUR IA ACADEMY · START v0.4</p><h1 id="title">Cargando lección…</h1><small>Vista candidata de contenidos integrados. No publicada ni conectada a producción.</small></header>
-<a class="back" href="start-v0.4.html">← Volver a la ruta START v0.4</a>
+<nav class="lesson-nav"><a class="back" href="start-v0.4.html">← Volver a la ruta START v0.4</a><a href="/">DuckTronSur IA Academy</a></nav>
+<header class="lesson-hero"><div><p class="lesson-kicker">DUCKTRONSUR IA ACADEMY · START v0.4</p><h1 id="title">Cargando lección…</h1><small>Vista candidata de contenidos integrados. No publicada ni conectada a producción.</small></div><img id="visual" class="lesson-visual" alt=""></header>
 <article class="lesson">
-<img id="visual" class="lesson-visual" alt="">
-<p id="meta" class="meta"></p>
-<section id="content" class="content"></section>
+<section class="lesson-block"><p id="meta" class="meta"></p><section id="content" class="content"></section></section>
 <div class="actions"><a id="previous" class="button secondary" href="#">← Anterior</a><a id="next" class="button" href="#">Siguiente →</a></div>
 </article>
 </main>
@@ -33,3 +32,4 @@ if(n===1){prev.textContent='← Volver a la ruta';prev.href='start-v0.4.html';}e
 if(n===8){next.textContent='Volver a la ruta →';next.href='start-v0.4.html';}else{next.href='start-v0.4-leccion.html?leccion='+(n+1);}
 </script>
 </body></html>
+
