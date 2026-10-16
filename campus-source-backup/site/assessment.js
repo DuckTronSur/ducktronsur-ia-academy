@@ -7,7 +7,7 @@
   const routeLabels = { start: 'START', 'start-v0-4': 'START', intermedio: 'INTERMEDIO', pro: 'PRO', lab: 'LAB' };
   const rawRoute = new URLSearchParams(location.search).get('ruta');
   const routeSlug = Object.prototype.hasOwnProperty.call(routeLabels, rawRoute) ? rawRoute : 'start';
-  const assessmentSlug = routeSlug === 'start-v0-4' ? 'start-v0-4-evaluacion-v0-2' : routeSlug + '-evaluacion-v1';
+  const assessmentSlug = routeSlug === 'start-v0-4' ? 'start-v0-4-evaluacion-v0-2' : routeSlug + '-evaluacion-v1';\n  const backLink = document.querySelector('a[href^="ruta.html"]');\n  if (backLink) backLink.href = 'ruta.html?ruta=' + encodeURIComponent(routeSlug);
   const $ = (id) => document.getElementById(id);
   const headers = () => ({ apikey: key, Authorization: 'Bearer ' + (state.session ? state.session.access_token : key), 'Content-Type': 'application/json' });
   const setStatus = (id, text, error, alert) => { $(id).textContent = text; $(id).classList.toggle('alert', Boolean(alert)); $(id).style.color = error ? '#a23b25' : ''; };
