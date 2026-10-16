@@ -1,1 +1,16 @@
-Û^š›bh¥êß¢¹­…â'ŠØš–,ŞçÚº[C®+Ş²Š^­«b¢z'¶…ŠW’ÊË^ššè¾'^­ö¢•çHÈSËSLH8 %ÛÜœ™XØÚpìÛˆH[™›ÙÜ˜Y°ëXH‚‘™XÚNˆM‹ÌLÌŒ‹ˆ\İYÎˆSˆ•QPTË‚‚ˆÈÈ[˜ÚY[˜ÚXB“HŒŒH[[˜ÚXH[˜H°èXİXØHH™\È\ÛÜË\›È[Üİ˜X˜HÛÛÈÜÈ›Ü]Y\Îˆ“Ô”QÔˆHQR“ÔK‚‚ˆÈÈÛÜœ™XØÚpìÛˆØ[™Y]HŒŒ‚ŒKˆ‘U’TĞHS“Ô”QÔˆYH[™\İ[YÈH]XİH]pêH˜[K‚Œ‹ˆQHSHQR“ÔNˆÛÛXÚ]H[ˆØ[Xš[ÈÛ\›ÈHÛÛ˜Ü™]Ë‚ŒËˆÓÓT•QPHHSQÑNˆ™\šYšXØHÈ[\Ü[HHÛÛœÙ\˜HH™\œÚpìÛˆ0î[‚‚“ÜšYÚ[˜[Y]X›HÕ‘ÈH^ÜXÚ[Û™\È‘ÈHÙX”HMŒ0åÈLˆHŒŒHÙHÛÛœÙ\˜HÛÛ[È[XÙY[KÛÛˆ\İYÈTĞĞT•QÈ\˜HX›XØXÚpìÛ‹‚‚ˆÈÈ˜[YXÚpìÛˆ[™Y[B”™]š\ÚpìÛˆ[™\ÜÛœØX›KYÚXš[YYpìİš[ÛÛ˜\İK^È[\›˜]]›ÈHÛÛ\\˜XÚpìÛˆÛÛˆH™\œÚpìÛˆY]ÜšX[ˆ›ÈX›XØ\ˆšH\ÜYØ\ˆ\İHİH\›Ø˜XÚpìÛ‹‚
+# INC-L04-001 â€” CorrecciÃ³n de infografÃ­a L04
+
+Fecha: 16/10/2026. Estado: EN PRUEBAS.
+
+## Incidencia
+La v0.1 anuncia una prÃ¡ctica de tres pasos, pero mostraba solo dos bloques: BORRADOR y MEJORA.
+
+## CorrecciÃ³n candidata v0.2
+1. REVISA EL BORRADOR: lee el resultado y detecta quÃ© falta.
+2. PIDE UNA MEJORA: solicita un cambio claro y concreto.
+3. COMPRUEBA Y ELIGE: verifica lo importante y conserva la versiÃ³n Ãºtil.
+
+Original editable SVG y exportaciones PNG y WebP de 1600 Ã— 900. La v0.1 se conserva como antecedente, con estado DESCARTADO para publicaciÃ³n.
+
+## ValidaciÃ³n pendiente
+RevisiÃ³n del responsable, legibilidad mÃ³vil, contraste, texto alternativo y comparaciÃ³n con la versiÃ³n editorial L04. No publicar ni desplegar hasta su aprobaciÃ³n.

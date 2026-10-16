@@ -1,10 +1,42 @@
-Û^š›bh¥êß¢¹­…â'ŠØš–,ŞçÚº[C®+Ş²Š^­«b¢z'¶…ŠW’ÊË^ššè¾'^­ö¢•çHÈ[ˆHYX˜\È8 %ÕT•Œ8 %ŒŒB‚‘\İYÎˆS‘QS•HHR‘PÕPÒpäÓ‹ˆ[\]Y]H›ÈÛÛœİ]^YH[˜H]Y]Ü°ëXH\›Ø˜YK‚‚ˆÈÈÛÛ™XÚ[Û™\ÈH[˜YB‹H™]š\ÚpìÛˆY]ÜšX[HğìÙYÛËØÛÜœ™\ÜÛ™[˜ÚXHLx $ÔLH\ÜÛšX›\È[ˆ[Ü››ÈZ\ÛYÎÈÚ[ˆØØ\ˆ›ÙXØÚpìÛ‹‚‹H[™[\š[ÈYš[š]]›ÈH™Xİ\œÛÜË^ÜÈ[\›˜]]›ÜÈHØ\\˜HHÜšYÙ[‹Ù™XÚH\˜HØYH[XYÙ[ˆ™X[‚‹HİY[HHYX˜HÚ[ˆ]ÜÈ\œÛÛ˜[\ÎÈXØÙ\ÛÈ˜XÚ[]YÈX[X[Y[HÜˆ[™\ÜÛœØX›HÚH\È™XÙ\Ø\š[Ë‚‚ˆÈÈX]š^ˆHÛÛ\›Ø˜XÚpìÛ‚ŸQYX˜Hpê]ÙÈXÙ\XÚpìÛˆ\İYÈŸKK_KK_KK_KK_KK_ŸHpìİš[ÌŒÌÍÍKÌÎLÍÌ˜]™YØXÚpìÛˆHØ\\˜\È[ˆ˜]™YØYÜˆ™X[Ú[ˆØÜ›ÛÜš^›Û[šH™XÛÜ\ÎÈ^ÈYÚX›HS‘QS•HŸˆ\ØÜš]Üš[ÈLÌMÌNLŒ™]š\Ø\ˆØYHXØÚpìÛˆ[[™XXÚpìÛˆH›ÜÜ˜Ú[Û™\È\İX›\ÈS‘QS•HŸÈ›ÛÛHŒ	HH	H›ÛÛH˜]™YØYÜ‹Ü™Y›İÈÚ[ˆ0ê\™YHHÛÛ[šYÈšHÛÛ›Û\ÈØİ[ÜÈS‘QS•HŸÛÛ˜\İHYYXÚpìÛˆĞĞQÈ‹ŒˆPHH\™\È™X[\È8¢iMNŒH^È›Ü›X[È8¢iLÎŒH^ÈÜ˜[™HH[\™˜^ˆS‘QS•HŸHXÛYÈH›ØÛÈX‹ÔÚY
-ÕX‹Ñ[\‹Ñ\ØØ\HÙXİY[˜ÚXH0ìÙÚXØK›ØÛÈš\ÚX›KÚ[ˆ˜[\\ÈS‘QS•HŸˆ^È[\›˜]]›ÈXİÜˆH[[HH™]š\ÚpìÛˆHÛÛ^È\ØÜšX™H[˜ÚpìÛÈ[pèYÙ[™\ÈXÛÜ˜]]˜\È˜XğëX\ÎÈ›È™Y[™[˜ÚXHS‘QS•HŸÈ˜]™YØXÚpìÛˆx $Ó[šXÚ[Ë[\š[Ü‹ÚYİZY[K›Û™\ˆØÚÈXØÚ[Û™\ÈXØÙ\ÚX›\ÈÚ[ˆ[›XÙ\È›İÜÈS‘QS•HŸ]˜[XXÚ[Û™\ÈLx $ÔLHÛÛ\\˜\ˆX]š^ˆØÙ[HÛÛˆÛÛ[šYÈHØYHH™Yİ[\È°è[Y\ÈÜˆXØÚpìÛÈğìÙYÛÜÈ0î›šXÛÜÎÈ™\ÜY\İ\ÈØÙ[\È›İYÚY\ÈS‘QS•HŸH™Xİ\œÛÜÈÜ°èYšXÛÜÈ]•ÛÛÈH™Y[ˆ[Ü››ÈZ\ÛYÈÚ[ˆY›Ü›XXÚpìÛ‹[pèYÙ[™\È™\ÜÛœÚ]˜\ËÚ[ˆ™XÛÜ\ÈS‘QS•HŸLØ\™ØHH›Ü›X]ÜÈYÚİ\ÙKÜ™YHØXÚ0êH\ÚXš[]YH\ÛÈ[™]šYX[]Y]YÈHØ\™ØH˜^›Û˜X›H[ˆpìİš[™X[S‘QS•HŸLHšYÙ[˜ÚXH™]š\ÚpìÛˆHRHH›İ™YYÜ™\ÈH™XÚHØ\\˜\È]]0ê[XØ\È™XÚY\ËİY[\ËÜ™YÚpìÛ‹Ü[ˆ^XÚ]YÜÈS‘QS•HŸLˆš]˜XÚYY™]š\ÚpìÛˆHÙÜÈÜÈ\˜Ú]›ÜÈHØ\\˜\ÈÚ[ˆRKÙXÜ™]ÜËÚÙ[œË]\Èš]˜Y\ÈšHY[YšXØYÜ™\ÈS‘QS•HŸLÈÙ[pè[XØHS0ë][ÜËX™[ÈHXİÜ™\È]\]Y]\ÈÛÜœ™Xİ\Ë\İXİ\˜H0ìÙÚXØKY[ÛXH\Üpì[ÛS‘QS•HŸM]˜[XXÚpìÛˆš[˜[›ŞYXİÈH°î˜œšXØHXİ]šYYš[˜[H™]š\ÚpìÛˆ[X[˜HÛÚ\™[\ÈÛÛˆHXØÚpìÛˆS‘QS•H‚ˆÈÈğìÙYÛÜÈHÛÜœ™\ÜÛ™[˜ÚX\ÈH]˜[XXÚpìÛˆH™]š\Ø\‚‹HNˆÕT•SKTLKÕT•SKTL‹ÕT•SKTLËÕT•SKTLÕT•SKTLH8 %
-Š”S‘QS•HHÛİZ›ÈÛÛˆ˜[˜ÛÈØÙ[JŠ‹‚‹HˆÕT•S‹TLKÕT•S‹TL‹ÕT•S‹TLËÕT•S‹TLÕT•S‹TLH8 %
-Š”S‘QS•HHÛİZ›ÈÛÛˆ˜[˜ÛÈØÙ[JŠ‹‚‹HÎˆÕT•SËTLKÕT•SËTL‹ÕT•SËTLËÕT•SËTLÕT•SËTLH8 %
-Š”S‘QS•HHÛİZ›ÈÛÛˆ˜[˜ÛÈØÙ[JŠ‹‚‹HˆÕT•STLKÕT•STL‹ÕT•STLËÕT•STLÕT•STLH8 %
-Š”S‘QS•HHÛİZ›ÈÛÛˆ˜[˜ÛÈØÙ[JŠ‹‚‹HNˆÕT•SKTLKÕT•SKTL‹ÕT•SKTLËÕT•SKTLÕT•SKTLH8 %
-Š”S‘QS•HHÛİZ›ÈÛÛˆ˜[˜ÛÈØÙ[JŠ‹‚‹HˆÕT•S‹TLKÕT•S‹TL‹ÕT•S‹TLËÕT•S‹TLÕT•S‹TLH8 %
-Š”S‘QS•HHÛİZ›ÈÛÛˆ˜[˜ÛÈØÙ[JŠ‹‚‹HÎˆÕT•SËTLKÕT•SËTL‹ÕT•SËTLËÕT•SËTLÕT•SËTLH8 %
-Š”S‘QS•HHÛİZ›ÈÛÛˆ˜[˜ÛÈØÙ[JŠ‹‚‹HˆÕT•STLKÕT•STL‹ÕT•STLËÕT•STLÕT•STLH8 %
-Š”S‘QS•HHÛİZ›ÈÛÛˆ˜[˜ÛÈØÙ[JŠ‹‚‚ˆÈÈ™YÚ\İ›ÈH™\İ[YÜÂ”\˜HØYH[›İ\ˆ™XÚKÚÜ˜K˜]™YØYÜ‹İ™\œÚpìÛ‹ÓËÙ\ÜÜÚ]]›Ë[Y[œÚpìÛ‹›Ø˜YÜ‹]šY[˜ÚXK[˜ÚY[˜ÚXKÙ]™\šYYÛÜœ™XØÚpìÛ‹™\]XÚpìÛˆH\›Ø˜XÚpìÛ‹ˆØ\\˜\ÈHYX˜H0î›šXØ[Y[HÛÛˆ]ÜÈšXİXÚ[ÜË‚‚ˆÈÈY\\ÈHX›XØXÚpìÛ‚”™\]ZY\™H™]š\ÚpìÛˆY]ÜšX[È^[Y[ˆH[˜Ú[Û™\ÈH[\™˜XÙ\ÈXİX[\ÎÈ™]š\ÚpìÛˆ›Ü›X]]˜NÈXØÙ\ÚXš[YYÈ\›Ø˜XÚpìÛˆ[X[˜HHÜÈ0ë][\ÎÈ[İÈ]]Üš^˜YÈÜİ\š[Ü›Y[NÈ\›Ø˜XÚpìÛˆ^0ëXÚ]HH[YÜ˜XÚpìÛ‹ˆš[™İ[˜HY\HÙHÛÛœÚY\˜Hİ\\˜YHÜˆÜ™X\ˆ\İÜÈ\˜Ú]›ÜË‚
+# Plan de pruebas â€” START v0.4 â€” v0.1
+
+Estado: PENDIENTE DE EJECUCIÃ“N. El paquete no constituye una auditorÃ­a aprobada.
+
+## Condiciones de entrada
+- RevisiÃ³n editorial y cÃ³digo/correspondencia Q01â€“Q05 disponibles en entorno aislado; sin tocar producciÃ³n.
+- Inventario definitivo de recursos, textos alternativos y captura de origen/fecha para cada imagen real.
+- Cuenta de prueba sin datos personales; acceso facilitado manualmente por el responsable si es necesario.
+
+## Matriz de comprobaciÃ³n
+| ID | Prueba | MÃ©todo | AceptaciÃ³n | Estado |
+|---|---|---|---|---|
+| T01 | MÃ³vil 320/375/390/430 px | NavegaciÃ³n y capturas en navegador real | Sin scroll horizontal ni recortes; texto legible | PENDIENTE |
+| T02 | Escritorio 1280/1440/1920 px | Revisar cada lecciÃ³n | AlineaciÃ³n y proporciones estables | PENDIENTE |
+| T03 | Zoom 200% y 400% | Zoom navegador/reflow | Sin pÃ©rdida de contenido ni controles ocultos | PENDIENTE |
+| T04 | Contraste | MediciÃ³n WCAG 2.2 AA de pares reales | â‰¥4.5:1 texto normal; â‰¥3:1 texto grande e interfaz | PENDIENTE |
+| T05 | Teclado y foco | Tab/Shift+Tab/Enter/Escape | Secuencia lÃ³gica, foco visible, sin trampas | PENDIENTE |
+| T06 | Texto alternativo | Lector de pantalla y revisiÃ³n de contexto | Describe funciÃ³n; imÃ¡genes decorativas vacÃ­as; no redundancia | PENDIENTE |
+| T07 | NavegaciÃ³n L01â€“L08 | Inicio, anterior, siguiente, volver | Ocho lecciones accesibles sin enlaces rotos | PENDIENTE |
+| T08 | Evaluaciones Q01â€“Q05 | Comparar matriz docente con contenido de cada L | 5 preguntas vÃ¡lidas por lecciÃ³n; 40 cÃ³digos Ãºnicos; respuestas docentes protegidas | PENDIENTE |
+| T09 | Recursos grÃ¡ficos | DevTools y red en entorno aislado | Sin deformaciÃ³n, imÃ¡genes responsivas, sin recortes | PENDIENTE |
+| T10 | Carga y formatos | Lighthouse/red y cachÃ© deshabilitada | Peso individual auditado y carga razonable en mÃ³vil real | PENDIENTE |
+| T11 | Vigencia | RevisiÃ³n de UI de proveedores y fecha | Capturas autÃ©nticas fechadas, cuentas/regiÃ³n/plan explicitados | PENDIENTE |
+| T12 | Privacidad | RevisiÃ³n de todos los archivos y capturas | Sin PII, secretos, tokens, rutas privadas ni identificadores | PENDIENTE |
+| T13 | SemÃ¡ntica | HTML, tÃ­tulos, labels y lectores | Etiquetas correctas, estructura lÃ³gica, idioma espaÃ±ol | PENDIENTE |
+| T14 | EvaluaciÃ³n final | L08 proyecto y rÃºbrica | Actividad final y revisiÃ³n humana coherentes con la lecciÃ³n | PENDIENTE |
+
+## CÃ³digos y correspondencias de evaluaciÃ³n a revisar
+- L01: START8-L01-Q01, START8-L01-Q02, START8-L01-Q03, START8-L01-Q04, START8-L01-Q05 â€” **PENDIENTE de cotejo con banco docente**.
+- L02: START8-L02-Q01, START8-L02-Q02, START8-L02-Q03, START8-L02-Q04, START8-L02-Q05 â€” **PENDIENTE de cotejo con banco docente**.
+- L03: START8-L03-Q01, START8-L03-Q02, START8-L03-Q03, START8-L03-Q04, START8-L03-Q05 â€” **PENDIENTE de cotejo con banco docente**.
+- L04: START8-L04-Q01, START8-L04-Q02, START8-L04-Q03, START8-L04-Q04, START8-L04-Q05 â€” **PENDIENTE de cotejo con banco docente**.
+- L05: START8-L05-Q01, START8-L05-Q02, START8-L05-Q03, START8-L05-Q04, START8-L05-Q05 â€” **PENDIENTE de cotejo con banco docente**.
+- L06: START8-L06-Q01, START8-L06-Q02, START8-L06-Q03, START8-L06-Q04, START8-L06-Q05 â€” **PENDIENTE de cotejo con banco docente**.
+- L07: START8-L07-Q01, START8-L07-Q02, START8-L07-Q03, START8-L07-Q04, START8-L07-Q05 â€” **PENDIENTE de cotejo con banco docente**.
+- L08: START8-L08-Q01, START8-L08-Q02, START8-L08-Q03, START8-L08-Q04, START8-L08-Q05 â€” **PENDIENTE de cotejo con banco docente**.
+
+## Registro de resultados
+Para cada Txx anotar: fecha/hora, navegador/versiÃ³n, SO/dispositivo, dimensiÃ³n, probador, evidencia, incidencia, severidad, correcciÃ³n, repeticiÃ³n y aprobaciÃ³n. Capturas de prueba Ãºnicamente con datos ficticios.
+
+## Puertas de publicaciÃ³n
+Requiere revisiÃ³n editorial; examen de funciones e interfaces actuales; revisiÃ³n normativa; accesibilidad; aprobaciÃ³n humana de los 40 Ã­tems; piloto autorizado posteriormente; aprobaciÃ³n explÃ­cita de integraciÃ³n. Ninguna puerta se considera superada por crear estos archivos.

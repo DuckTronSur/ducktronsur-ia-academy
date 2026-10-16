@@ -1,1 +1,10 @@
-Û^š›bh¥êß¢¹­…â'ŠØš–,ŞçÚº[C®+Ş²Š^­«b¢z'¶…ŠW’ÊË^ššè¾'^­ö¢•çHÈ›ÜY\İHH[YÜ˜XÚpìÛˆ8 %“ÈR‘PÕUQB‚”˜[XHH™Y™\™[˜ÚXNˆ™X]Üİ\]ŒMN[XØÚ[Û™\ËXØ[™Y]ØÈˆÌˆÚ[ˆ\ØÜš]\˜\È[ˆÚ]X‹‚‚İX[™È^\İH]]Üš^˜XÚpìÛˆHÙH\YX™[ˆÜÈ\˜Ú]›ÜË›ÜY\İHHXšXØXÚpìÛ‚‹HØ[\\Ë\Ûİ\˜ÙKX˜XÚİ\ÜÚ]KØ\ÜÙ]ËÜİ\İŒÛKØ8 )ˆÛØˆ^ÜXÚ[Û™\ÈÙXœK0î›šXØ[Y[HİX[™ÈYØH˜[Kœ™Ø‚‹HØÜËÜİ\]ŒØ\ÜÙ]ËÜÛİ\˜ÙKÛKØ8 )ˆÛØˆY[\Èœİ™ØHÜšYÚ[˜[\ÈY]X›\Ë‚‹HØÜËÜİ\]ŒØ\ÜÙ]ËÛX[šY™\İØˆX[šYšY\İË^È[\›˜]]›ÈH[ˆHYX˜\Ë‚‚“›ÈÙHHÛÜXYÈ˜YH[0è\˜›Û\ÜYØX›KˆX™\°èH™\šYšXØ\œÙHÚHÜÈ™Xİ\œÛÜÈ[\İ˜]]›ÜÈX™[ˆÙ\ˆ[[Y[ÜÈ[YÏ˜È[[Y[ÜÈSÙ[pè[XÛÜÎÈÜÈ›Ü›][\š[ÜÈSÛÛˆX]\šX[H˜X˜Z›ÈÙ™›[™K›È[ˆÛÛ\Û™[HH›ÙXØÚpìÛ‹ˆH™Y™\™[˜ÚXHHX\ØÛİHÙHÛÛœÙ\˜H[XİHH›ÈÙHX›XØHšHÛØœ™\ØÜšX™K‚
+# Propuesta de integraciÃ³n â€” NO EJECUTADA
+
+Rama de referencia: `feat/start-v0-4-8-lecciones-candidato`; PR #28. Sin escrituras en GitHub.
+
+Cuando exista autorizaciÃ³n y se aprueben los archivos, propuesta de ubicaciÃ³n:
+- `campus-source-backup/site/assets/start/v0.4/l01/` â€¦ `/l08/`: exportaciones `.webp` y, Ãºnicamente cuando haga falta, `.png`.
+- `docs/start-v0.4/assets/source/l01/` â€¦ `/l08/`: fuentes `.svg` y originales editables.
+- `docs/start-v0.4/assets/manifest/`: manifiesto, texto alternativo y plan de pruebas.
+
+No se ha copiado nada al Ã¡rbol desplegable. DeberÃ¡ verificarse si los recursos ilustrativos deben ser elementos `<img>` o elementos HTML semÃ¡nticos; los formularios HTML son material de trabajo offline, no un componente de producciÃ³n. La referencia de mascota se conserva intacta y no se publica ni sobrescribe.

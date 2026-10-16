@@ -1,1 +1,41 @@
-Û^š›bh¥êß¢¹­…â'ŠØš–,ŞçÚº[C®+Ş²Š^­«b¢z'¶…ŠW’ÊË^ššè¾'^­ö¢•çHÈ[™Y[\ÈH0ë[Z]\ÈHX›XØXÚpìÛˆ8 %ÕT•Œ‚•ÙÜÈÜÈ™Xİ\œÛÜÈH\İH\]Y]HÛÛˆØ[™Y]ÜË›ÈX]\šX[X›XØYË‚‚ˆÈÈH8 %S‘QS•B‹HšXÚ\È™\šYšXØY\ÈH\œ˜[ZY[\Â‹HÛÜØ\š[Èš\İX[][YÂ‹H[[Üİ˜XÚpìÛˆÛÛˆØ\\˜\È™X[\Â‚ˆÈÈˆ8 %S‘QS•B‹HØ\\˜\ÈXØÙ\ÚX›\ÈH[\™˜^‚‹HÛÛ\\˜]]˜Hpìİš[ÈÜ™[˜YÜˆHÙ\šXÚ[È™X[‹H[[Üİ˜XÚpìÛˆH›ŞˆHY[ÜÂ‚ˆÈÈÈ8 %S‘QS•B‹HXİ]šYYY]X›H]˜[˜YB‹HØ\\˜\ÈXİX[\È™\šYšXØY\Â‚ˆÈÈ8 %S‘QS•B‹HØ\\˜\È™\šYšXØY\ÈH[\™˜^‚‹H°î˜œšXØHØÙ[Hš[˜[‚ˆÈÈH8 %S‘QS•B‹HZ™[\ÜÈØİ[Y[YÜÈÛÛˆY[\ÈH™XÚ\Â‹H™]š\ÚpìÛˆH™Y™\™[˜ÚX\ÈšYÙ[\Â‚ˆÈÈˆ8 %S‘QS•B‹HİpëXHHš]˜XÚYYHØYH›İ™YYÜ‚‹H˜[YXÚpìÛˆ›Ü›X]]˜KÚ\°ëYXØH[™\[™Y[B‚ˆÈÈÈ8 %S‘QS•B‹HX›HH\™X\ÈHZ™[\ÜÈ[\XYÜÂ‹H[[Üİ˜XÚ[Û™\ÈH›İ™YYÜ™\È™\šYšXØY\Â‹H]]Ù]˜[XXÚpìÛˆØÙ[B‚ˆÈÈ8 %S‘QS•B‹HZ™[\È™\İY[ÈÛÛ\]ÈÛÛˆ]ÜÈšXİXÚ[ÜÂ‹H°î˜œšXØHØÙ[Hš[˜[‹HØ\\˜\È™\šYšXØY\È[›ØÙ\ÛÂ‚“›ÈÙHÚ[][[ˆ[[\ÈH›İ™YYÜ™\ËˆÜÈXYÜ˜[X\ÈY]X›\ÈÛÛˆ\Ü]Y[X\ÈYYğìÙÚXÛÜË›È]šY[˜ÚXHH[˜Ú[Û˜[YY\Ëˆ›ÈÙH[ˆ\ØÜš]ÈÛ]™\ÈH\È]˜[XXÚ[Û™\Ëˆ›È™]][^˜\ˆÛÛÜ™\È›İš\Ú[Û˜[\ÈÛÛ[ÈğìÙYÛÜÈVÙšXÚX[\Ë‚
+# Pendientes y lÃ­mites de publicaciÃ³n â€” START v0.4
+
+Todos los recursos de este paquete son candidatos, no material publicado.
+
+## L01 â€” PENDIENTE
+- fichas verificadas de herramientas
+- glosario visual detallado
+- demostraciÃ³n con capturas reales
+
+## L02 â€” PENDIENTE
+- capturas accesibles de interfaz
+- comparativa mÃ³vil / ordenador de servicio real
+- demostraciÃ³n de voz y adjuntos
+
+## L03 â€” PENDIENTE
+- actividad editable avanzada
+- capturas actuales verificadas
+
+## L04 â€” PENDIENTE
+- capturas verificadas de interfaz
+- rÃºbrica docente final
+
+## L05 â€” PENDIENTE
+- ejemplos documentados con fuentes y fechas
+- revisiÃ³n de referencias vigentes
+
+## L06 â€” PENDIENTE
+- guÃ­a de privacidad de cada proveedor
+- validaciÃ³n normativa/jurÃ­dica independiente
+
+## L07 â€” PENDIENTE
+- tabla de tareas y ejemplos ampliados
+- demostraciones de proveedores verificadas
+- autoevaluaciÃ³n docente
+
+## L08 â€” PENDIENTE
+- ejemplo resuelto completo con datos ficticios
+- rÃºbrica docente final
+- capturas verificadas del proceso
+
+No se simulan pantallas de proveedores. Los diagramas editables son esquemas pedagÃ³gicos, no evidencia de funcionalidades. No se han escrito claves de las evaluaciones. No reutilizar colores provisionales como cÃ³digos HEX oficiales.
