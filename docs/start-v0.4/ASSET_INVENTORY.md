@@ -14,7 +14,8 @@ Estado: PLANTILLA DE TRABAJO · no publicado
 | L03 | Plantilla de prompts | START_L03_plantilla-prompts_v0.1.pdf | PENDIENTE | legibilidad |
 | L03 | Antes / después | START_L03_prompt-antes-despues_v0.1.webp | PENDIENTE | coherencia |
 | L03 | Cinco componentes | START_L03_cinco-componentes_v0.1.webp | PENDIENTE | precisión |
-| L04 | Primer borrador / versión útil | START_L04_borrador-version-util_v0.1.webp | PENDIENTE | secuencia |
+| L04 | Primer borrador / versión útil | START_L04_infografia_v0.2.svg + PNG/WebP | EN PRUEBAS | móvil / contraste / texto alternativo / revisión editorial |
+| L04 | Antecedente conservado | START_L04_borrador-version-util_v0.1.webp | DESCARTADO PARA PUBLICACIÓN | conservar como antecedente |
 | L04 | Comparar versiones | START_L04_comparar-versiones_v0.1.pdf | PENDIENTE | uso práctico |
 | L04 | Rúbrica | START_L04_rubrica_v0.1.pdf | PENDIENTE | comprensión |
 | L05 | Checklist de revisión | START_L05_checklist-revision_v0.1.pdf | PENDIENTE | verificabilidad |
@@ -30,6 +31,10 @@ Estado: PLANTILLA DE TRABAJO · no publicado
 | L08 | Ejemplo ficticio | START_L08_ejemplo-ficticio_v0.1.pdf | PENDIENTE | ausencia de datos reales |
 | L08 | Seguridad y verificación | START_L08_checklist-seguridad_v0.1.pdf | PENDIENTE | riesgos |
 | L08 | Rúbrica y capturas | START_L08_rubrica-capturas_v0.1.pdf | PENDIENTE | evaluación |
+
+## Registro de revisión L04 v0.2
+
+La corrección de L04 incorpora tres bloques: revisar el borrador, pedir una mejora y comprobar/escoger la versión útil. La revisión visual de escritorio está realizada; quedan pendientes la comprobación móvil, contraste final, texto alternativo aplicado en la interfaz y aprobación editorial. No publicar ni desplegar mientras siga EN PRUEBAS.
 
 ## Reglas
 
