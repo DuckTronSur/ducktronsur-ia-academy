@@ -11,15 +11,15 @@
 </head>
 <body><main class="shell">
 <header><p>DUCKTRONSUR IA ACADEMY · RAMA DE REVISIÓN</p><h1>START v0.4</h1><small>Vista previa técnica de la ruta de ocho lecciones. No publicada ni conectada a producción.</small></header>
-<div class="notice"><strong>Estado:</strong> contenido candidato. L04 v0.2 está integrada como prueba responsive; el resto de imágenes, la evaluación v2 y la aprobación editorial siguen pendientes.</div>
+<div class="notice"><strong>Estado:</strong> contenido candidato. Los ocho recursos visuales están aprobados editorialmente; la evaluación v2 y la integración de contenidos siguen pendientes.</div>
 <h2>Itinerario</h2><section id="lessons" class="grid"></section>
-<h2>Recursos visuales candidatos</h2><section id="visuals" class="visual-grid" aria-label="Recursos visuales candidatos de las ocho lecciones"></section>
+<h2>Recursos visuales aprobados</h2><section id="visuals" class="visual-grid" aria-label="Recursos visuales aprobados de las ocho lecciones"></section>
 </main>
 <script src="start-v0.4-data.js"></script>
 <script>
 const root=document.querySelector('#lessons');
 root.innerHTML=START_V04.lessons.map(l=>'<article class="card"><div class="num">'+String(l.number).padStart(2,'0')+'</div><div><h2>'+l.title+'</h2><p>Contenido editorial candidato · cinco preguntas asociadas.</p><div class="meta">'+l.questions+'</div><a href="https://github.com/DuckTronSur/ducktronsur-ia-academy/tree/feat/start-v0-4-8-lecciones-candidato/docs/start-v0.4/content/'+l.source+'">Ver fuente editorial →</a></div></article>').join('');
 const visualRoot=document.querySelector('#visuals');
-visualRoot.innerHTML=START_V04.lessons.map(l=>{const n=String(l.number).padStart(2,'0');const version=l.number===4?'v0.2':'v0.1';const alt=l.number===4?'L04: tres pasos para mejorar una respuesta de IA: revisar el borrador, pedir una mejora y comprobar y elegir la versión útil.':'L'+n+': recurso visual candidato de la lección '+l.title+'.';return '<article class="visual-card"><h3>L'+n+' · '+l.title+'</h3><img src="assets/start/v0.4/l'+n+'/START_L'+n+'_infografia_'+version+'.webp" alt="'+alt+'"><p>Recurso '+version+' · pendiente de aprobación editorial.</p></article>';}).join('');
+visualRoot.innerHTML=START_V04.lessons.map(l=>{const n=String(l.number).padStart(2,'0');const version=l.number===4?'v0.2':'v0.1';const alt=l.number===4?'L04: tres pasos para mejorar una respuesta de IA: revisar el borrador, pedir una mejora y comprobar y elegir la versión útil.':'L'+n+': recurso visual candidato de la lección '+l.title+'.';return '<article class="visual-card"><h3>L'+n+' · '+l.title+'</h3><img src="assets/start/v0.4/l'+n+'/START_L'+n+'_infografia_'+version+'.webp" alt="'+alt+'"><p>Recurso '+version+' · aprobado editorialmente.</p></article>';}).join('');
 </script>
 </body></html>
