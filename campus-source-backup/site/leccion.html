@@ -45,6 +45,15 @@ start:{name:'START',color:'#18a889',soft:'#e8f8f3',image:'/assets/ruta-start-v1.
 ['Cómo escribir una buena instrucción','Aprende a pedir mejores resultados a una herramienta de IA.'],
 ['Cómo comprobar una respuesta','Aprende a revisar y contrastar una respuesta generada por IA.'],
 ['Tu primer flujo de trabajo','Construye un proceso sencillo y repetible con inteligencia artificial.']]},
+start-v0-4:{name:'START v0.4',color:'#18a889',soft:'#e8f8f3',image:'/assets/ruta-start-v1.png',lessons:[
+['Descubre qué es la IA','Comprende qué es la inteligencia artificial y dónde puede ayudarte.'],
+['Tu primer asistente de IA','Aprende a trabajar con un asistente de IA para resolver una tarea concreta.'],
+['Aprende a hablar con la IA: los prompts','Escribe instrucciones claras para obtener respuestas útiles.'],
+['Cómo mejorar y aprovechar las respuestas','Revisa, mejora y comprueba las respuestas generadas por IA.'],
+['Errores, información falsa y verificación','Detecta errores y verifica la información antes de utilizarla.'],
+['Privacidad, seguridad y uso responsable','Utiliza la IA con criterio, cuidado y respeto por la privacidad.'],
+['La IA en tu vida cotidiana','Identifica usos prácticos de la IA en tus tareas diarias.'],
+['Tu primer proyecto completo con inteligencia artificial','Integra lo aprendido en un pequeño proyecto completo.']]},
 intermedio:{name:'INTERMEDIO',color:'#2474c6',soft:'#eaf2ff',image:'/assets/ruta-intermedio-v1.png',lessons:[
 ['Contexto y objetivos','Define correctamente el contexto y el resultado que necesitas.'],
 ['Plantillas de prompts','Crea instrucciones reutilizables para tareas frecuentes.'],
@@ -105,6 +114,11 @@ return Object.entries(value).map(([key,item])=>`<p><strong>${escContent(key)}</s
 return fallbackContent;
 };
 const content=renderContent(dbLesson?.content);
+const isStartV04Candidate=routeSlug==='start-v0-4';
+if(isStartV04Candidate&&!dbLesson){
+app.innerHTML=`<section class="lesson-block"><h1>START v0.4 todavía no está publicado</h1><p>Esta versión candidata está preparada para revisión técnica. El contenido permanece despublicado y no está disponible para alumnos.</p><a class="lesson-link" href="/start-v0.4.html">Volver a START v0.4</a></section>`;
+return;
+}
 
 app.innerHTML=`
 <section class="lesson-hero">
