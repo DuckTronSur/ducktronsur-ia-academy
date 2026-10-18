@@ -6,6 +6,8 @@
 <title>Ruta · DuckTronSur IA Academy</title>
 <link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/brand-overrides.css">
 <script defer src="/start-v0.4-route.js"></script>
+<link rel="stylesheet" href="/academy-mobile-nav.css">
+<script defer src="/academy-mobile-nav.js"></script>
 <style>
 :root{--navy:#06152e;--cyan:#00cfff;--paper:#dceaf1;--ink:#0a203a;--muted:#5c7184;--route:#ffc83d;--route-soft:#fff7d8;--green:#20d879}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,Arial,sans-serif}.route-shell{width:min(1240px,calc(100% - 40px));margin:auto}.route-nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:10px 16px;background:var(--navy);border-radius:0 0 16px 16px}.route-brand img{display:block;width:190px}.route-nav-links{display:flex;gap:10px;align-items:center}.route-nav-links a,.route-account{padding:10px 13px;color:#fff;font-size:.78rem;font-weight:800;text-decoration:none;border-radius:10px}.route-nav-links a:hover,.route-account:hover{background:#e4f5fb}.route-account{border:2px solid var(--cyan);color:#fff}
@@ -20,11 +22,29 @@
 @media(max-width:430px){.summary-grid{grid-template-columns:1fr}.route-hero h1{font-size:3.2rem}.route-level{font-size:1.25rem}}
 
 @media(max-width:650px){.academy-nav{flex-wrap:wrap;align-items:center;padding:10px 12px}.academy-links{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;gap:8px}.academy-links a{display:flex;align-items:center;justify-content:center;min-height:42px;padding:9px 8px;border:2px solid #00cfff;border-radius:10px;background:#041b35;color:#fff;white-space:nowrap}.academy-links .academy-access{border-color:#20f06b;color:#20f06b}}
+
+/* Menú contextual común para las rutas: sin duplicar la navegación global. */
+.route-level-menu{display:flex;justify-content:center;gap:10px;max-width:1180px;margin:14px auto 22px;padding:0 8px;overflow-x:auto;scrollbar-width:thin}
+.route-level-menu a{--level-accent:#ffc83d;display:inline-flex;flex:1 0 auto;min-width:130px;justify-content:center;align-items:center;padding:13px 12px;border:1px solid var(--level-accent);border-radius:12px;background:#06152e;color:#f6fbff;text-decoration:none;font-weight:850;font-size:.82rem;letter-spacing:.025em;transition:background .16s,box-shadow .16s}
+.route-level-menu a[data-route-level=intermedio]{--level-accent:#16a7ed}.route-level-menu a[data-route-level=pro]{--level-accent:#ff8a00}.route-level-menu a[data-route-level=lab]{--level-accent:#a855f7}
+.route-level-menu a[aria-current=page]{background:var(--level-accent);color:#06152e;box-shadow:0 0 14px color-mix(in srgb,var(--level-accent) 35%,transparent)}
+.route-level-menu a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:740px){.route-level-menu{justify-content:flex-start;padding:0 3px 10px}.route-level-menu a{flex:0 0 auto;min-width:120px;min-height:44px}.academy-links{overflow-x:auto;flex-wrap:nowrap;width:100%;justify-content:flex-start;padding-bottom:6px}.academy-links a{flex:0 0 auto}}
 </style>
 </head>
 <body>
 <main class="route-shell">
-<header class="academy-header"><nav class="academy-nav" aria-label="Navegación principal"><a class="academy-brand" href="/"><img src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a><div class="academy-links"><a href="/#rutas">Rutas</a><a href="/mi-campus.html">Mi Campus</a><a href="/prompteca.html">Prompteca</a><a class="academy-access" href="/auth.html">Acceder</a></div></nav></header>
+<header class="academy-header"><nav class="academy-nav" aria-label="Navegación principal"><a class="academy-brand" href="/"><img src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a><div class="academy-links"><a href="/">Inicio</a><a href="/#rutas" aria-current="page">Rutas</a><a href="/prompteca.html">Prompteca</a><a href="/pildoras.html">Recursos</a><a href="/empresas.html">Empresas</a><a href="/mi-campus.html" data-desktop-campus>Mi Campus</a><a class="academy-access" href="/auth.html">Acceder</a></div><button class="academy-mobile-toggle" id="academy-mobile-toggle" type="button" aria-expanded="false" aria-controls="academy-mobile-menu">☰ Menú</button>
+<div class="academy-mobile-menu" id="academy-mobile-menu" hidden>
+<a href="/">🏠 Inicio</a><a href="/#rutas">📚 Rutas</a>
+<a href="/prompteca.html">🔍 Prompteca</a><a href="/pildoras.html">📦 Recursos</a>
+<a href="/empresas.html">🏢 Empresas</a><a href="/auth.html" data-guest-only>🔐 Acceder</a>
+<a href="/mi-campus.html" data-member-only hidden>🎓 Mi Campus</a><a href="/perfil.html" data-member-only hidden>👤 Mi perfil</a>
+<button type="button" id="academy-mobile-logout" data-member-only hidden>↪ Cerrar sesión</button>
+</div></nav></header>
+<a class="academy-campus-shortcut" id="academy-campus-shortcut" href="/mi-campus.html" hidden>🎓 Ir a Mi Campus</a>
+<nav class="route-level-menu" aria-label="Rutas de aprendizaje"><a href="/ruta.html?ruta=start-v0-4" data-route-level="start-v0-4">START</a><a href="/ruta.html?ruta=intermedio" data-route-level="intermedio">INTERMEDIO</a><a href="/ruta.html?ruta=pro" data-route-level="pro">PRO</a><a href="/ruta.html?ruta=lab" data-route-level="lab">LABORATORIO</a></nav>
+<script>(function(){const selected=(new URLSearchParams(location.search).get('ruta')||'start').toLowerCase();const current=selected==='start'?'start-v0-4':selected==='laboratorio'?'lab':selected;document.querySelectorAll('[data-route-level]').forEach(el=>{if(el.dataset.routeLevel===current){el.setAttribute('aria-current','page')}})})()</script>
 <div id="route-app"><p>Cargando ruta…</p></div><div id="assessment-cta" style="display:none;margin:14px 0"><a id="assessment-link" class="neon-button" href="/evaluacion.html?ruta=start">Hacer la evaluación →</a></div><footer class="route-footer"><a href="/mi-campus.html">← Volver a Mi Campus</a><a href="/#rutas">Explorar otras rutas</a></footer>
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script><script src="/supabase-config.js"></script><script src="/intermedio-content.js"></script><script src="/pro-content.js"></script><script src="/lab-content.js"></script>
