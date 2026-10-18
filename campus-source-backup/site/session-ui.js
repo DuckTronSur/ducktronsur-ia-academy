@@ -10,12 +10,12 @@
     document.querySelectorAll('.academy-links a[href="/mi-campus.html"],.nav-links a[href="/mi-campus.html"]').forEach(element => { if (!root.contains(element)) element.hidden = true; });
   };
   const favorites = [
-    ['/assets/session-tiles/DuckTronSur_Tile_Mi_Campus_v0.1_96.png','Mi Campus','Tu espacio de aprendizaje','/mi-campus.html'],
-    ['/assets/session-tiles/DuckTronSur_Tile_Prompteca_v0.1_96.png','Prompteca','Prompts y recursos reutilizables','/prompteca.html'],
-    ['/assets/session-tiles/DuckTronSur_Tile_Pildoras_IA_v0.1_96.png','Píldoras IA','Contenidos breves y prácticos','/pildoras.html'],
-    ['/assets/session-tiles/DuckTronSur_Tile_Guia_para_empresas_v0.1_96.png','Guía para empresas','IA aplicada a una pyme','/ia-para-empresas.html'],
+    ['/session-tiles/DuckTronSur_Tile_Mi_Campus_v0.1_96.png','Mi Campus','Tu espacio de aprendizaje','/mi-campus.html'],
+    ['/session-tiles/DuckTronSur_Tile_Prompteca_v0.1_96.png','Prompteca','Prompts y recursos reutilizables','/prompteca.html'],
+    ['/session-tiles/DuckTronSur_Tile_Pildoras_IA_v0.1_96.png','Píldoras IA','Contenidos breves y prácticos','/pildoras.html'],
+    ['/session-tiles/DuckTronSur_Tile_Guia_para_empresas_v0.1_96.png','Guía para empresas','IA aplicada a una pyme','/ia-para-empresas.html'],
     ['👤','Perfil profesional','Datos y perfil de usuario','/perfil.html'],
-    ['/assets/session-tiles/DuckTronSur_Tile_Comunidad_WhatsApp_v0.1_96.png','Comunidad','WhatsApp de DuckTronSur','https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee']
+    ['/session-tiles/DuckTronSur_Tile_Comunidad_WhatsApp_v0.1_96.png','Comunidad','WhatsApp de DuckTronSur','https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee']
   ];
   const closeMenu = root => {
     root.querySelectorAll('[aria-expanded="true"]').forEach(button => button.setAttribute('aria-expanded','false'));
