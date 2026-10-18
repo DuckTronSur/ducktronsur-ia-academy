@@ -11,6 +11,14 @@
   const displayName = user => user.user_metadata?.display_name || user.email?.split('@')[0] || 'Usuario';
   const initials = user => displayName(user).split(/[\s._-]+/).filter(Boolean).slice(0,2).map(part => part[0]).join('').toUpperCase() || 'U';
   const sessionHost = () => document.querySelector('.academy-links,.nav-links,.campus-nav-links,.nav-tools,.campus-nav,.auth-top') || document.body;
+  const tidyNavigation = root => {
+    document.querySelectorAll('.academy-access,.nav-access').forEach(element => {
+      if (!root.contains(element)) element.hidden = true;
+    });
+    document.querySelectorAll('.academy-links a[href="/mi-campus.html"],.nav-links a[href="/mi-campus.html"]').forEach(element => {
+      if (!root.contains(element)) element.hidden = true;
+    });
+  };
   const render = user => {
     let root = document.querySelector('#global-session-ui');
     const host = sessionHost();
@@ -24,6 +32,7 @@
       host.appendChild(root);
     }
     if (!user) { root.hidden = true; return; }
+    tidyNavigation(root);
     const name = displayName(user);
     root.hidden = false;
     root.innerHTML = '<span class="global-session-avatar" aria-hidden="true">' + escapeHtml(initials(user)) + '</span>' +
