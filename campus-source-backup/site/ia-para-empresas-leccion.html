@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lección · Guía para empresas · DuckTronSur IA Academy</title>
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="ia-para-empresas.css">
+</head>
+<body class="auth-page enterprise-page">
+  <main class="auth-wrap">
+    <header class="auth-top"><a href="ia-para-empresas.html">← Guía para empresas</a><span>DuckTronSur IA Academy</span></header>
+    <section class="auth-card" aria-labelledby="lesson-title">
+      <p class="auth-kicker">GUÍA PARA EMPRESAS · LECCIÓN</p>
+      <div id="lesson-content">
+        <p id="enterprise-status" class="auth-message" role="status" aria-live="polite">Comprobando tu acceso…</p>
+      </div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_PUBLISHABLE_KEY) throw new Error('Supabase client configuration unavailable');
+    const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
+    const root = document.querySelector('#lesson-content');
+    const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[character]));
+    const listHtml = values => `<ul>${(values || []).map(value => `<li>${escapeHtml(value)}</li>`).join('')}</ul>`;
+    const position = Number(new URLSearchParams(location.search).get('position'));
+    const images = {
+      1: 'assets/empresas/DuckTronSur_Guia_Empresas_L01_oportunidades_v0.1.png',
+      2: 'assets/empresas/DuckTronSur_Guia_Empresas_L02_documentos_reuniones_v0.1.png',
+      3: 'assets/empresas/DuckTronSur_Guia_Empresas_L03_evaluar_herramienta_v0.1.png'
+    };
+    (async () => {
+      const { data: userData } = await client.auth.getUser();
+      if (!userData.user) { location.href = 'auth.html'; return; }
+      const { data: module, error: moduleError } = await client.from('enterprise_modules').select('id,title,description').eq('slug','ia-para-empresas').eq('published',true).single();
+      if (moduleError || !module) { root.innerHTML = '<p class="auth-message error">Este módulo no está disponible ahora.</p>'; return; }
+      const { data: items, error: itemsError } = await client.from('enterprise_module_items').select('position,title,objective,content').eq('module_id',module.id).eq('published',true).order('position');
+      if (itemsError || !items?.length) { root.innerHTML = '<p class="auth-message error">No hay contenidos disponibles ahora.</p>'; return; }
+      const item = items.find(entry => Number(entry.position) === position) || items[0];
+      const content = item.content || {};
+      const previous = items.find(entry => Number(entry.position) === Number(item.position) - 1);
+      const next = items.find(entry => Number(entry.position) === Number(item.position) + 1);
+      root.innerHTML = `<img class="enterprise-lesson-image" src="${images[item.position] || ''}" alt="">
+        <p class="auth-kicker">LECCIÓN ${String(item.position).padStart(2,'0')}</p>
+        <h1 id="lesson-title">${escapeHtml(item.title)}</h1>
+        <p class="enterprise-intro"><strong>Objetivo:</strong> ${escapeHtml(item.objective)}</p>
+        <h2>Idea principal</h2><p>${escapeHtml(content.idea)}</p>
+        <h2>${escapeHtml(content.toolTitle || 'Herramienta de trabajo')}</h2>${listHtml(content.tool)}
+        <h2>Caso</h2><p>${escapeHtml(content.case)}</p>
+        <p class="warning"><strong>Atención:</strong> ${escapeHtml(content.warning)}</p>
+        <p class="challenge"><strong>Microreto:</strong> ${escapeHtml(content.challenge)}</p>
+        <section class="enterprise-check" aria-labelledby="question-${item.position}">
+          <h2 id="question-${item.position}">Comprobación</h2>
+          <p>${escapeHtml(content.question)}</p>
+          <div class="enterprise-options">${(content.options || []).map((option,index) => `<button type="button" data-answer="${index}" data-correct="${content.correctOption}" data-result="${escapeHtml(content.result)}">${escapeHtml(option)}</button>`).join('')}</div>
+          <p class="enterprise-result" aria-live="polite"></p>
+        </section>
+        <nav class="enterprise-nav" aria-label="Navegación de lecciones">
+          ${previous ? `<a class="neon-button" href="ia-para-empresas-leccion.html?position=${previous.position}">← Anterior</a>` : '<span></span>'}
+          ${next ? `<a class="neon-button" href="ia-para-empresas-leccion.html?position=${next.position}">Siguiente →</a>` : '<span></span>'}
+        </nav>`;
+      document.querySelectorAll('[data-answer]').forEach(button => button.addEventListener('click', () => {
+        const result = button.closest('.enterprise-check').querySelector('.enterprise-result');
+        const correct = Number(button.dataset.answer) === Number(button.dataset.correct);
+        result.textContent = correct ? `✓ Correcto. ${button.dataset.result}` : 'No es la mejor opción. Revisa la explicación y vuelve a intentarlo.';
+        result.className = `enterprise-result ${correct ? 'auth-message success' : 'auth-message error'}`;
+      }));
+    })().catch(() => { root.innerHTML = '<p class="auth-message error">No se ha podido cargar la lección. Inténtalo de nuevo.</p>'; });
+  </script>
+</body>
+</html>
