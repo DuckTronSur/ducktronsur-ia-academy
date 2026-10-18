@@ -36,6 +36,7 @@ body{background:#e3eef3;color:#173b4b}
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/supabase-config.js"></script>
+<script src="/intermedio-content.js"></script>
 <script>
 const client=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
 
@@ -73,6 +74,9 @@ lab:{name:'LAB',color:'#7654c8',soft:'#f0ebff',image:'/assets/ruta-lab-v1.png',l
 ['Documentación y entrega','Deja preparado el procedimiento para continuar o escalar.']]}
 };
 
+const intermedioStatic=window.INTERMEDIO_CONTENT||{};
+if(intermedioStatic&&Object.keys(intermedioStatic).length){routeData.intermedio.lessons=Object.values(intermedioStatic).map(item=>[item.title||'',item.paragraphs?.find(p=>/^1\\.\\s*(OBJETIVO|OBJECTIVE)/i.test(p))||'Contenido completo de la lección INTERMEDIO.']);}
+
 const params=new URLSearchParams(location.search);
 const routeSlug=(params.get('ruta')||'start').toLowerCase();
 const lessonNumber=Number(params.get('leccion')||'1');
@@ -97,7 +101,8 @@ if(!lessonError)dbLesson=foundLesson;
 if(user&&dbLesson){const {data:progress}=await withTimeout(client.from('lesson_progress').select('completed').eq('user_id',user.id).eq('lesson_id',dbLesson.id).maybeSingle(),4000);completed=Boolean(progress?.completed)}
 }
 }catch(error){console.warn('No se pudo cargar el contenido de Supabase; se usa la lección de respaldo.',error)}
-const title=dbLesson?.title||lesson[0];
+const staticLesson=routeSlug==='intermedio'?intermedioStatic[lessonNumber]:null;
+const title=staticLesson?.title||dbLesson?.title||lesson[0];
 const objective=lesson[1];
 const fallbackContent=`
 <p>En esta lección aprenderás a aplicar este concepto paso a paso y a relacionarlo con una tarea real.</p>
@@ -113,7 +118,7 @@ return Object.entries(value).map(([key,item])=>`<p><strong>${escContent(key)}</s
 }
 return fallbackContent;
 };
-const content=renderContent(dbLesson?.content);
+const content=renderContent(staticLesson?.paragraphs||dbLesson?.content);
 const isStartV04Candidate=routeSlug==='start-v0-4';
 if(isStartV04Candidate&&!dbLesson){
 app.innerHTML=`<section class="lesson-block"><h1>START v0.4 todavía no está publicado</h1><p>Esta versión candidata está preparada para revisión técnica. El contenido permanece despublicado y no está disponible para alumnos.</p><a class="lesson-link" href="/start-v0.4.html">Volver a START v0.4</a></section>`;
