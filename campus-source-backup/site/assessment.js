@@ -6,7 +6,8 @@
   const state = { session: null, assessment: null, questions: [] };
   const routeLabels = { start: 'START', 'start-v0-4': 'START', intermedio: 'INTERMEDIO', pro: 'PRO', lab: 'LAB' };
   const rawRoute = new URLSearchParams(location.search).get('ruta');
-  const routeSlug = Object.prototype.hasOwnProperty.call(routeLabels, rawRoute) ? rawRoute : 'start';
+  const requestedRoute = rawRoute || 'start';
+  const routeSlug = requestedRoute === 'start' ? 'start-v0-4' : (Object.prototype.hasOwnProperty.call(routeLabels, requestedRoute) ? requestedRoute : 'start-v0-4');
   const assessmentSlug = routeSlug === 'start-v0-4' ? 'start-v0-4-evaluacion-v0-2' : routeSlug + '-evaluacion-v1';
   const backLink = document.querySelector('a[href^="ruta.html"]');
   if (backLink) backLink.href = 'ruta.html?ruta=' + encodeURIComponent(routeSlug);
