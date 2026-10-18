@@ -1,0 +1,16 @@
+.enterprise-page .auth-wrap{width:min(980px,calc(100% - 36px))}
+.enterprise-page .auth-card{padding:clamp(24px,5vw,54px)}
+.enterprise-intro{max-width:720px}
+.enterprise-grid{display:grid;gap:22px;margin-top:32px}
+.enterprise-item{padding:26px;background:#f4f8fb;border-left:4px solid #00a9e2}
+.enterprise-item h2{margin:0 0 8px;color:#071225;font-size:clamp(1.35rem,3vw,2rem);letter-spacing:-.035em}
+.enterprise-item h3{margin:22px 0 8px;color:#087eaa;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase}
+.enterprise-item p{color:#405269;line-height:1.65}
+.enterprise-item ul{margin:10px 0 0;padding-left:22px;color:#405269;line-height:1.65}
+.enterprise-item .warning{padding:14px 16px;background:#fff8df;border-left:3px solid #d49a00}
+.enterprise-item .challenge{padding:14px 16px;background:#e9f8ff;border-left:3px solid #00a9e2}
+.enterprise-check{margin-top:22px;padding-top:18px;border-top:1px solid #d7e2ea}
+.enterprise-options{display:grid;gap:8px}
+.enterprise-options button{padding:12px 14px;text-align:left;border:1px solid #bfd0db;background:#fff;color:#25364b;cursor:pointer}
+.enterprise-options button:hover,.enterprise-options button:focus-visible{border-color:#008dbe;background:#eefaff}
+.enterprise-result{font-weight:700}
