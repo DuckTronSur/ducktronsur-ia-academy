@@ -3,9 +3,9 @@
 /* Menú móvil piloto aprobado (solo ruta.html, rama de pruebas). */
 .academy-mobile-toggle,.academy-mobile-menu,.academy-campus-shortcut{display:none}
 @media(max-width:760px){
- :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen) .academy-nav{flex-direction:row!important;align-items:center!important;flex-wrap:wrap;gap:8px!important}
- :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen) .academy-brand img{width:min(165px,48vw)!important;max-width:48vw}
- :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen) .academy-links{display:none!important}
+ :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen,.auxiliary-page) .academy-nav{flex-direction:row!important;align-items:center!important;flex-wrap:wrap;gap:8px!important}
+ :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen,.auxiliary-page) .academy-brand img{width:min(165px,48vw)!important;max-width:48vw}
+ :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen,.auxiliary-page) .academy-links{display:none!important}
  .academy-mobile-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:8px 12px;margin-left:auto;border:2px solid #00cfff;border-radius:11px;color:white;background:#041b35;font:800 14px Manrope,Arial,sans-serif;cursor:pointer}
  .academy-mobile-menu:not([hidden]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;margin:10px 0 0;padding:10px 0 2px}
  .academy-mobile-menu a,.academy-mobile-menu button{display:flex;align-items:center;justify-content:flex-start;min-height:48px;padding:10px;border:1px solid #167eaa;border-radius:11px;background:#081b35;color:white;text-decoration:none;font:750 13px Manrope,Arial,sans-serif}
