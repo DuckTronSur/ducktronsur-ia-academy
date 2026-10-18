@@ -1,0 +1,16 @@
+/* Menú móvil piloto aprobado (solo ruta.html, rama de pruebas). */
+.academy-mobile-toggle,.academy-mobile-menu,.academy-campus-shortcut{display:none}
+@media(max-width:760px){
+ .route-shell .academy-nav{flex-direction:row!important;align-items:center!important;flex-wrap:wrap;gap:8px!important}
+ .route-shell .academy-brand img{width:min(165px,48vw)!important;max-width:48vw}
+ .route-shell .academy-links{display:none!important}
+ .academy-mobile-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:8px 12px;margin-left:auto;border:2px solid #00cfff;border-radius:11px;color:white;background:#041b35;font:800 14px Manrope,Arial,sans-serif;cursor:pointer}
+ .academy-mobile-menu:not([hidden]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;margin:10px 0 0;padding:10px 0 2px}
+ .academy-mobile-menu a,.academy-mobile-menu button{display:flex;align-items:center;justify-content:flex-start;min-height:48px;padding:10px;border:1px solid #167eaa;border-radius:11px;background:#081b35;color:white;text-decoration:none;font:750 13px Manrope,Arial,sans-serif}
+ .academy-mobile-menu button{cursor:pointer}
+ .academy-mobile-toggle:focus-visible,.academy-mobile-menu a:focus-visible,.academy-mobile-menu button:focus-visible{outline:3px solid #ffc83d;outline-offset:2px}
+ .academy-campus-shortcut:not([hidden]){display:inline-flex;align-items:center;min-height:42px;margin:11px 2px 0;padding:9px 15px;border-radius:10px;background:#00cfff;color:#06152e;font-weight:900;text-decoration:none}
+ .route-level-menu{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;overflow:visible!important;justify-content:stretch;margin:14px auto 19px;padding:0 2px}
+ .route-level-menu a{min-width:0!important;flex:auto;min-height:48px;white-space:normal;text-align:center}
+}
+@media(min-width:761px){.academy-mobile-menu,.academy-mobile-toggle,.academy-campus-shortcut{display:none!important}}
