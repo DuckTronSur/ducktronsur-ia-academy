@@ -10,12 +10,12 @@
     document.querySelectorAll('.academy-links a[href="/mi-campus.html"],.nav-links a[href="/mi-campus.html"]').forEach(element => { if (!root.contains(element)) element.hidden = true; });
   };
   const favorites = [
-    ['🏠','Mi Campus','Tu espacio de aprendizaje','/mi-campus.html'],
-    ['✦','Prompteca','Prompts y recursos reutilizables','/prompteca.html'],
-    ['⚡','Píldoras IA','Contenidos breves y prácticos','/pildoras.html'],
-    ['🏢','Guía para empresas','IA aplicada a una pyme','/ia-para-empresas.html'],
+    ['/assets/session-tiles/DuckTronSur_Tile_Mi_Campus_v0.1_96.png','Mi Campus','Tu espacio de aprendizaje','/mi-campus.html'],
+    ['/assets/session-tiles/DuckTronSur_Tile_Prompteca_v0.1_96.png','Prompteca','Prompts y recursos reutilizables','/prompteca.html'],
+    ['/assets/session-tiles/DuckTronSur_Tile_Pildoras_IA_v0.1_96.png','Píldoras IA','Contenidos breves y prácticos','/pildoras.html'],
+    ['/assets/session-tiles/DuckTronSur_Tile_Guia_para_empresas_v0.1_96.png','Guía para empresas','IA aplicada a una pyme','/ia-para-empresas.html'],
     ['👤','Perfil profesional','Datos y perfil de usuario','/perfil.html'],
-    ['💬','Comunidad','WhatsApp de DuckTronSur','https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee']
+    ['/assets/session-tiles/DuckTronSur_Tile_Comunidad_WhatsApp_v0.1_96.png','Comunidad','WhatsApp de DuckTronSur','https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee']
   ];
   const closeMenu = root => {
     root.querySelectorAll('[aria-expanded="true"]').forEach(button => button.setAttribute('aria-expanded','false'));
@@ -46,7 +46,7 @@
     if (!user) { root.hidden = true; return; }
     tidyNavigation(root);
     const name = displayName(user);
-    const cards = favorites.map(([icon,title,description,href]) => '<a class="global-session-favorite" href="' + href + '"' + (href.startsWith('http') ? ' target="_blank" rel="noopener"' : '') + '><span class="global-session-favorite-icon">' + icon + '</span><span><strong>' + title + '</strong><small>' + description + '</small></span></a>').join('');
+    const cards = favorites.map(([visual,title,description,href]) => { const icon = visual.startsWith('/') ? '<img class="global-session-favorite-image" src="' + visual + '" alt="" loading="lazy" width="38" height="38">' : '<span class="global-session-favorite-icon">' + visual + '</span>'; return '<a class="global-session-favorite" href="' + href + '"' + (href.startsWith('http') ? ' target="_blank" rel="noopener"' : '') + '>' + icon + '<span><strong>' + title + '</strong><small>' + description + '</small></span></a>'; }).join('');
     root.hidden = false;
     root.innerHTML = '<button class="global-session-toggle global-session-apps" type="button" aria-expanded="false" aria-controls="global-session-menu" title="Tus accesos">⠿</button>' +
       '<button class="global-session-toggle global-session-profile" type="button" aria-expanded="false" aria-controls="global-session-menu"><span class="global-session-avatar" aria-hidden="true">' + escapeHtml(initials(user)) + '</span><span class="global-session-copy"><strong>' + escapeHtml(name) + '</strong><small>Sesión iniciada</small></span><span class="global-session-chevron" aria-hidden="true">⌄</span></button>' +
