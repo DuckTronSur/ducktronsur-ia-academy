@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IA para empresas · DuckTronSur IA Academy</title>
+  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="ia-para-empresas.css">
+</head>
+<body class="auth-page enterprise-page">
+  <main class="auth-wrap">
+    <header class="auth-top"><a href="mi-campus.html">← Mi Campus</a><span>DuckTronSur IA Academy</span></header>
+    <section class="auth-card" aria-labelledby="enterprise-title">
+      <p class="auth-kicker">MÓDULO AUTENTICADO · v1.0</p>
+      <h1 id="enterprise-title">IA para empresas</h1>
+      <p id="enterprise-intro" class="enterprise-intro">Contenido práctico para detectar oportunidades, transformar información y evaluar herramientas de IA con criterio empresarial.</p>
+      <p id="enterprise-status" class="auth-message" role="status" aria-live="polite">Cargando contenido…</p>
+      <div id="enterprise-grid" class="enterprise-grid"></div>
+    </section>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+    if (!window.supabase || !window.SUPABASE_URL || !window.SUPABASE_PUBLISHABLE_KEY) throw new Error('Supabase client configuration unavailable');
+    const client = window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_PUBLISHABLE_KEY);
+    const status = document.querySelector('#enterprise-status');
+    const grid = document.querySelector('#enterprise-grid');
+    const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[character]));
+    const listHtml = values => `<ul>${(values || []).map(value => `<li>${escapeHtml(value)}</li>`).join('')}</ul>`;
+    const renderItem = item => {
+      const content = item.content || {};
+      const options = Array.isArray(content.options) ? content.options : [];
+      return `<article class="enterprise-item">
+        <p class="auth-kicker">LECCIÓN ${String(item.position).padStart(2, '0')}</p>
+        <h2>${escapeHtml(item.title)}</h2>
+        <p><strong>Objetivo:</strong> ${escapeHtml(item.objective)}</p>
+        <h3>Idea principal</h3><p>${escapeHtml(content.idea)}</p>
+        <h3>${escapeHtml(content.toolTitle || 'Herramienta de trabajo')}</h3>${listHtml(content.tool)}
+        <h3>Caso</h3><p>${escapeHtml(content.case)}</p>
+        <p class="warning"><strong>Atención:</strong> ${escapeHtml(content.warning)}</p>
+        <p class="challenge"><strong>Microreto:</strong> ${escapeHtml(content.challenge)}</p>
+        <section class="enterprise-check" aria-labelledby="question-${item.position}">
+          <h3 id="question-${item.position}">Comprobación</h3>
+          <p>${escapeHtml(content.question)}</p>
+          <div class="enterprise-options">${options.map((option, index) => `<button type="button" data-answer="${index}" data-correct="${content.correctOption}" data-result="${escapeHtml(content.result)}">${escapeHtml(option)}</button>`).join('')}</div>
+          <p class="enterprise-result" aria-live="polite"></p>
+        </section>
+      </article>`;
+    };
+    (async () => {
+      const { data: userData, error: userError } = await client.auth.getUser();
+      if (userError || !userData.user) { location.href = 'auth.html'; return; }
+      const { data: module, error: moduleError } = await client.from('enterprise_modules').select('id,title,description').eq('slug', 'ia-para-empresas').eq('published', true).single();
+      if (moduleError || !module) { status.textContent = 'Este módulo no está disponible ahora.'; status.className = 'auth-message error'; return; }
+      document.querySelector('#enterprise-title').textContent = module.title;
+      document.querySelector('#enterprise-intro').textContent = module.description;
+      const { data: items, error: itemsError } = await client.from('enterprise_module_items').select('position,title,objective,content').eq('module_id', module.id).eq('published', true).order('position');
+      if (itemsError || !items?.length) { status.textContent = 'No hay contenidos disponibles ahora.'; status.className = 'auth-message error'; return; }
+      grid.innerHTML = items.map(renderItem).join('');
+      status.textContent = `${items.length} contenidos disponibles para tu cuenta.`;
+      status.className = 'auth-message success';
+      grid.querySelectorAll('[data-answer]').forEach(button => button.addEventListener('click', () => {
+        const result = button.closest('.enterprise-check').querySelector('.enterprise-result');
+        const correct = Number(button.dataset.answer) === Number(button.dataset.correct);
+        result.textContent = correct ? `✓ Correcto. ${button.dataset.result}` : 'No es la mejor opción. Revisa la explicación y vuelve a intentarlo.';
+        result.className = `enterprise-result ${correct ? 'auth-message success' : 'auth-message error'}`;
+      }));
+    })().catch(() => { status.textContent = 'No se ha podido cargar el módulo. Inténtalo de nuevo.'; status.className = 'auth-message error'; });
+  </script>
+</body>
+</html>
