@@ -1,3 +1,5 @@
+/* Respeta el atributo hidden incluso cuando el componente usa display:flex/grid. */
+.academy-mobile-menu[hidden],.academy-mobile-menu [hidden],.academy-campus-shortcut[hidden]{display:none!important}
 /* Menú móvil piloto aprobado (solo ruta.html, rama de pruebas). */
 .academy-mobile-toggle,.academy-mobile-menu,.academy-campus-shortcut{display:none}
 @media(max-width:760px){
