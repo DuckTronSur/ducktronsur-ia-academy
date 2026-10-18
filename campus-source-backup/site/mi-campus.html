@@ -6,6 +6,8 @@
 <title>Mi Campus · DuckTronSur IA Academy</title>
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/brand-overrides.css">
+<link rel="stylesheet" href="/academy-mobile-nav.css">
+<script defer src="/academy-mobile-nav.js"></script>
 <style>
 :root{--navy:#06152e;--blue:#0f5fd7;--cyan:#00cfff;--paper:#dceaf1;--ink:#0a203a;--muted:#5c7184;--start:#ffc83d;--inter:#16a7ed;--pro:#ff8a00;--lab:#a855f7;--green:#20d879}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,Arial,sans-serif}.campus-shell{width:min(1240px,calc(100% - 40px));margin:auto}.campus-nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}.campus-brand img{display:block;width:190px;height:auto}.campus-nav-links{display:flex;align-items:center;gap:10px}.campus-nav-links a,.campus-account{display:inline-flex;align-items:center;min-height:38px;padding:9px 12px;color:#0b557e;font-size:.74rem;font-weight:900;text-decoration:none;border:1px solid #62c9e8;border-radius:10px;background:#e7f5fa;box-shadow:0 0 8px rgba(57,213,255,.28);transition:filter .18s ease,transform .18s ease,box-shadow .18s ease}.campus-nav-links a:hover,.campus-nav-links a:focus-visible,.campus-account:hover{color:#06243f;background:#d8f3fb;box-shadow:0 0 12px rgba(57,213,255,.58);transform:translateY(-1px)}.campus-account{border:2px solid var(--cyan);background:#39d5ff;color:#042038;box-shadow:0 0 12px rgba(57,213,255,.62)}
@@ -24,7 +26,11 @@
 </head>
 <body>
 <main class="campus-shell">
-<header class="academy-header"><nav class="academy-nav" aria-label="Navegación principal"><a class="academy-brand" href="/"><img src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a><div class="academy-links"><a href="/#rutas">Rutas</a><a href="/mi-campus.html">Mi Campus</a><a href="/prompteca.html">Prompteca</a><a class="academy-access" href="/auth.html">Acceder</a></div></nav></header>
+<header class="academy-header"><nav class="academy-nav" aria-label="Navegación principal"><a class="academy-brand" href="/"><img src="/assets/logo-horizontal.png" alt="DuckTronSur IA Academy"></a><div class="academy-links"><a href="/">Inicio</a><a href="/#rutas">Rutas</a><a href="/prompteca.html">Prompteca</a><a href="/pildoras.html">Recursos</a><a href="/empresas.html">Empresas</a><a href="/mi-campus.html" aria-current="page">Mi Campus</a><a class="academy-access" href="/auth.html">Acceder</a></div><button class="academy-mobile-toggle" id="academy-mobile-toggle" type="button" aria-expanded="false" aria-controls="academy-mobile-menu">☰ Menú</button>
+<div class="academy-mobile-menu" id="academy-mobile-menu" hidden>
+<a href="/">🏠 Inicio</a><a href="/#rutas">📚 Rutas</a><a href="/prompteca.html">🔍 Prompteca</a><a href="/pildoras.html">📦 Recursos</a><a href="/empresas.html">🏢 Empresas</a><a href="/auth.html" data-guest-only>🔐 Acceder</a>
+<a href="/mi-campus.html" data-member-only hidden aria-current="page">🎓 Mi Campus</a><a href="/perfil.html" data-member-only hidden>👤 Mi perfil</a><button type="button" id="academy-mobile-logout" data-member-only hidden>↪ Cerrar sesión</button>
+</div></nav></header><a class="academy-campus-shortcut" id="academy-campus-shortcut" href="/mi-campus.html" hidden>🎓 Mi Campus</a>
 
 <section class="campus-hero" aria-labelledby="welcome">
 <div class="campus-hero-copy"><p class="eyebrow">DUCKTRONSUR IA ACADEMY</p><h1 id="welcome">Cargando tu Campus…</h1><p id="account">Estamos recuperando tus datos.</p><p class="hero-email" id="hero-email"></p><p class="founder-pill" id="founder-status" hidden>Fundador vitalicio · acceso académico propio</p><div class="hero-actions"><a class="neon-button" href="#routes">Ver mis rutas</a><a class="neon-button green" href="/perfil.html">Perfil profesional</a><a class="neon-button" href="/auth.html">Gestionar cuenta</a><a class="neon-button" href="/ia-para-empresas.html">Guía para empresas</a><button class="neon-button founder-claim" id="claim-founder" type="button" hidden>Solicitar plaza fundadora</button></div><p id="founder-feedback" class="founder-feedback" role="status" aria-live="polite"></p></div>
