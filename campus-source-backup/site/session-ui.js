@@ -10,13 +10,18 @@
   const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
   const displayName = user => user.user_metadata?.display_name || user.email?.split('@')[0] || 'Usuario';
   const initials = user => displayName(user).split(/[\s._-]+/).filter(Boolean).slice(0,2).map(part => part[0]).join('').toUpperCase() || 'U';
+  const sessionHost = () => document.querySelector('.academy-links,.nav-links,.campus-nav-links,.nav-tools,.campus-nav,.auth-top') || document.body;
   const render = user => {
     let root = document.querySelector('#global-session-ui');
+    const host = sessionHost();
     if (!root) {
       root = document.createElement('aside');
       root.id = 'global-session-ui';
       root.className = 'global-session-ui';
-      document.body.appendChild(root);
+    }
+    if (!host.contains(root)) {
+      host.classList.add('global-session-host');
+      host.appendChild(root);
     }
     if (!user) { root.hidden = true; return; }
     const name = displayName(user);
