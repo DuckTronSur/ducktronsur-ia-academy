@@ -1,11 +1,11 @@
 /* Respeta el atributo hidden incluso cuando el componente usa display:flex/grid. */
 .academy-mobile-menu[hidden],.academy-mobile-menu [hidden],.academy-campus-shortcut[hidden]{display:none!important}
-/* Menú móvil piloto aprobado (solo ruta.html, rama de pruebas). */
+/* Menú común reutilizado en toda la academia. */
 .academy-mobile-toggle,.academy-mobile-menu,.academy-campus-shortcut{display:none}
 @media(max-width:760px){
- :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen,.auxiliary-page,.enterprise-page) .academy-nav{flex-direction:row!important;align-items:center!important;flex-wrap:wrap;gap:8px!important}
- :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen,.auxiliary-page,.enterprise-page) .academy-brand img{width:min(165px,48vw)!important;max-width:48vw}
- :is(.route-shell,.campus-shell,.prompteca-page,.pills-page,.companies-page,.home-page,.auth-page,.profile-page,.lesson-page,.assessment-screen,.auxiliary-page,.enterprise-page) .academy-links{display:none!important}
+ .academy-header .academy-nav{flex-direction:row!important;align-items:center!important;flex-wrap:wrap;gap:8px!important}
+ .academy-header .academy-brand img{width:min(165px,48vw)!important;max-width:48vw}
+ .academy-header .academy-links{display:none!important}
  .academy-mobile-toggle{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:8px 12px;margin-left:auto;border:2px solid #00cfff;border-radius:11px;color:white;background:#041b35;font:800 14px Manrope,Arial,sans-serif;cursor:pointer}
  .academy-mobile-menu:not([hidden]){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;width:100%;margin:10px 0 0;padding:10px 0 2px}
  .academy-mobile-menu a,.academy-mobile-menu button{display:flex;align-items:center;justify-content:flex-start;min-height:48px;padding:10px;border:1px solid #167eaa;border-radius:11px;background:#081b35;color:white;text-decoration:none;font:750 13px Manrope,Arial,sans-serif}
@@ -25,3 +25,7 @@
 .lesson-page .route-level-menu a[data-route-level=lab],.assessment-screen .route-level-menu a[data-route-level=lab]{--level-accent:#a855f7}
 .lesson-page .route-level-menu a[aria-current=page],.assessment-screen .route-level-menu a[aria-current=page]{background:var(--level-accent);color:#06152e}
 @media(max-width:760px){.lesson-page .route-level-menu,.assessment-screen .route-level-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.lesson-page .route-level-menu a,.assessment-screen .route-level-menu a{min-width:0}}
+
+/* La cabecera está fuera de los contenedores de página en varias vistas. */
+@media(max-width:760px){.academy-header .academy-nav{width:100%;display:flex!important;align-items:center!important;flex-direction:row!important;flex-wrap:wrap!important}.academy-header .academy-links{display:none!important}.academy-header .academy-brand img{max-width:48vw!important}.academy-header .academy-mobile-menu:not([hidden]){display:grid!important}}
+@media(min-width:761px){.academy-header .academy-nav{flex-direction:row;align-items:center}.academy-header .academy-links{display:flex}}
