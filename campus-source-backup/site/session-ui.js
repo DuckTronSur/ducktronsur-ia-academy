@@ -10,12 +10,37 @@
     document.querySelectorAll('.academy-links a[href="/mi-campus.html"],.nav-links a[href="/mi-campus.html"]').forEach(element => { if (!root.contains(element)) element.hidden = true; });
   };
   const favorites = [
-    ['/session-tiles/DuckTronSur_Tile_Mi_Campus_v0.1_97.png','Mi Campus','Tu espacio de aprendizaje','/mi-campus.html'],
-    ['/session-tiles/DuckTronSur_Tile_Prompteca_v0.1_97.png','Prompteca','Prompts y recursos reutilizables','/prompteca.html'],
-    ['/session-tiles/DuckTronSur_Tile_Pildoras_IA_v0.1_97.png','Píldoras IA','Contenidos breves y prácticos','/pildoras.html'],
-    ['/session-tiles/DuckTronSur_Tile_Guia_para_empresas_v0.1_97.png','Guía para empresas','IA aplicada a una pyme','/ia-para-empresas.html'],
+    ['data:image/png;base64,Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
+MethodInvocationException: 
+Line |
+   2 |  [Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\Users\JCueto\.c …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Exception calling "ReadAllBytes" with "1" argument(s): "Could not find a part of the path 'C:\Users\JCueto\.codex\.chatgpt-projects\g-p-6ab5861aaa7081918be16ad8f9c428cb\campus-source-backup\site\session-tiles\DuckTronSur_Tile_Mi_Campus_v0.1_97.png'."','Mi Campus','Tu espacio de aprendizaje','/mi-campus.html'],
+    ['data:image/png;base64,Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
+MethodInvocationException: 
+Line |
+   2 |  [Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\Users\JCueto\.c …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Exception calling "ReadAllBytes" with "1" argument(s): "Could not find a part of the path 'C:\Users\JCueto\.codex\.chatgpt-projects\g-p-6ab5861aaa7081918be16ad8f9c428cb\campus-source-backup\site\session-tiles\DuckTronSur_Tile_Prompteca_v0.1_97.png'."','Prompteca','Prompts y recursos reutilizables','/prompteca.html'],
+    ['data:image/png;base64,Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
+MethodInvocationException: 
+Line |
+   2 |  [Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\Users\JCueto\.c …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Exception calling "ReadAllBytes" with "1" argument(s): "Could not find a part of the path 'C:\Users\JCueto\.codex\.chatgpt-projects\g-p-6ab5861aaa7081918be16ad8f9c428cb\campus-source-backup\site\session-tiles\DuckTronSur_Tile_Pildoras_IA_v0.1_97.png'."','Píldoras IA','Contenidos breves y prácticos','/pildoras.html'],
+    ['data:image/png;base64,Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
+MethodInvocationException: 
+Line |
+   2 |  [Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\Users\JCueto\.c …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Exception calling "ReadAllBytes" with "1" argument(s): "Could not find a part of the path 'C:\Users\JCueto\.codex\.chatgpt-projects\g-p-6ab5861aaa7081918be16ad8f9c428cb\campus-source-backup\site\session-tiles\DuckTronSur_Tile_Guia_para_empresas_v0.1_97.png'."','Guía para empresas','IA aplicada a una pyme','/ia-para-empresas.html'],
     ['👤','Perfil profesional','Datos y perfil de usuario','/perfil.html'],
-    ['/session-tiles/DuckTronSur_Tile_Comunidad_WhatsApp_v0.1_97.png','Comunidad','WhatsApp de DuckTronSur','https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee']
+    ['data:image/png;base64,Attempting to perform the InitializeDefaultDrives operation on the 'FileSystem' provider failed.
+MethodInvocationException: 
+Line |
+   2 |  [Convert]::ToBase64String([IO.File]::ReadAllBytes('C:\Users\JCueto\.c …
+     |  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+     | Exception calling "ReadAllBytes" with "1" argument(s): "Could not find a part of the path 'C:\Users\JCueto\.codex\.chatgpt-projects\g-p-6ab5861aaa7081918be16ad8f9c428cb\campus-source-backup\site\session-tiles\DuckTronSur_Tile_Comunidad_WhatsApp_v0.1_97.png'."','Comunidad','WhatsApp de DuckTronSur','https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee']
   ];
   const closeMenu = root => {
     root.querySelectorAll('[aria-expanded="true"]').forEach(button => button.setAttribute('aria-expanded','false'));
