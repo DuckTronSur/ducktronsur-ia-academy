@@ -16,3 +16,12 @@
  .route-level-menu a{min-width:0!important;flex:auto;min-height:48px;white-space:normal;text-align:center}
 }
 @media(min-width:761px){.academy-mobile-menu,.academy-mobile-toggle,.academy-campus-shortcut{display:none!important}}
+
+/* Menú contextual de niveles en lecciones y evaluaciones. */
+.lesson-page .route-level-menu,.assessment-screen .route-level-menu{display:flex;max-width:1180px;margin:14px auto 22px;gap:10px;padding:0 12px}
+.lesson-page .route-level-menu a,.assessment-screen .route-level-menu a{--level-accent:#ffc83d;flex:1;display:flex;align-items:center;justify-content:center;min-height:46px;padding:9px;border:1px solid var(--level-accent);border-radius:12px;background:#06152e;color:white;font-weight:800;text-decoration:none}
+.lesson-page .route-level-menu a[data-route-level=intermedio],.assessment-screen .route-level-menu a[data-route-level=intermedio]{--level-accent:#16a7ed}
+.lesson-page .route-level-menu a[data-route-level=pro],.assessment-screen .route-level-menu a[data-route-level=pro]{--level-accent:#ff8a00}
+.lesson-page .route-level-menu a[data-route-level=lab],.assessment-screen .route-level-menu a[data-route-level=lab]{--level-accent:#a855f7}
+.lesson-page .route-level-menu a[aria-current=page],.assessment-screen .route-level-menu a[aria-current=page]{background:var(--level-accent);color:#06152e}
+@media(max-width:760px){.lesson-page .route-level-menu,.assessment-screen .route-level-menu{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.lesson-page .route-level-menu a,.assessment-screen .route-level-menu a{min-width:0}}
