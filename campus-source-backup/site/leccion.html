@@ -84,9 +84,10 @@ if(labStatic&&Object.keys(labStatic).length){routeData.lab.lessons=Object.values
 if(proStatic&&Object.keys(proStatic).length){routeData.pro.lessons=Object.values(proStatic).map(item=>[item.title||'',item.objective||'Contenido completo de la lección PRO.']);}
 
 const params=new URLSearchParams(location.search);
-const routeSlug=(params.get('ruta')||'start').toLowerCase();
+const requestedRouteSlug=(params.get('ruta')||'start').toLowerCase();
+const routeSlug=requestedRouteSlug==='start'?'start-v0-4':requestedRouteSlug;
 const lessonNumber=Number(params.get('leccion')||'1');
-const route=routeData[routeSlug]||routeData.start;
+const route=routeData[routeSlug]||routeData['start-v0-4'];
 const lesson=route.lessons[lessonNumber-1]||route.lessons[0];
 
 document.documentElement.style.setProperty('--route-color',route.color);
