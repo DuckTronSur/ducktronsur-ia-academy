@@ -38,6 +38,7 @@ body{background:#e3eef3;color:#173b4b}
 <script src="/supabase-config.js"></script>
 <script src="/intermedio-content.js"></script>
 <script src="/pro-content.js"></script>
+<script src="/lab-content.js"></script>
 <script>
 const client=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
 
@@ -78,6 +79,8 @@ lab:{name:'LAB',color:'#7654c8',soft:'#f0ebff',image:'/assets/ruta-lab-v1.png',l
 const intermedioStatic=window.INTERMEDIO_CONTENT||{};
 if(intermedioStatic&&Object.keys(intermedioStatic).length){routeData.intermedio.lessons=Object.values(intermedioStatic).map(item=>[item.title||'',item.paragraphs?.find(p=>/^1\\.\\s*(OBJETIVO|OBJECTIVE)/i.test(p))||'Contenido completo de la lección INTERMEDIO.']);}
 const proStatic=window.PRO_CONTENT||{};
+const labStatic=window.LAB_CONTENT||{};
+if(labStatic&&Object.keys(labStatic).length){routeData.lab.lessons=Object.values(labStatic).map(item=>[item.title||'',item.objective||'Contenido completo de la lección LAB.']);}
 if(proStatic&&Object.keys(proStatic).length){routeData.pro.lessons=Object.values(proStatic).map(item=>[item.title||'',item.objective||'Contenido completo de la lección PRO.']);}
 
 const params=new URLSearchParams(location.search);
@@ -104,7 +107,7 @@ if(!lessonError)dbLesson=foundLesson;
 if(user&&dbLesson){const {data:progress}=await withTimeout(client.from('lesson_progress').select('completed').eq('user_id',user.id).eq('lesson_id',dbLesson.id).maybeSingle(),4000);completed=Boolean(progress?.completed)}
 }
 }catch(error){console.warn('No se pudo cargar el contenido de Supabase; se usa la lección de respaldo.',error)}
-const staticLesson=routeSlug==='intermedio'?intermedioStatic[lessonNumber]:routeSlug==='pro'?proStatic[lessonNumber]:null;
+const staticLesson=routeSlug==='intermedio'?intermedioStatic[lessonNumber]:routeSlug==='pro'?proStatic[lessonNumber]:routeSlug==='lab'?labStatic[lessonNumber]:null;
 const title=staticLesson?.title||dbLesson?.title||lesson[0];
 const objective=staticLesson?.objective||lesson[1];
 const fallbackContent=`
