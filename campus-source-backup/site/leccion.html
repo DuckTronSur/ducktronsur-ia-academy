@@ -103,7 +103,7 @@ if(user&&dbLesson){const {data:progress}=await withTimeout(client.from('lesson_p
 }catch(error){console.warn('No se pudo cargar el contenido de Supabase; se usa la lección de respaldo.',error)}
 const staticLesson=routeSlug==='intermedio'?intermedioStatic[lessonNumber]:null;
 const title=staticLesson?.title||dbLesson?.title||lesson[0];
-const objective=lesson[1];
+const objective=staticLesson?.objective||lesson[1];
 const fallbackContent=`
 <p>En esta lección aprenderás a aplicar este concepto paso a paso y a relacionarlo con una tarea real.</p>
 <p>Trabaja con un objetivo claro, revisa el resultado y conserva el procedimiento que te funcione.</p>`;
