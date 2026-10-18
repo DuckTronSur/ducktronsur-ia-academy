@@ -20,11 +20,20 @@ function init(){
   document.addEventListener('keydown',e=>{if(e.key==='Escape')close()});
   document.addEventListener('click',e=>{if(!menu.hidden&&!menu.contains(e.target)&&!toggle.contains(e.target))close()});
   apply(null);
-  if(!window.supabase||!window.SUPABASE_URL||!window.SUPABASE_PUBLISHABLE_KEY)return;
-  supa=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
-  supa.auth.getUser().then(({data,error})=>{if(!error)apply(data?.user||null)}).catch(()=>apply(null));
-  supa.auth.onAuthStateChange((_event,session)=>apply(session?.user||null));
+  let attempts=0;
+  function connect(){
+    if(supa)return;
+    if(!window.supabase||!window.SUPABASE_URL||!window.SUPABASE_PUBLISHABLE_KEY){
+      if(++attempts<100)setTimeout(connect,100);
+      return;
+    }
+    supa=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+    supa.auth.getUser().then(({data,error})=>{if(!error)apply(data?.user||null)}).catch(()=>apply(null));
+    supa.auth.onAuthStateChange((_event,session)=>apply(session?.user||null));
+  }
+  connect();
   logout?.addEventListener('click',async()=>{
+    if(!supa)return;
     logout.disabled=true;
     try{const {error}=await supa.auth.signOut();if(error)throw error;apply(null);close();location.assign('/');}
     catch(e){alert('No se pudo cerrar la sesión. Vuelve a intentarlo.');logout.disabled=false;}
