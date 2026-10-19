@@ -47,3 +47,5 @@
 .academy-user-panel button{grid-column:1/-1;justify-content:center;border-color:#ef7c8a;background:#fff0f1;color:#a3162b}
 @media(max-width:760px){.academy-user-menu{display:none!important}}
 @media(min-width:761px){.academy-header .academy-nav{display:flex;align-items:center}.academy-header .academy-links{display:flex;align-items:center;gap:10px}.academy-header .academy-links a[hidden]{display:none!important}}
+
+.academy-user-panel .academy-access-card{display:flex;align-items:center;gap:8px;min-height:70px;padding:8px;border:1px solid #00cfff;border-radius:11px;background:#06152e;color:#fff;text-decoration:none;font:800 12px Manrope,Arial,sans-serif}.academy-access-card img{width:42px;height:42px;flex:none;object-fit:cover;border-radius:9px;background:#12395a}.academy-access-card span{display:grid;gap:3px;min-width:0}.academy-access-card strong{font-size:12px}.academy-access-card small{color:#a9ddec;font-size:10px;line-height:1.2}.academy-access-card:hover{background:#0b2b4d;transform:translateY(-1px)}
