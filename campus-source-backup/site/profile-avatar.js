@@ -10,7 +10,7 @@ waitForClient(async()=>{
  const setMessage=(text,type)=>{message.textContent=text;message.className='avatar-message '+(type||'')};
  const {data,error}=await client.auth.getUser();if(error||!data.user){location.href='/auth.html';return}
  const user=data.user;let pendingFile=null,pendingUrl='';
- function clearPending(){if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=null;pendingUrl='';save.hidden=true;cancel.hidden=true;meta.textContent='';fileInput.value=''}
+ function clearPending(){if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=null;pendingUrl='';save.disabled=true;cancel.hidden=true;meta.textContent='Selecciona una imagen para ver sus datos.';fileInput.value=''}
  async function load(){
   const result=await client.from('profiles').select('display_name,avatar_path').eq('id',user.id).maybeSingle();if(result.error){setMessage('No se ha podido cargar la foto de perfil.','error');return}
   const profile=result.data||{},label=profile.display_name||user.user_metadata?.display_name||user.email;let url='';
@@ -23,7 +23,7 @@ waitForClient(async()=>{
   if(!['image/jpeg','image/png','image/webp'].includes(file.type)){setMessage('Usa una imagen JPG, PNG o WebP.','error');fileInput.value='';return}
   if(file.size>2*1024*1024){setMessage('La imagen no puede superar 2 MB.','error');fileInput.value='';return}
   if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=file;pendingUrl=URL.createObjectURL(file);setPreview(file.name,pendingUrl);
-  meta.textContent=file.name+' · '+sizeLabel(file.size)+' · comprobando dimensiones…';save.hidden=false;cancel.hidden=false;setMessage('Revisa la imagen y pulsa «Guardar foto».','');
+  meta.textContent=file.name+' · '+sizeLabel(file.size)+' · comprobando dimensiones…';save.disabled=false;cancel.hidden=false;setMessage('Revisa la imagen y pulsa «Guardar foto».','');
   const probe=new Image();probe.onload=()=>{meta.textContent=file.name+' · '+sizeLabel(file.size)+' · '+probe.naturalWidth+' × '+probe.naturalHeight+' px'};probe.src=pendingUrl;
  });
  cancel.addEventListener('click',async()=>{await load();setMessage('Cambios cancelados.','')});

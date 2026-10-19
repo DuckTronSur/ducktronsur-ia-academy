@@ -21,7 +21,7 @@ body{margin:0;background:#dceaf1;color:#0a203a;font-family:Manrope,Arial,sans-se
 <h1>Perfil profesional</h1>
 <div class="avatar-editor" aria-labelledby="avatar-title">
 <button class="avatar-preview" id="avatar-preview" type="button" aria-label="Elegir foto de perfil"><img id="avatar-image" alt="" hidden><span id="avatar-initials">?</span></button>
-<div class="avatar-copy"><h2 id="avatar-title">Foto de perfil</h2><p>Elige una imagen para mostrarla junto a tu nombre. Solo tú podrás cambiarla o eliminarla.</p><div class="avatar-actions"><input id="avatar-file" type="file" accept="image/jpeg,image/png,image/webp" class="avatar-file-input"><label id="avatar-choose" class="avatar-file-control" for="avatar-file">Elegir imagen</label><button id="avatar-remove" class="secondary" type="button" hidden>Eliminar foto</button></div><p id="avatar-meta" class="avatar-meta" aria-live="polite"></p><div class="avatar-pending"><button id="avatar-save" type="button" hidden>Guardar foto</button><button id="avatar-cancel" class="secondary" type="button" hidden>Cancelar</button></div><p id="avatar-message" class="avatar-message" role="status" aria-live="polite"></p></div>
+<div class="avatar-copy"><h2 id="avatar-title">Foto de perfil</h2><p>Elige una imagen para mostrarla junto a tu nombre. Revisa sus datos y pulsa «Guardar foto». Solo tú podrás cambiarla o eliminarla.</p><div class="avatar-actions"><input id="avatar-file" type="file" accept="image/jpeg,image/png,image/webp" class="avatar-file-input"><label id="avatar-choose" class="avatar-file-control" for="avatar-file">Elegir imagen</label><button id="avatar-remove" class="secondary" type="button" hidden>Eliminar foto</button></div><p id="avatar-meta" class="avatar-meta" aria-live="polite"></p><div class="avatar-pending"><button id="avatar-save" type="button" disabled>Guardar foto</button><button id="avatar-cancel" class="secondary" type="button" hidden>Cancelar</button></div><p id="avatar-message" class="avatar-message" role="status" aria-live="polite"></p></div>
 </div>
 
 <p>Estos datos son opcionales. Se usan para adaptar tu aprendizaje; no se muestran públicamente.</p>
@@ -34,7 +34,7 @@ body{margin:0;background:#dceaf1;color:#0a203a;font-family:Manrope,Arial,sans-se
 <label class="field full">Objetivos de aprendizaje<textarea name="learning_objectives" maxlength="600" placeholder="Escribe un objetivo por línea. Máximo ocho."></textarea></label>
 </div>
 <p class="note">Puedes actualizar o eliminar los datos de estos campos cuando quieras.</p>
-<button type="submit">Guardar perfil</button>
+<button type="submit">Guardar datos profesionales</button>
 <p id="message" class="status" role="status" aria-live="polite"></p>
 </form>
 </section>
