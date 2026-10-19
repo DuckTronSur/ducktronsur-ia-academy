@@ -27,8 +27,7 @@ waitForClient(async()=>{
   sourceImage=new Image();sourceImage.onload=()=>{drawCrop();save.disabled=false};sourceImage.src=pendingUrl;
  }
  fileInput.addEventListener('change',()=>prepareFile(fileInput.files?.[0]));zoom.addEventListener('input',drawCrop);
- const {data,error}=await client.auth.getUser();if(error||!data.user){location.href='/auth.html';return}
- const user=data.user;
+ let user=null;
  async function load(){
   const result=await client.from('profiles').select('display_name,avatar_path').eq('id',user.id).maybeSingle();if(result.error){setMessage('No se ha podido cargar la foto de perfil.','error');return}
   const profile=result.data||{},label=profile.display_name||user.user_metadata?.display_name||user.email;let url='';
@@ -36,10 +35,12 @@ waitForClient(async()=>{
   setPreview(label,url);remove.hidden=!profile.avatar_path;if(!pendingFile)clearPending()
  }
  document.querySelector('#avatar-preview').addEventListener('click',()=>fileInput.click());
- cancel.addEventListener('click',async()=>{await load();setMessage('Cambios cancelados.','')});
+ const ensureUser=()=>{if(user)return true;setMessage('La sesión todavía no está lista. Espera un momento y vuelve a intentarlo.','error');return false};
+ cancel.addEventListener('click',async()=>{if(!ensureUser())return;await load();setMessage('Cambios cancelados.','')});
  function withTimeout(promise,message,ms=15000){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))])}
  function restoreSaveControls(){choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=!pendingFile||!sourceImage;cancel.disabled=false;remove.disabled=false}
  save.addEventListener('click',async()=>{
+  if(!ensureUser())return;
   if(!pendingFile||!sourceImage)return;const file=pendingFile;choose.classList.add('is-disabled');choose.setAttribute('aria-disabled','true');save.disabled=true;cancel.disabled=true;remove.disabled=true;setMessage('Guardando la foto…','');
   let path=null;
   try{
@@ -57,12 +58,16 @@ waitForClient(async()=>{
   }finally{restoreSaveControls()}
  });
  remove.addEventListener('click',async()=>{
+  if(!ensureUser())return;
   const profile=(await client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle()).data;if(!profile?.avatar_path)return;
   remove.disabled=true;choose.classList.add('is-disabled');choose.setAttribute('aria-disabled','true');setMessage('Eliminando la foto…','');
   const update=await client.from('profiles').update({avatar_path:null}).eq('id',user.id);
   if(update.error){setMessage('No se ha podido eliminar la foto.','error');remove.disabled=false;choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');return}
   await client.storage.from('avatars').remove([profile.avatar_path]);await load();setMessage('Foto eliminada.','success');remove.disabled=false;choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');
  });
+ const authResult=await withTimeout(client.auth.getUser(),'No se ha podido confirmar tu sesión. Recarga la página e inicia sesión de nuevo.',10000);
+ if(authResult.error||!authResult.data?.user){setMessage(authResult.error?.message||'No se ha podido confirmar tu sesión.','error');return}
+ user=authResult.data.user;
  await load();
 });
 })();
