@@ -5,7 +5,7 @@ function waitForClient(done){if(window.supabase&&window.SUPABASE_URL&&window.SUP
 function setPreview(label,url){const image=document.querySelector('#avatar-image');const fallback=document.querySelector('#avatar-initials');if(url){image.src=url;image.hidden=false;fallback.hidden=true}else{image.removeAttribute('src');image.hidden=true;fallback.hidden=false;fallback.textContent=initials(label)}}
 function sizeLabel(bytes){return bytes<1024*1024?(bytes/1024).toFixed(0)+' KB':(bytes/1024/1024).toFixed(2)+' MB'}
 waitForClient(async()=>{
- const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+ const client=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
  const fileInput=document.querySelector('#avatar-file'),choose=document.querySelector('#avatar-choose'),remove=document.querySelector('#avatar-remove'),save=document.querySelector('#avatar-save'),cancel=document.querySelector('#avatar-cancel'),meta=document.querySelector('#avatar-meta'),message=document.querySelector('#avatar-message'),crop=document.querySelector('#avatar-crop'),zoom=document.querySelector('#avatar-zoom');
  const setMessage=(text,type)=>{message.textContent=text;message.className='avatar-message '+(type||'')};
  let pendingFile=null,pendingUrl='',sourceImage=null;
@@ -65,9 +65,15 @@ waitForClient(async()=>{
   if(update.error){setMessage('No se ha podido eliminar la foto.','error');remove.disabled=false;choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');return}
   await client.storage.from('avatars').remove([profile.avatar_path]);await load();setMessage('Foto eliminada.','success');remove.disabled=false;choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');
  });
- const authResult=await withTimeout(client.auth.getSession(),'No se ha podido recuperar tu sesión. Recarga la página e inicia sesión de nuevo.',3000);
- if(authResult.error||!authResult.data?.session?.user){setMessage(authResult.error?.message||'No se ha podido recuperar tu sesión. Inicia sesión de nuevo.','error');return}
- user=authResult.data.session.user;
+ const session=await new Promise(resolve=>{
+  let finished=false;
+  const finish=value=>{if(finished)return;finished=true;subscription?.unsubscribe();resolve(value)};
+  const {data:{subscription}}=client.auth.onAuthStateChange((_event,currentSession)=>{if(currentSession?.user)finish(currentSession)});
+  client.auth.getSession().then(result=>{if(result.error)finish(null);else if(result.data?.session)finish(result.data.session)}).catch(()=>finish(null));
+  setTimeout(()=>finish(null),8000);
+ });
+ if(!session?.user){setMessage('No se ha podido recuperar tu sesión. Inicia sesión de nuevo.','error');return}
+ user=session.user;
  await load();
 });
 })();
