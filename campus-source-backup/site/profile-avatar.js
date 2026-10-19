@@ -65,9 +65,9 @@ waitForClient(async()=>{
   if(update.error){setMessage('No se ha podido eliminar la foto.','error');remove.disabled=false;choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');return}
   await client.storage.from('avatars').remove([profile.avatar_path]);await load();setMessage('Foto eliminada.','success');remove.disabled=false;choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');
  });
- const authResult=await withTimeout(client.auth.getUser(),'No se ha podido confirmar tu sesión. Recarga la página e inicia sesión de nuevo.',10000);
- if(authResult.error||!authResult.data?.user){setMessage(authResult.error?.message||'No se ha podido confirmar tu sesión.','error');return}
- user=authResult.data.user;
+ const authResult=await withTimeout(client.auth.getSession(),'No se ha podido recuperar tu sesión. Recarga la página e inicia sesión de nuevo.',3000);
+ if(authResult.error||!authResult.data?.session?.user){setMessage(authResult.error?.message||'No se ha podido recuperar tu sesión. Inicia sesión de nuevo.','error');return}
+ user=authResult.data.session.user;
  await load();
 });
 })();
