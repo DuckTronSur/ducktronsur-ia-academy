@@ -29,3 +29,21 @@
 /* La cabecera está fuera de los contenedores de página en varias vistas. */
 @media(max-width:760px){.academy-header .academy-nav{width:100%;display:flex!important;align-items:center!important;flex-direction:row!important;flex-wrap:wrap!important}.academy-header .academy-links{display:none!important}.academy-header .academy-brand img{max-width:48vw!important}.academy-header .academy-mobile-menu:not([hidden]){display:grid!important}}
 @media(min-width:761px){.academy-header .academy-nav{flex-direction:row;align-items:center}.academy-header .academy-links{display:flex}}
+
+
+/* Cuenta y avatar: visible solo cuando existe una sesión real. */
+.academy-user-menu{position:relative;z-index:30;margin-left:4px}
+.academy-user-menu[hidden]{display:none!important}
+.academy-user-trigger{display:inline-flex;align-items:center;gap:8px;min-height:46px;padding:5px 10px 5px 6px;border:1px solid #39d5ff;border-radius:18px;background:#06152e;color:#fff;font:800 13px Manrope,Arial,sans-serif;cursor:pointer;box-shadow:0 0 10px #00cfff66}
+.academy-user-trigger:focus-visible,.academy-user-panel a:focus-visible,.academy-user-panel button:focus-visible{outline:3px solid #ffc83d;outline-offset:2px}
+.academy-avatar{width:34px;height:34px;display:grid;place-items:center;overflow:hidden;border-radius:50%;background:#1d9fe0;color:#06152e;font-size:12px;font-weight:900}
+.academy-avatar img{width:100%;height:100%;object-fit:cover}
+.academy-user-name{max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.academy-user-chevron{color:#9deaff;font-size:16px}
+.academy-user-panel{position:absolute;right:0;top:calc(100% + 8px);display:grid;grid-template-columns:repeat(2,minmax(130px,1fr));gap:8px;width:min(330px,calc(100vw - 28px));padding:14px;border:1px solid #9deeff;border-radius:18px;background:#f7fbfd;box-shadow:0 18px 40px #06152e44}
+.academy-user-panel[hidden]{display:none!important}
+.academy-user-panel-title{grid-column:1/-1;margin:0 0 2px;color:#06152e;font-size:16px;font-weight:900}
+.academy-user-panel a,.academy-user-panel button{display:flex;align-items:center;min-height:48px;padding:9px 10px;border:1px solid #00cfff;border-radius:11px;background:#06152e;color:#fff;text-decoration:none;font:800 12px Manrope,Arial,sans-serif;cursor:pointer}
+.academy-user-panel button{grid-column:1/-1;justify-content:center;border-color:#ef7c8a;background:#fff0f1;color:#a3162b}
+@media(max-width:760px){.academy-user-menu{display:none!important}}
+@media(min-width:761px){.academy-header .academy-nav{display:flex;align-items:center}.academy-header .academy-links{display:flex;align-items:center;gap:10px}.academy-header .academy-links a[hidden]{display:none!important}}
