@@ -51,9 +51,15 @@ const client=window.__academySessionClient||window.supabase.createClient(window.
 const form=document.querySelector('#profile-form');
 const setMessage=(text,type='')=>{message.textContent=text;message.className='status '+type};
 (async()=>{
- const sessionResult=await client.auth.getSession();
- if(sessionResult.error||!sessionResult.data?.session?.user){location.href='/auth.html';return}
- const user=sessionResult.data.session.user;
+ const session=await new Promise(resolve=>{
+  let finished=false;
+  const finish=value=>{if(finished)return;finished=true;subscription?.unsubscribe();resolve(value)};
+  const {data:{subscription}}=client.auth.onAuthStateChange((_event,currentSession)=>{if(currentSession?.user)finish(currentSession)});
+  client.auth.getSession().then(result=>{if(result.data?.session)finish(result.data.session)}).catch(()=>{});
+  setTimeout(()=>finish(null),8000);
+ });
+ if(!session?.user){location.href='/auth.html';return}
+ const user=session.user;
  document.querySelector('#account-email').textContent=user.email||'Correo no disponible';
  const {data:profile,error:profileError}=await client.from('professional_profiles').select('professional_title,organization,sector,experience_level,learning_objectives').eq('user_id',user.id).maybeSingle();
  if(profileError){setMessage('No se ha podido cargar el perfil.','error');return}
