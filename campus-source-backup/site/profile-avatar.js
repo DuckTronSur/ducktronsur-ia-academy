@@ -35,6 +35,7 @@ waitForClient(async()=>{
     remove.hidden=!profile.avatar_path;
   }
   choose.addEventListener('click',()=>fileInput.click());
+  document.querySelector('#avatar-preview').addEventListener('click',()=>fileInput.click());
   fileInput.addEventListener('change',async()=>{
     const file=fileInput.files?.[0];
     if(!file)return;
