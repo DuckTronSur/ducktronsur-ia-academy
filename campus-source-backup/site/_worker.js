@@ -17,7 +17,6 @@ async function handleContact(request,env){
   if(!response.ok){console.error("Brevo email rejected",{status:response.status});return json({error:"No se ha podido entregar el mensaje. Código del proveedor: BREVO_"+response.status},502)}
   return json({ok:true},200)
 }
-const addSessionUi=response=>new HTMLRewriter().on("head",{element(element){element.append('<link rel="stylesheet" href="/session-ui.css">',{html:true})}}).on("body",{element(element){element.append('<script src="/session-ui.js" defer></script>',{html:true})}}).transform(response);
 export default{async fetch(request,env,ctx){
   const url=new URL(request.url);
   if(url.pathname==="/api/contact"){
@@ -27,5 +26,5 @@ export default{async fetch(request,env,ctx){
   }
   const response=await env.ASSETS.fetch(request);
   const type=response.headers.get("content-type")||"";
-  return type.includes("text/html")?addSessionUi(response):response;
+  return response;
 }};
