@@ -47,7 +47,7 @@ waitForClient(async()=>{
     const upload=await client.storage.from('avatars').upload(path,file,{contentType:file.type,upsert:false});
     if(upload.error){setMessage('No se ha podido subir la imagen.','error');choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');remove.disabled=!old;fileInput.value='';return}
     const update=await client.from('profiles').update({avatar_path:path}).eq('id',user.id);
-    if(update.error){await client.storage.from('avatars').remove([path]);setMessage('La imagen se subió pero no se pudo guardar el perfil.','error');choose.disabled=false;remove.disabled=!old;fileInput.value='';return}
+    if(update.error){await client.storage.from('avatars').remove([path]);setMessage('La imagen se subió pero no se pudo guardar el perfil.','error');choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');remove.disabled=!old;fileInput.value='';return}
     if(old)await client.storage.from('avatars').remove([old]);
     await load();setMessage('Foto de perfil guardada.','success');choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');remove.disabled=false;fileInput.value='';
   });
