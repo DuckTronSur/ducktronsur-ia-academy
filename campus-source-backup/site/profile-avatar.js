@@ -8,24 +8,25 @@ waitForClient(async()=>{
  const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
  const fileInput=document.querySelector('#avatar-file'),choose=document.querySelector('#avatar-choose'),remove=document.querySelector('#avatar-remove'),save=document.querySelector('#avatar-save'),cancel=document.querySelector('#avatar-cancel'),meta=document.querySelector('#avatar-meta'),message=document.querySelector('#avatar-message');
  const setMessage=(text,type)=>{message.textContent=text;message.className='avatar-message '+(type||'')};
- const {data,error}=await client.auth.getUser();if(error||!data.user){location.href='/auth.html';return}
- const user=data.user;let pendingFile=null,pendingUrl='';
+ let pendingFile=null,pendingUrl='';
  function clearPending(){if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=null;pendingUrl='';save.disabled=true;cancel.hidden=true;meta.textContent='Selecciona una imagen para ver sus datos.';fileInput.value=''}
+ function prepareFile(file){
+  if(!file)return;
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)){setMessage('Usa una imagen JPG, PNG o WebP.','error');fileInput.value='';return}
+  if(file.size>2*1024*1024){setMessage('La imagen no puede superar 2 MB.','error');fileInput.value='';return}
+  if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=file;pendingUrl=URL.createObjectURL(file);setPreview(file.name,pendingUrl);meta.textContent=file.name+' · '+sizeLabel(file.size)+' · comprobando dimensiones…';save.disabled=false;cancel.hidden=false;setMessage('Revisa la imagen y pulsa «Guardar foto».','');
+  const probe=new Image();probe.onload=()=>{meta.textContent=file.name+' · '+sizeLabel(file.size)+' · '+probe.naturalWidth+' × '+probe.naturalHeight+' px'};probe.src=pendingUrl;
+ }
+ fileInput.addEventListener('change',()=>prepareFile(fileInput.files?.[0]));
+ const {data,error}=await client.auth.getUser();if(error||!data.user){location.href='/auth.html';return}
+ const user=data.user;
  async function load(){
   const result=await client.from('profiles').select('display_name,avatar_path').eq('id',user.id).maybeSingle();if(result.error){setMessage('No se ha podido cargar la foto de perfil.','error');return}
   const profile=result.data||{},label=profile.display_name||user.user_metadata?.display_name||user.email;let url='';
   if(profile.avatar_path){const signed=await client.storage.from('avatars').createSignedUrl(profile.avatar_path,3600);url=signed.data?.signedUrl||''}
-  setPreview(label,url);remove.hidden=!profile.avatar_path;clearPending()
+  setPreview(label,url);remove.hidden=!profile.avatar_path;if(!pendingFile)clearPending()
  }
  document.querySelector('#avatar-preview').addEventListener('click',()=>fileInput.click());
- fileInput.addEventListener('change',()=>{
-  const file=fileInput.files?.[0];if(!file)return;
-  if(!['image/jpeg','image/png','image/webp'].includes(file.type)){setMessage('Usa una imagen JPG, PNG o WebP.','error');fileInput.value='';return}
-  if(file.size>2*1024*1024){setMessage('La imagen no puede superar 2 MB.','error');fileInput.value='';return}
-  if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=file;pendingUrl=URL.createObjectURL(file);setPreview(file.name,pendingUrl);
-  meta.textContent=file.name+' · '+sizeLabel(file.size)+' · comprobando dimensiones…';save.disabled=false;cancel.hidden=false;setMessage('Revisa la imagen y pulsa «Guardar foto».','');
-  const probe=new Image();probe.onload=()=>{meta.textContent=file.name+' · '+sizeLabel(file.size)+' · '+probe.naturalWidth+' × '+probe.naturalHeight+' px'};probe.src=pendingUrl;
- });
  cancel.addEventListener('click',async()=>{await load();setMessage('Cambios cancelados.','')});
  save.addEventListener('click',async()=>{
   if(!pendingFile)return;const file=pendingFile;choose.classList.add('is-disabled');choose.setAttribute('aria-disabled','true');save.disabled=true;cancel.disabled=true;remove.disabled=true;setMessage('Guardando la foto…','');
