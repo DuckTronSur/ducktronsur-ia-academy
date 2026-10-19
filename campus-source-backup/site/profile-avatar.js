@@ -37,16 +37,24 @@ waitForClient(async()=>{
  }
  document.querySelector('#avatar-preview').addEventListener('click',()=>fileInput.click());
  cancel.addEventListener('click',async()=>{await load();setMessage('Cambios cancelados.','')});
+ function withTimeout(promise,message,ms=15000){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))])}
+ function restoreSaveControls(){choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=!pendingFile||!sourceImage;cancel.disabled=false;remove.disabled=false}
  save.addEventListener('click',async()=>{
   if(!pendingFile||!sourceImage)return;const file=pendingFile;choose.classList.add('is-disabled');choose.setAttribute('aria-disabled','true');save.disabled=true;cancel.disabled=true;remove.disabled=true;setMessage('Guardando la foto…','');
-  const croppedBlob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.92));if(!croppedBlob){setMessage('No se ha podido preparar el recorte.','error');choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=false;cancel.disabled=false;remove.disabled=false;return}
-  const path=user.id+'/avatar-'+crypto.randomUUID()+'.jpg';
-  const old=(await client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle()).data?.avatar_path||null;
-  const upload=await client.storage.from('avatars').upload(path,croppedBlob,{contentType:'image/jpeg',upsert:false});
-  if(upload.error){setMessage('No se ha podido subir la imagen: '+(upload.error.message||'error de almacenamiento'),'error');choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=false;cancel.disabled=false;remove.disabled=!old;return}
-  const update=await client.from('profiles').update({avatar_path:path}).eq('id',user.id);
-  if(update.error){await client.storage.from('avatars').remove([path]);setMessage('La imagen se subió pero no se pudo guardar el perfil: '+(update.error.message||'error de perfil'),'error');choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=false;cancel.disabled=false;remove.disabled=!old;return}
-  if(old)await client.storage.from('avatars').remove([old]);await load();setMessage('Foto de perfil guardada.','success');choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=false;cancel.disabled=false;remove.disabled=false;
+  let path=null;
+  try{
+   const croppedBlob=await withTimeout(new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.92)),'No se ha podido preparar el recorte.',10000);if(!croppedBlob)throw new Error('No se ha podido preparar el recorte.');
+   path=user.id+'/avatar-'+crypto.randomUUID()+'.jpg';
+   const oldResult=await withTimeout(client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle(),'No se ha podido leer tu perfil.');if(oldResult.error)throw oldResult.error;
+   const old=oldResult.data?.avatar_path||null;
+   const upload=await withTimeout(client.storage.from('avatars').upload(path,croppedBlob,{contentType:'image/jpeg',upsert:false}),'La subida ha tardado demasiado. Comprueba tu conexión y vuelve a intentarlo.');
+   if(upload.error)throw new Error('No se ha podido subir la imagen: '+(upload.error.message||'error de almacenamiento'));
+   const update=await withTimeout(client.from('profiles').update({avatar_path:path}).eq('id',user.id),'No se ha podido guardar la ruta de la foto.');if(update.error)throw new Error('La imagen se subió pero no se pudo guardar el perfil: '+(update.error.message||'error de perfil'));
+   if(old)await client.storage.from('avatars').remove([old]);await load();setMessage('Foto de perfil guardada.','success');
+  }catch(error){
+   if(path)await client.storage.from('avatars').remove([path]).catch(()=>{});
+   setMessage(error?.message||'No se ha podido guardar la foto. Puedes volver a intentarlo.','error');
+  }finally{restoreSaveControls()}
  });
  remove.addEventListener('click',async()=>{
   const profile=(await client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle()).data;if(!profile?.avatar_path)return;
