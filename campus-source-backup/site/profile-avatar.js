@@ -38,7 +38,7 @@ waitForClient(async()=>{
  document.querySelector('#avatar-preview').addEventListener('click',()=>fileInput.click());
  const ensureUser=()=>{if(user)return true;setMessage('La sesión todavía no está lista. Espera un momento y vuelve a intentarlo.','error');return false};
  cancel.addEventListener('click',async()=>{if(!ensureUser())return;await load();setMessage('Cambios cancelados.','')});
- function withTimeout(promise,message,ms=15000){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))}
+ function withTimeout(promise,message,ms=15000){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))]);}
  function restoreSaveControls(){choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=!pendingFile||!sourceImage;cancel.disabled=false;remove.disabled=false}
  save.addEventListener('click',async()=>{
   if(!ensureUser())return;
