@@ -4,6 +4,7 @@ function initials(label){return String(label||'?').trim().split(/\s+/).slice(0,2
 function waitForClient(done){if(window.supabase&&window.SUPABASE_URL&&window.SUPABASE_PUBLISHABLE_KEY){done();return}setTimeout(()=>waitForClient(done),100)}
 function setPreview(label,url){const image=document.querySelector('#avatar-image');const fallback=document.querySelector('#avatar-initials');if(url){image.src=url;image.hidden=false;fallback.hidden=true}else{image.removeAttribute('src');image.hidden=true;fallback.hidden=false;fallback.textContent=initials(label)}}
 function sizeLabel(bytes){return bytes<1024*1024?(bytes/1024).toFixed(0)+' KB':(bytes/1024/1024).toFixed(2)+' MB'}
+function canvasBlob(){const dataUrl=canvas.toDataURL('image/jpeg',.92),base64=dataUrl.split(',')[1],bytes=Uint8Array.from(atob(base64),char=>char.charCodeAt(0));return new Blob([bytes],{type:'image/jpeg'})}
 waitForClient(async()=>{
  const client=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
  const fileInput=document.querySelector('#avatar-file'),choose=document.querySelector('#avatar-choose'),remove=document.querySelector('#avatar-remove'),save=document.querySelector('#avatar-save'),cancel=document.querySelector('#avatar-cancel'),meta=document.querySelector('#avatar-meta'),message=document.querySelector('#avatar-message'),crop=document.querySelector('#avatar-crop'),zoom=document.querySelector('#avatar-zoom');
@@ -44,13 +45,16 @@ waitForClient(async()=>{
   if(!pendingFile||!sourceImage)return;const file=pendingFile;choose.classList.add('is-disabled');choose.setAttribute('aria-disabled','true');save.disabled=true;cancel.disabled=true;remove.disabled=true;setMessage('Guardando la foto…','');
   let path=null;
   try{
-   const croppedBlob=await withTimeout(new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.92)),'No se ha podido preparar el recorte.',10000);if(!croppedBlob)throw new Error('No se ha podido preparar el recorte.');
+   setMessage('Preparando la imagen…','');
+   const croppedBlob=await withTimeout(Promise.resolve(canvasBlob()),'No se ha podido preparar el recorte.',10000);if(!croppedBlob)throw new Error('No se ha podido preparar el recorte.');
    path=user.id+'/avatar-'+crypto.randomUUID()+'.jpg';
-   const oldResult=await withTimeout(client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle(),'No se ha podido leer tu perfil.');if(oldResult.error)throw oldResult.error;
+   const oldResult=await withTimeout(client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle(),'No se ha podido leer tu perfil.',10000);if(oldResult.error)throw oldResult.error;
    const old=oldResult.data?.avatar_path||null;
-   const upload=await withTimeout(client.storage.from('avatars').upload(path,croppedBlob,{contentType:'image/jpeg',upsert:false}),'La subida ha tardado demasiado. Comprueba tu conexión y vuelve a intentarlo.');
+   setMessage('Subiendo la imagen…','');
+   const upload=await withTimeout(client.storage.from('avatars').upload(path,croppedBlob,{contentType:'image/jpeg',upsert:false}),'La subida ha tardado demasiado. Comprueba tu conexión y vuelve a intentarlo.',12000);
    if(upload.error)throw new Error('No se ha podido subir la imagen: '+(upload.error.message||'error de almacenamiento'));
-   const update=await withTimeout(client.from('profiles').update({avatar_path:path}).eq('id',user.id),'No se ha podido guardar la ruta de la foto.');if(update.error)throw new Error('La imagen se subió pero no se pudo guardar el perfil: '+(update.error.message||'error de perfil'));
+   setMessage('Guardando la foto en tu perfil…','');
+   const update=await withTimeout(client.from('profiles').update({avatar_path:path}).eq('id',user.id),'No se ha podido guardar la ruta de la foto.',12000);if(update.error)throw new Error('La imagen se subió pero no se pudo guardar el perfil: '+(update.error.message||'error de perfil'));
    if(old)await client.storage.from('avatars').remove([old]);await load();setMessage('Foto de perfil guardada.','success');
   }catch(error){
    if(path)await client.storage.from('avatars').remove([path]).catch(()=>{});
