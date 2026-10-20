@@ -4,13 +4,13 @@ function initials(label){return String(label||'?').trim().split(/\s+/).slice(0,2
 function waitForClient(done){if(window.supabase&&window.SUPABASE_URL&&window.SUPABASE_PUBLISHABLE_KEY){done();return}setTimeout(()=>waitForClient(done),100)}
 function setPreview(label,url){const image=document.querySelector('#avatar-image');const fallback=document.querySelector('#avatar-initials');if(url){image.src=url;image.hidden=false;fallback.hidden=true}else{image.removeAttribute('src');image.hidden=true;fallback.hidden=false;fallback.textContent=initials(label)}}
 function sizeLabel(bytes){return bytes<1024*1024?(bytes/1024).toFixed(0)+' KB':(bytes/1024/1024).toFixed(2)+' MB'}
-function canvasBlob(){const dataUrl=canvas.toDataURL('image/jpeg',.92),base64=dataUrl.split(',')[1],bytes=Uint8Array.from(atob(base64),char=>char.charCodeAt(0));return new Blob([bytes],{type:'image/jpeg'})}
 waitForClient(async()=>{
  const client=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
  const fileInput=document.querySelector('#avatar-file'),choose=document.querySelector('#avatar-choose'),remove=document.querySelector('#avatar-remove'),save=document.querySelector('#avatar-save'),cancel=document.querySelector('#avatar-cancel'),meta=document.querySelector('#avatar-meta'),message=document.querySelector('#avatar-message'),crop=document.querySelector('#avatar-crop'),zoom=document.querySelector('#avatar-zoom');
  const setMessage=(text,type)=>{message.textContent=text;message.className='avatar-message '+(type||'')};
  let pendingFile=null,pendingUrl='',sourceImage=null;
  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;const ctx=canvas.getContext('2d');
+ function canvasBlob(){const dataUrl=canvas.toDataURL('image/jpeg',.92),base64=dataUrl.split(',')[1],bytes=Uint8Array.from(atob(base64),char=>char.charCodeAt(0));return new Blob([bytes],{type:'image/jpeg'})}
  function clearPending(){if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=null;pendingUrl='';sourceImage=null;save.disabled=true;cancel.hidden=true;crop.hidden=true;zoom.value='1';meta.textContent='Selecciona una imagen para ver sus datos.';fileInput.value=''}
  function drawCrop(){
   if(!sourceImage||!pendingFile)return;
@@ -38,7 +38,7 @@ waitForClient(async()=>{
  document.querySelector('#avatar-preview').addEventListener('click',()=>fileInput.click());
  const ensureUser=()=>{if(user)return true;setMessage('La sesión todavía no está lista. Espera un momento y vuelve a intentarlo.','error');return false};
  cancel.addEventListener('click',async()=>{if(!ensureUser())return;await load();setMessage('Cambios cancelados.','')});
- function withTimeout(promise,message,ms=15000){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))])}
+ function withTimeout(promise,message,ms=15000){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))}
  function restoreSaveControls(){choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=!pendingFile||!sourceImage;cancel.disabled=false;remove.disabled=false}
  save.addEventListener('click',async()=>{
   if(!ensureUser())return;
