@@ -64,11 +64,15 @@ const setMessage=(text,type='')=>{message.textContent=text;message.className='st
  const user=session.user;
  document.querySelector('#account-email').textContent=user.email||'Correo no disponible';
  const statusLabel=document.querySelector('#account-status-label');
- const [{data:accountProfile},{data:accessGrants}]=await Promise.all([
+ statusLabel.textContent='Alumno';
+ Promise.all([
   client.from('profiles').select('role').eq('id',user.id).maybeSingle(),
   client.from('access_grants').select('source,status').eq('user_id',user.id).eq('status','active')
- ]);
- statusLabel.textContent=accountProfile?.role==='admin'?'Administrador':((accessGrants||[]).some(grant=>grant.source==='founder_lifetime')?'Alumno vitalicio':'Alumno');
+ ]).then(([profileResult,grantResult])=>{
+  const accountProfile=profileResult.data;
+  const accessGrants=grantResult.data||[];
+  statusLabel.textContent=accountProfile?.role==='admin'?'Administrador':(accessGrants.some(grant=>grant.source==='founder_lifetime')?'Alumno vitalicio':'Alumno');
+ }).catch(()=>{});
  const {data:profile,error:profileError}=await client.from('professional_profiles').select('professional_title,organization,sector,experience_level,learning_objectives').eq('user_id',user.id).maybeSingle();
  if(profileError){setMessage('No se ha podido cargar el perfil.','error');return}
  if(profile){for(const key of ['professional_title','organization','sector','experience_level'])form.elements[key].value=profile[key]||'';form.elements.learning_objectives.value=(profile.learning_objectives||[]).join('\n')}
