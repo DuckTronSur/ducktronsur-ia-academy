@@ -6,8 +6,8 @@
 <title>Mi Campus · DuckTronSur IA Academy</title>
 <link rel="stylesheet" href="/styles.css">
 <link rel="stylesheet" href="/brand-overrides.css">
-<link rel="stylesheet" href="/academy-mobile-nav.css?v=171">
-<script defer src="/academy-mobile-nav.js?v=171"></script>
+<link rel="stylesheet" href="/academy-mobile-nav.css?v=172">
+<script defer src="/academy-mobile-nav.js?v=172"></script>
 <style>
 :root{--navy:#06152e;--blue:#0f5fd7;--cyan:#00cfff;--paper:#dceaf1;--ink:#0a203a;--muted:#5c7184;--start:#ffc83d;--inter:#16a7ed;--pro:#ff8a00;--lab:#a855f7;--green:#20d879}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:Manrope,Arial,sans-serif}.campus-shell{width:min(1240px,calc(100% - 40px));margin:auto}.campus-nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:18px}.campus-brand img{display:block;width:190px;height:auto}.campus-nav-links{display:flex;align-items:center;gap:10px}.campus-nav-links a,.campus-account{display:inline-flex;align-items:center;min-height:38px;padding:9px 12px;color:#0b557e;font-size:.74rem;font-weight:900;text-decoration:none;border:1px solid #62c9e8;border-radius:10px;background:#e7f5fa;box-shadow:0 0 8px rgba(57,213,255,.28);transition:filter .18s ease,transform .18s ease,box-shadow .18s ease}.campus-nav-links a:hover,.campus-nav-links a:focus-visible,.campus-account:hover{color:#06243f;background:#d8f3fb;box-shadow:0 0 12px rgba(57,213,255,.58);transform:translateY(-1px)}.campus-account{border:2px solid var(--cyan);background:#39d5ff;color:#042038;box-shadow:0 0 12px rgba(57,213,255,.62)}
@@ -54,7 +54,7 @@
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script><script src="/supabase-config.js"></script>
 <script>
-const client=window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+const client=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);window.__academySessionClient=client;
 const routeMeta={start:{name:'START',level:'Iniciación · 8 lecciones',color:'#ffc83d',image:'/assets/ruta-start-v1.png',description:'Iniciación práctica en inteligencia artificial con ocho lecciones, práctica y evaluación.'},intermedio:{name:'INTERMEDIO',level:'Consolidación',color:'#16a7ed',image:'/assets/ruta-intermedio-v1.png',description:'Mejores instrucciones, contexto y procesos reutilizables.'},pro:{name:'PRO',level:'Avanzado',color:'#ff8a00',image:'/assets/ruta-pro-v1.png',description:'Automatizaciones, herramientas y sistemas de IA.'},lab:{name:'LAB',level:'Profesional',color:'#a855f7',image:'/assets/ruta-lab-v1.png',description:'Diseño y evaluación de proyectos reales.'}};
 const order=['start','intermedio','pro','lab'];const courseSlugByRoute={start:'start-v0-4',intermedio:'intermedio',pro:'pro',lab:'lab'};
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
