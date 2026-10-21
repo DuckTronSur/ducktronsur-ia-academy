@@ -88,7 +88,7 @@ function init(){
       if(++attempts<100)setTimeout(connect,100);
       return;
     }
-    supa=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
+    supa=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);window.__academySessionClient=supa;
     supa.auth.getSession().then(({data,error})=>{if(!error)apply(data?.session?.user||null)}).catch(()=>apply(null));
     supa.auth.onAuthStateChange((_event,session)=>apply(session?.user||null));
   }
