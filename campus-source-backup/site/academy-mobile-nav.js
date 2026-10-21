@@ -26,7 +26,7 @@ function init(){
     userMenu=document.createElement('div');
     userMenu.className='academy-user-menu';
     userMenu.hidden=true;
-    userMenu.innerHTML='<button class="academy-user-trigger" type="button" aria-expanded="false" aria-controls="academy-user-panel"><span class="academy-avatar" data-avatar aria-hidden="true"></span><span class="academy-user-name" data-user-name>Mi cuenta</span><span class="academy-user-chevron" aria-hidden="true">⌄</span></button><div class="academy-user-panel" id="academy-user-panel" hidden><p class="academy-user-panel-title">Tus accesos</p><a class="academy-access-card" href="/mi-campus.html"><img src="/assets/ducktronsur-ia-academy-hero-v2.png" alt=""><span><strong>Mi Campus</strong><small>Tu espacio de aprendizaje</small></span></a><a class="academy-access-card" href="/prompteca.html"><img src="/assets/prompteca-visual-kit-web/categoria-chatgpt-ia-general.jpg" alt=""><span><strong>Prompteca</strong><small>Prompts y recursos</small></span></a><a class="academy-access-card" href="/pildoras.html"><img src="/assets/pildoras-ia-hero.webp" alt=""><span><strong>Píldoras IA</strong><small>Contenidos prácticos</small></span></a><a class="academy-access-card" href="/empresas.html"><img src="/assets/empresas/DuckTronSur_Guia_Empresas_L01_oportunidades_v0.1.png" alt=""><span><strong>Guía para empresas</strong><small>IA aplicada a una pyme</small></span></a><a class="academy-access-card" href="/perfil.html"><img src="/assets/auth-login-campus.jpg" alt=""><span><strong>Perfil</strong><small>Cuenta y datos personales</small></span></a><a class="academy-access-card" href="https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee" target="_blank" rel="noopener"><img src="/assets/campus/Campus%20012%20Avatar%20Comunidad%20WhatsApp.png" alt=""><span><strong>Comunidad</strong><small>WhatsApp de DuckTronSur</small></span></a><button type="button" data-desktop-logout>Cerrar sesión</button></div>';
+    userMenu.innerHTML='<button class="academy-user-trigger" type="button" aria-expanded="false" aria-controls="academy-user-panel"><span class="academy-avatar" data-avatar aria-hidden="true"></span><span class="academy-user-name" data-user-name>Mi cuenta</span><span class="academy-user-badge" data-user-badge hidden></span><span class="academy-user-chevron" aria-hidden="true">⌄</span></button><div class="academy-user-panel" id="academy-user-panel" hidden><p class="academy-user-panel-title">Tus accesos</p><a class="academy-access-card" href="/mi-campus.html"><img src="/assets/ducktronsur-ia-academy-hero-v2.png" alt=""><span><strong>Mi Campus</strong><small>Tu espacio de aprendizaje</small></span></a><a class="academy-access-card" href="/prompteca.html"><img src="/assets/prompteca-visual-kit-web/categoria-chatgpt-ia-general.jpg" alt=""><span><strong>Prompteca</strong><small>Prompts y recursos</small></span></a><a class="academy-access-card" href="/pildoras.html"><img src="/assets/pildoras-ia-hero.webp" alt=""><span><strong>Píldoras IA</strong><small>Contenidos prácticos</small></span></a><a class="academy-access-card" href="/empresas.html"><img src="/assets/empresas/DuckTronSur_Guia_Empresas_L01_oportunidades_v0.1.png" alt=""><span><strong>Guía para empresas</strong><small>IA aplicada a una pyme</small></span></a><a class="academy-access-card" href="/perfil.html"><img src="/assets/auth-login-campus.jpg" alt=""><span><strong>Perfil</strong><small>Cuenta y datos personales</small></span></a><a class="academy-access-card" href="https://chat.whatsapp.com/DeI65xZLzYA47fKKAjiCee" target="_blank" rel="noopener"><img src="/assets/campus/Campus%20012%20Avatar%20Comunidad%20WhatsApp.png" alt=""><span><strong>Comunidad</strong><small>WhatsApp de DuckTronSur</small></span></a><button type="button" data-desktop-logout>Cerrar sesión</button></div>';
     nav.appendChild(userMenu);
     const trigger=userMenu.querySelector('.academy-user-trigger');
     const panel=userMenu.querySelector('.academy-user-panel');
@@ -52,6 +52,20 @@ function init(){
       avatar.appendChild(image);
     }else avatar.textContent=initials(label);
   }
+  async function resolveAccountLabel(user,profile){
+    if(profile?.role==='admin')return 'Administrador';
+    try{
+      const result=await supa.from('access_grants').select('source,status').eq('user_id',user.id).eq('status','active');
+      if((result.data||[]).some(grant=>grant.source==='founder_lifetime'))return 'Alumno vitalicio';
+    }catch(error){}
+    return 'Alumno';
+  }
+  function setAccountBadge(root,label){
+    const badge=root.querySelector('[data-user-badge]');
+    if(!badge)return;
+    badge.textContent=label||'';
+    badge.hidden=!label;
+  }
   async function apply(user){
     members.forEach(el=>{el.hidden=!user});
     guests.forEach(el=>{el.hidden=!!user});
@@ -67,7 +81,7 @@ function init(){
     userMenu.querySelector('[data-user-name]').textContent=label;
     let profile=null;
     try{
-      const result=await supa.from('profiles').select('display_name,avatar_path').eq('id',user.id).maybeSingle();
+      const result=await supa.from('profiles').select('display_name,avatar_path,role').eq('id',user.id).maybeSingle();
       profile=result.data||null;
     }catch(error){}
     const profileLabel=profile?.display_name||label;
@@ -80,6 +94,7 @@ function init(){
     }
     userMenu.querySelector('[data-user-name]').textContent=profileLabel;
     setAvatar(userMenu,profileLabel,avatarUrl);
+    setAccountBadge(userMenu,await resolveAccountLabel(user,profile));
   }
   function closeMobile(){menu.hidden=true;toggle.setAttribute('aria-expanded','false')}
   toggle.addEventListener('click',()=>{const open=menu.hidden;menu.hidden=!open;toggle.setAttribute('aria-expanded',String(open))});
