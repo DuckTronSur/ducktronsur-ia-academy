@@ -6,28 +6,17 @@ function setPreview(label,url){const image=document.querySelector('#avatar-image
 function sizeLabel(bytes){return bytes<1024*1024?(bytes/1024).toFixed(0)+' KB':(bytes/1024/1024).toFixed(2)+' MB'}
 waitForClient(async()=>{
  const client=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);
- const fileInput=document.querySelector('#avatar-file'),choose=document.querySelector('#avatar-choose'),remove=document.querySelector('#avatar-remove'),save=document.querySelector('#avatar-save'),cancel=document.querySelector('#avatar-cancel'),meta=document.querySelector('#avatar-meta'),message=document.querySelector('#avatar-message'),crop=document.querySelector('#avatar-crop'),zoom=document.querySelector('#avatar-zoom');
+ const fileInput=document.querySelector('#avatar-file'),choose=document.querySelector('#avatar-choose'),remove=document.querySelector('#avatar-remove'),save=document.querySelector('#avatar-save'),cancel=document.querySelector('#avatar-cancel'),meta=document.querySelector('#avatar-meta'),message=document.querySelector('#avatar-message');
  const setMessage=(text,type)=>{message.textContent=text;message.className='avatar-message '+(type||'')};
- let pendingFile=null,pendingUrl='',sourceImage=null;
- const canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;const ctx=canvas.getContext('2d');
- function canvasBlob(){return new Promise((resolve,reject)=>{if(typeof canvas.toBlob!=='function'){reject(new Error('El navegador no permite preparar el recorte.'));return}canvas.toBlob(blob=>{if(blob)resolve(blob);else reject(new Error('No se ha podido preparar el recorte.'))},'image/jpeg',.92)})}
- function clearPending(){if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=null;pendingUrl='';sourceImage=null;save.disabled=true;cancel.hidden=true;crop.hidden=true;zoom.value='1';meta.textContent='Selecciona una imagen para ver sus datos.';fileInput.value=''}
- function drawCrop(){
-  if(!sourceImage||!pendingFile)return;
-  const zoomValue=Number(zoom.value||1),side=Math.min(sourceImage.naturalWidth,sourceImage.naturalHeight)/zoomValue;
-  const sx=(sourceImage.naturalWidth-side)/2,sy=(sourceImage.naturalHeight-side)/2;
-  ctx.clearRect(0,0,512,512);ctx.drawImage(sourceImage,sx,sy,side,side,0,0,512,512);
-  setPreview(pendingFile.name,canvas.toDataURL('image/jpeg',.92));
-  meta.textContent=pendingFile.name+' · '+sizeLabel(pendingFile.size)+' · recorte 512 × 512 px';
- }
+ let pendingFile=null,pendingUrl='';
+ function clearPending(){if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=null;pendingUrl='';save.disabled=true;cancel.hidden=true;meta.textContent='Selecciona una imagen para ver sus datos.';fileInput.value=''}
  function prepareFile(file){
   if(!file)return;
   if(!['image/jpeg','image/png','image/webp'].includes(file.type)){setMessage('Usa una imagen JPG, PNG o WebP.','error');fileInput.value='';return}
   if(file.size>2*1024*1024){setMessage('La imagen no puede superar 2 MB.','error');fileInput.value='';return}
-  if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=file;pendingUrl=URL.createObjectURL(file);zoom.value='1';crop.hidden=false;save.disabled=true;cancel.hidden=false;setMessage('Ajusta el encuadre y pulsa «Guardar foto».','');
-  sourceImage=new Image();sourceImage.onload=()=>{drawCrop();save.disabled=false};sourceImage.src=pendingUrl;
+  if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=file;pendingUrl=URL.createObjectURL(file);save.disabled=false;cancel.hidden=false;setPreview(file.name,pendingUrl);meta.textContent=file.name+' · '+sizeLabel(file.size);setMessage('Imagen lista. Pulsa «Guardar foto».','');
  }
- fileInput.addEventListener('change',()=>prepareFile(fileInput.files?.[0]));zoom.addEventListener('input',drawCrop);
+ fileInput.addEventListener('change',()=>prepareFile(fileInput.files?.[0]));
  let user=null;
  async function load(){
   const result=await client.from('profiles').select('display_name,avatar_path').eq('id',user.id).maybeSingle();if(result.error){setMessage('No se ha podido cargar la foto de perfil.','error');return}
@@ -39,19 +28,18 @@ waitForClient(async()=>{
  const ensureUser=()=>{if(user)return true;setMessage('La sesión todavía no está lista. Espera un momento y vuelve a intentarlo.','error');return false};
  cancel.addEventListener('click',async()=>{if(!ensureUser())return;await load();setMessage('Cambios cancelados.','')});
  function withTimeout(promise,message,ms=15000){return Promise.race([promise,new Promise((_,reject)=>setTimeout(()=>reject(new Error(message)),ms))]);}
- function restoreSaveControls(){choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=!pendingFile||!sourceImage;cancel.disabled=false;remove.disabled=false}
+ function restoreSaveControls(){choose.classList.remove('is-disabled');choose.removeAttribute('aria-disabled');save.disabled=!pendingFile;cancel.disabled=false;remove.disabled=false}
  save.addEventListener('click',async()=>{
   if(!ensureUser())return;
-  if(!pendingFile||!sourceImage)return;const file=pendingFile;choose.classList.add('is-disabled');choose.setAttribute('aria-disabled','true');save.disabled=true;cancel.disabled=true;remove.disabled=true;setMessage('Guardando la foto…','');
+  if(!pendingFile)return;const file=pendingFile;choose.classList.add('is-disabled');choose.setAttribute('aria-disabled','true');save.disabled=true;cancel.disabled=true;remove.disabled=true;setMessage('Guardando la foto…','');
   let path=null;
   try{
-   setMessage('Preparando la imagen…','');
-   const croppedBlob=await withTimeout(canvasBlob(),'No se ha podido preparar el recorte.',10000);if(!croppedBlob)throw new Error('No se ha podido preparar el recorte.');
-   path=user.id+'/avatar-'+crypto.randomUUID()+'.jpg';
+   const extension=file.type==='image/png'?'png':file.type==='image/webp'?'webp':'jpg';
+   path=user.id+'/avatar-'+crypto.randomUUID()+'.'+extension;
    const oldResult=await withTimeout(client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle(),'No se ha podido leer tu perfil.',10000);if(oldResult.error)throw oldResult.error;
    const old=oldResult.data?.avatar_path||null;
    setMessage('Subiendo la imagen…','');
-   const upload=await withTimeout(client.storage.from('avatars').upload(path,croppedBlob,{contentType:'image/jpeg',upsert:false}),'La subida ha tardado demasiado. Comprueba tu conexión y vuelve a intentarlo.',12000);
+   const upload=await withTimeout(client.storage.from('avatars').upload(path,file,{contentType:file.type,upsert:false}),'La subida ha tardado demasiado. Comprueba tu conexión y vuelve a intentarlo.',12000);
    if(upload.error)throw new Error('No se ha podido subir la imagen: '+(upload.error.message||'error de almacenamiento'));
    setMessage('Guardando la foto en tu perfil…','');
    const update=await withTimeout(client.from('profiles').update({avatar_path:path}).eq('id',user.id),'No se ha podido guardar la ruta de la foto.',12000);if(update.error)throw new Error('La imagen se subió pero no se pudo guardar el perfil: '+(update.error.message||'error de perfil'));
