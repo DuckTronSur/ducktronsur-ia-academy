@@ -54,7 +54,16 @@
 </main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script><script src="/supabase-config.js"></script>
 <script>
+let sessionResolver;
+if(!window.__academySessionReady){
+  window.__academySessionReady=new Promise(resolve=>{sessionResolver=resolve});
+  window.__academyResolveSessionReady=sessionResolver;
+}
 const client=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);window.__academySessionClient=client;
+if(!window.__academySessionStarted){
+  window.__academySessionStarted=true;
+  client.auth.getSession().then(({data,error})=>{window.__academyResolveSessionReady?.(!error?data?.session?.user||null:null)}).catch(()=>window.__academyResolveSessionReady?.(null));
+}
 const routeMeta={start:{name:'START',level:'Iniciación · 8 lecciones',color:'#ffc83d',image:'/assets/ruta-start-v1.png',description:'Iniciación práctica en inteligencia artificial con ocho lecciones, práctica y evaluación.'},intermedio:{name:'INTERMEDIO',level:'Consolidación',color:'#16a7ed',image:'/assets/ruta-intermedio-v1.png',description:'Mejores instrucciones, contexto y procesos reutilizables.'},pro:{name:'PRO',level:'Avanzado',color:'#ff8a00',image:'/assets/ruta-pro-v1.png',description:'Automatizaciones, herramientas y sistemas de IA.'},lab:{name:'LAB',level:'Profesional',color:'#a855f7',image:'/assets/ruta-lab-v1.png',description:'Diseño y evaluación de proyectos reales.'}};
 const order=['start','intermedio','pro','lab'];const courseSlugByRoute={start:'start-v0-4',intermedio:'intermedio',pro:'pro',lab:'lab'};
 const esc=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
