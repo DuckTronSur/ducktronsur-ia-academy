@@ -38,7 +38,7 @@ function init(){
       if(!supa)return;
       const button=userMenu.querySelector('[data-desktop-logout]');
       button.disabled=true;
-      try{const result=await supa.auth.signOut();if(result.error)throw result.error;apply(null)}catch(error){button.disabled=false;alert('No se pudo cerrar la sesión. Vuelve a intentarlo.')}
+      try{await signOutCurrentSession()}catch(error){button.disabled=false;alert('No se pudo cerrar la sesión. Vuelve a intentarlo.')}
     });
   }
 
@@ -65,6 +65,17 @@ function init(){
     if(!badge)return;
     badge.textContent=label||'';
     badge.hidden=!label;
+  }
+  async function signOutCurrentSession(){
+    const result=await Promise.race([
+      supa.auth.signOut({scope:'local'}),
+      new Promise((_,reject)=>setTimeout(()=>reject(new Error('signout_timeout')),8000))
+    ]);
+    if(result?.error)throw result.error;
+    window.__academyCurrentUser=null;
+    window.__academyResolveSessionReady?.(null);
+    apply(null);
+    location.assign('/auth.html');
   }
   async function apply(user){
     if(supa||user){window.__academyCurrentUser=user||null;window.__academyResolveSessionReady?.(window.__academyCurrentUser)}
@@ -123,7 +134,7 @@ function init(){
   logout?.addEventListener('click',async()=>{
     if(!supa)return;
     logout.disabled=true;
-    try{const result=await supa.auth.signOut();if(result.error)throw result.error;apply(null);closeMobile();location.assign('/')}
+    try{await signOutCurrentSession();closeMobile()}
     catch(error){alert('No se pudo cerrar la sesión. Vuelve a intentarlo.');logout.disabled=false}
   });
 }
