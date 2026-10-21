@@ -94,7 +94,8 @@ function init(){
     }
     userMenu.querySelector('[data-user-name]').textContent=profileLabel;
     setAvatar(userMenu,profileLabel,avatarUrl);
-    setAccountBadge(userMenu,await resolveAccountLabel(user,profile));
+    setAccountBadge(userMenu,'Alumno');
+    resolveAccountLabel(user,profile).then(label=>setAccountBadge(userMenu,label)).catch(()=>{});
   }
   function closeMobile(){menu.hidden=true;toggle.setAttribute('aria-expanded','false')}
   toggle.addEventListener('click',()=>{const open=menu.hidden;menu.hidden=!open;toggle.setAttribute('aria-expanded',String(open))});
