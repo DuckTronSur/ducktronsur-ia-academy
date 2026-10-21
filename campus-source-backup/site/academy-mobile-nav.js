@@ -67,6 +67,7 @@ function init(){
     badge.hidden=!label;
   }
   async function apply(user){
+    if(supa||user){window.__academyCurrentUser=user||null;window.__academyResolveSessionReady?.(window.__academyCurrentUser)}
     members.forEach(el=>{el.hidden=!user});
     guests.forEach(el=>{el.hidden=!!user});
     shortcut.hidden=!user;
