@@ -10,7 +10,7 @@ waitForClient(async()=>{
  const setMessage=(text,type)=>{message.textContent=text;message.className='avatar-message '+(type||'')};
  let pendingFile=null,pendingUrl='',sourceImage=null;
  const canvas=document.createElement('canvas');canvas.width=512;canvas.height=512;const ctx=canvas.getContext('2d');
- function canvasBlob(){const dataUrl=canvas.toDataURL('image/jpeg',.92),base64=dataUrl.split(',')[1],bytes=Uint8Array.from(atob(base64),char=>char.charCodeAt(0));return new Blob([bytes],{type:'image/jpeg'})}
+ function canvasBlob(){return new Promise((resolve,reject)=>{if(typeof canvas.toBlob!=='function'){reject(new Error('El navegador no permite preparar el recorte.'));return}canvas.toBlob(blob=>{if(blob)resolve(blob);else reject(new Error('No se ha podido preparar el recorte.'))},'image/jpeg',.92)})}
  function clearPending(){if(pendingUrl)URL.revokeObjectURL(pendingUrl);pendingFile=null;pendingUrl='';sourceImage=null;save.disabled=true;cancel.hidden=true;crop.hidden=true;zoom.value='1';meta.textContent='Selecciona una imagen para ver sus datos.';fileInput.value=''}
  function drawCrop(){
   if(!sourceImage||!pendingFile)return;
@@ -46,7 +46,7 @@ waitForClient(async()=>{
   let path=null;
   try{
    setMessage('Preparando la imagen…','');
-   const croppedBlob=await withTimeout(Promise.resolve(canvasBlob()),'No se ha podido preparar el recorte.',10000);if(!croppedBlob)throw new Error('No se ha podido preparar el recorte.');
+   const croppedBlob=await withTimeout(canvasBlob(),'No se ha podido preparar el recorte.',10000);if(!croppedBlob)throw new Error('No se ha podido preparar el recorte.');
    path=user.id+'/avatar-'+crypto.randomUUID()+'.jpg';
    const oldResult=await withTimeout(client.from('profiles').select('avatar_path').eq('id',user.id).maybeSingle(),'No se ha podido leer tu perfil.',10000);if(oldResult.error)throw oldResult.error;
    const old=oldResult.data?.avatar_path||null;
