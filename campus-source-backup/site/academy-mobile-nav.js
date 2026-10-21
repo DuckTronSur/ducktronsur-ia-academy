@@ -1,6 +1,8 @@
 /* Navegación común y estado de sesión del Campus. */
 (function(){
 'use strict';
+let resolveSessionReady;
+window.__academySessionReady=window.__academySessionReady||new Promise(resolve=>{resolveSessionReady=resolve});
 function initials(label){
   return String(label||'?').trim().split(/\s+/).slice(0,2).map(part=>part[0]).join('').toUpperCase()||'?';
 }
@@ -89,7 +91,7 @@ function init(){
       return;
     }
     supa=window.__academySessionClient||window.supabase.createClient(window.SUPABASE_URL,window.SUPABASE_PUBLISHABLE_KEY);window.__academySessionClient=supa;
-    supa.auth.getSession().then(({data,error})=>{if(!error)apply(data?.session?.user||null)}).catch(()=>apply(null));
+    supa.auth.getSession().then(({data,error})=>{const user=!error?data?.session?.user||null:null;resolveSessionReady?.(user);if(!error)apply(user);else apply(null);return user}).catch(()=>{resolveSessionReady?.(null);apply(null);return null});
     supa.auth.onAuthStateChange((_event,session)=>apply(session?.user||null));
   }
   connect();
