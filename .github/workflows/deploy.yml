@@ -1,10 +1,11 @@
-name: Deploy campus to Cloudflare Pages
+name: Deploy staging campus to Cloudflare Pages
 
 on:
   push:
-    branches: [main]
+    branches: [staging]
     paths:
       - 'campus-source-backup/site/**'
+      - '.github/workflows/deploy.yml'
   workflow_dispatch:
 
 permissions:
@@ -19,4 +20,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy campus-source-backup/site --project-name=ducktronsur-ia-academy
+          command: pages deploy campus-source-backup/site --project-name=ducktronsur-ia-academy-staging
